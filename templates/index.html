@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<link rel="icon" href="images/logo2.png">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap-social/bootstrap-social.css">
+	<link rel="stylesheet" type="text/css" id='styledark' href="css/stylesdark.css">
+	<title>Hardcopy.com | Home</title>
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+	<div class="container">
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="fa fa-bars fa-lg"></span></button>
+		<a href="#" class="navbar-brand"><img src="images/logo2.png" width="70" height="50"></a>
+		<div class="collapse navbar-collapse" id="navig">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item main-nav active"><a class="nav-link" href="#" id="first-nav"><span class="fa fa-home fa-lg"></span><strong> Home</strong></a></li>
+				<li class="nav-item main-nav"><a href="about.html" class="nav-link" id="first-nav"><span class="fa fa-info-circle fa-lg"></span><strong> About</strong></a></li>
+				<li class="nav-item main-nav"><a href="contact.html" class="nav-link" id="first-nav"><span class="fa fa-address-card fa-lg"></span><strong> Contact</strong></a></li>
+				<li class="nav-item main-nav"><a class="nav-link contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span><strong> Contribute</strong></a></li>
+				<li class="nav-item main-nav"><a href="cart.html" class="nav-link" id="first-nav"><span class="fa fa-shopping-cart fa-lg"></span><strong> Cart</strong></a></li>
+				<li class="nav-item main-nav"><a class="nav-link theme"><img src="images/lighttheme.png"></a></li>
+			</ul>
+			<span class="navbar-text">
+				<a id="login"><span class="fa fa-sign-in fa-lg"></span><strong> Login/Signup</strong></a>
+			</span>
+		</div>
+	</div>
+</nav>
+<form method="POST" action="">
+	<div class="modal fade" id="Loginmodal" role="dialog">
+		<div class="modal-dialog modal-lg" role="content">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title"><strong>Login</strong></h2>
+					<span class="close" data-dismiss="modal">
+						&times;
+					</span>
+				</div>
+				<div class="modal-body modal-dark">
+					<form>
+						<div class="form-group row">
+							<div class="col-12">
+								<input type="text" name="username" id="log_username" class="form-control" placeholder="Username">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-12">
+								<input type="password" name="password" id="log_password" class="form-control" placeholder="Password">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<button class="savebtn btn btn-primary"><span class="fa fa-sign-in fa-lg"></span> &nbsp;Login</button>
+							</div>
+							<div class="col-sm-6">
+								<p class="mt-3"><a href="#" id="noform">Forgot your password?</a></p>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<a href="#" id="king">New user? Register here</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="modal fade" id="contributemodal" role="dialog">
+	<div class="modal-dialog modal-lg" role="content">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title">Contribute to help Hardcopy grow!</h2>
+				<span class="close" data-dismiss="modal">
+					&times;
+				</span>
+			</div>
+		</div>
+		<div class="modal-body modal-dark">
+			<div class="row">
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header donor-head">
+							<h3>Donate</h3>
+						</div>
+						<div class="card-body" id="donor-body">
+							<h5>I don't partake any of the delivery cost, so I would really feel motivated if you could contribute to help me keep this running!</h5>
+							<h5>Not compulsary at all, only those who can afford to should do it! I hope that you rather take full advantage of such a website.</h5>
+							<div class="text-center">
+								<button class="btn btn-primary" id="donate-btn"><span class="fa fa-usd fa-lg"></span> Donate!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header donor-head">
+							<h3>Upload</h3>
+						</div>
+						<div class="card-body" id="donor-body">
+							<h5>Hardcopy needs books, and any book that you feel you have read enough can be donated over here, with quality measures.</h5>
+							<h5>This website runs on contributions in the form of books, so this is something I encourage everyone of you to actively participate in!</h5>
+							<div class="text-center">
+								<button class="btn btn-primary" id="donate-btn"><span class="fa fa-upload fa-lg"></span> Upload!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<form method="POST" action="">
+	<div class="modal fade" id="signupmodal" role="dialog">
+		<div class="modal-dialog modal-lg" role="content">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title"><strong>SignUp</strong></h2>
+					<span class="close" data-dismiss="modal">
+						&times;
+					</span>
+				</div>
+				<div class="modal-body modal-dark">
+					<form>
+						<div class="form-group row">
+							<div class="col-12">
+								<input type="text" name="username" id="username" class="form-control" placeholder="Username" required="required">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-12">
+								<input type="email" name="email" id="email" class="form-control" placeholder="Email ID" required="required">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-12">
+								<input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required">
+							</div>
+						</div>
+						<fieldset class="form-group">
+							<legend class="text-center">Address</legend>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="text" name="street" placeholder="Room no. & street" id="street" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<input type="text" name="city" placeholder="City Name" id="city" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="text" name="state" placeholder="State" id="state" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<input type="text" name="country" placeholder="Country" id="country" class="form-control">
+								</div>
+							</div>
+						</fieldset>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<button class="savebtn btn btn-primary"><span class="fa fa-sign-in fa-lg"></span> &nbsp;SignUp</button>
+							</div>
+							<div class="col-sm-6">
+								<a href="#" id="algore">Already registered? Login here</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<header class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-sm-6 align-self-center">
+				<h1>Do you want to obtain Hardcopy of your favourite books for free?</h1>
+				<h5>Hardcopy is the website that you might have dreamt of!! And guess what, the dream has come true.</h5>
+			</div>
+			<div class="col-12 col-sm-6 align-self-center text-center">
+				<img src="images/logo2.png" height="250" width="300" id="central-logo">
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="carousel slide carousel-expand-sm" id="genrecarousel" data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active min-vh-100">
+						<div class="row">
+							<div class="col-3">
+								<img src="images/fiction1.jpg" id="carousel-img">
+							</div>
+							<div class="col-9 text-center">
+								<div class="carousel-caption">
+								<h2 id="caption-header"><strong>Fiction</strong></h2>
+									<blockquote class="blockquote d-none d-md-block">
+									<p>Literature is a luxury;fiction is a necessity</p>
+									<p class="blockquote-footer">
+										G.K. Chesterson <cite><strong>The prince of Paradox</strong></cite>
+									</p>
+									</blockquote>
+									<p class="d-none d-lg-block">Fiction nurtures imagination, and here you can feed your imagination in the same olden ways!</p>
+								<br><br>
+								<button id="explore"><a href="#" class="fiction"><span class="fa fa-rocket fa-lg"></span> Explore!</a></button>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-2">
+								<img src="images/nfiction10.jpg">
+							</div>
+							<div class="col-10">
+								<div class="carousel-caption">
+									<h2 id="caption-header"><strong>Non-Fiction</strong></h2>
+									<blockquote class="blockquote d-none d-md-block">
+										<p>The book to read is not the one that thinks for you, but the one that makes you think.</p>
+										<p class="blockquote-footer">Harper Lee <cite>Author of Pulitzer prize winning novel,<strong>To kill the Mockingbird</strong> </cite></p>
+									</blockquote>
+									<p class="d-none d-lg-block">Real-life experiences, or wonderful historical events all explained to a full detail - well non-fiction is for you!</p>
+									<br>
+									<button id="explore"><a href="#" class="fiction"><span class="fa fa-rocket fa-lg"></span> Explore!</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-2">
+								<img src="images/rom5.jpg">
+							</div>
+							<div class="col-10">
+								<div class="carousel-caption">
+									<h2 id="caption-header"><strong>Romance</strong></h2>
+									<blockquote class="blockquote d-none d-md-block">
+										<p>Did my heart love till now? Forswear it, sight! For I ne'er saw true beauty till this night</p>
+										<p class="blockquote-footer"><strong>Romeo and Juliet by <cite>Shakesphere</cite></strong></p>
+									</blockquote>
+									<p class="d-none d-lg-block">Romantic classics and novels have inspired relations through generations. Pick your choice here!!</p>
+									<br><br>
+									<button id="explore"><a href="#" class="fiction"><span class="fa fa-rocket fa-lg"></span> Explore!</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-2">
+								<img src="images/bio5.jpeg">
+							</div>
+							<div class="col-10">
+								<div class="carousel-caption">
+									<h2 id="caption-header"><strong>Biographies</strong></h2>
+									<blockquote class="blockquote d-none d-md-block">
+										<p id="bio">Biographies are but the clothes and buttons of a man</p>
+										<p class="blockquote-footer" id="bio"><strong>Mark Twain <cite>Author and humorist</cite></strong></p>
+									</blockquote>
+									<p class="d-none d-lg-block" id="bio">
+										Biographies are the best, when it comes to being motivated by your role-models. The genre is my personal favourite, and you can find yours here.
+									</p>
+									<br><br>
+									<button id="explore"><a href="#" class="fiction"><span class="fa fa-rocket fa-lg"></span> Explore!</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-2">
+								<img src="images/comic3.jpg">
+							</div>
+							<div class="col-10">
+								<div class="carousel-caption">
+									<h2 id="caption-header"><strong>Comics</strong></h2>
+									<blockquote class="blockquote d-none d-md-block">
+										<p id="bio">You either die a hero, or live long enough to see yourself become the villian</p>
+										<p class="blockquote-footer" id="bio"><strong>Two Face <cite>Batman Comics</cite></strong></p>
+									</blockquote>
+									<p class="d-none d-lg-block" id="bio">
+										Almost everybody of us were introduced to reading through this genre. Revisit your memories or take a break by looking into this section.
+									</p>
+									<br><br>
+									<button id="explore"><a href="#" class="fiction"><span class="fa fa-rocket fa-lg"></span> Explore!</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ol class="carousel-indicators">
+						<li data-target="#genrecarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#genrecarousel" data-slide-to="1"></li>
+						<li data-target="#genrecarousel" data-slide-to="2"></li>
+						<li data-target="#genrecarousel" data-slide-to="3"></li>
+						<li data-target="#genrecarousel" data-slide-to="4"></li>
+					</ol>
+					<a href="#genrecarousel" class="carousel-control-prev" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+					<a href="#genrecarousel" class="carousel-control-next" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 text-center">
+			<h2 id="bdhead">What is Hardcopy?</h2>
+		</div>
+	</div>
+	<div class="row row-content">
+		<div class="col-sm-4">
+			<p><span class="fa fa-book fa-lg" id="p1"></span></p>
+			<p id="p1">This is a website that will offer you used,quality hardcopy of books for free! Yes, the books won't be ebooks, and all those who complain, that they are not able to read for long hours in ebooks, then this website is absolutely for them.</p>
+		</div>
+		<div class="col-sm-4">
+			<p><span class="fa fa-tags fa-lg" id="p2"></span></p>
+			<p id="p2">The only thing you got to pay for is the delivery charge which is 40&#8377; for Indian residents, and only 2$ in case of every other reader outside India. Now I hope it won't be repelling you from using this, as the delivery service needs payment from me!</p>
+		</div>
+		<div class="col-sm-4">
+			<p><span class="fa fa-thumbs-up" id="p3"></span></p>
+			<p id="p3">Easily buy whatever book you want, by just clicking on it and basically for free. Uploading books is also free for all you wonderful people, and do not at all hesitate in uploading the books, before they lose out on quality!</p>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-3">
+				<ul class="list-unstyled" id="foot">
+					<li><b>Navigation</b></li>
+					<li><a href="#" id="tap-link1"><span class="fa fa-home fa-lg" id="tap1"></span> Home</a></li>
+					<li><a href="about.html" id="tap-link2"><span class="fa fa-info-circle fa-lg" id="tap2"></span> About</a></li>
+					<li><a href="#" id="tap-link3"><span class="fa fa-address-card fa-lg" id="tap3"></span> Contact</a></li>
+					<li><a href="#" id="tap-link4"><span class="fa fa-upload fa-lg" id="tap4"></span> Upload</a></li>
+					<li><a href="#" id="tap-link5"><span class="fa fa-gift fa-lg" id="tap5"></span> Donate</a></li>
+					<li><a href="#" id="tap-link6"><span class="fa fa-question-circle fa-lg" id="tap6"></span> FAQ</a></li>
+				</ul>
+			</div>
+			<div class="col-3 offset-2">
+				<ul class="list-unstyled" id="foot">
+					<li><b>Genres</b></li>
+					<li><a href="#" id="cap-link1"><span class="fa fa-fort-awesome fa-lg" id="cap1"></span> Fiction</a></li>
+					<li><a href="#" id="cap-link2"><span class="fa fa-book fa-lg" id="cap2"></span> Non-Fiction</a></li>
+					<li><a href="#" id="cap-link3"><span class="fa fa-heart fa-lg" id="cap3"></span> Romance</a></li>
+					<li><a href="#" id="cap-link4"><span class="fa fa-user fa-lg" id="cap4"></span> Biographies</a></li>
+					<li><a href="#" id="cap-link5"><span class="fa fa-superpowers fa-lg" id="cap5"></span> Comics</a></li>
+				</ul>
+			</div>
+			<div class="col-12 col-sm-4" id="foot">
+				<ul class="list-unstyled">
+					<li><b>Connect</b></li>
+					<li><a href="tel:9321685956" id="map-link1"><span class="fa fa-phone fa-lg" id="map1"></span> Call</a></li>
+					<li><a href="mailto:nambiarakhilraj01@gmail.com" id="map-link2"><span class="fa fa-envelope fa-lg" id="map2"></span> Mail</a></li>
+					<li><a class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/akhilraj-nambiar-013b811a2"><i class="fa fa-linkedin fa-lg"></i></a>
+					&nbsp;
+					<span><a href="https://www.instagram.com/nambiarakhilraj01/" class="btn btn-social-icon btn-instagram" id="instagram"><i class="fa fa-instagram fa-lg"></i></a></span>
+					</li>
+				</ul>
+ 			</div>
+		</div>
+	</div>
+</footer>
+<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+
