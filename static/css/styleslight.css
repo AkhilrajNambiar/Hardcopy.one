@@ -1,0 +1,249 @@
+body{
+	margin-top: 70px;
+	background-color: floral;
+	color: black;
+}
+.row-content{
+	padding: 50px 0 50px 0;
+	border-bottom: 1px ridge;
+}
+.navbar-dark{
+	background-color: #d9d9d9;
+}
+.main-nav{
+	margin-right: 20px;
+	padding: 5px;
+	border-radius: 5px;
+}
+.main-nav:hover{
+	background-color: orange;
+}
+#first-nav{
+	filter: invert(100%);
+}
+#first-nav:hover{
+	color: black;
+}
+.jumbotron{
+	background-image: url('../images/background.png');
+}
+.carousel-item{
+	height: 350px;
+	background-image: url('../images/background.png');
+}
+.carousel-caption{
+	position: absolute;
+	right:0;
+}
+#caption-header{
+	margin-right: -50px;
+	background: linear-gradient(orange,green,blue);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+}
+.carousel-img{
+	position:absolute;
+	left:0;
+	top:0;
+}
+#tap1,#tap2,#tap3,#tap4,#tap5,#tap6{
+	color: #E62E40;
+	display: none;
+}
+#tap-link1,#tap-link2,#tap-link3,#tap-link4,#tap-link5,#tap-link6{
+	text-decoration: none;
+	color: #007bff;
+	font-weight: bold;
+}
+#map1,#map2{
+	color: #38d9a9;
+	display:none;
+}
+#map-link1,#map-link2,#map-link3{
+	text-decoration: none;
+	color: #007bff;
+	font-weight: bold;
+}
+#instagram{
+	background-image: linear-gradient(to bottom left,purple, purple, magenta, orange, yellow);
+}
+#cap1,#cap2,#cap3,#cap4,#cap5{
+	color:magenta;
+	display: none;
+}
+#cap-link1,#cap-link2,#cap-link3,#cap-link4,#cap-link5{
+	text-decoration: none;
+	color: #007bff;
+	font-weight: bold;
+}
+#foot li{
+	margin-top: 10px;
+}
+footer{
+	background-color: #d9d9d9;
+}
+.blockquote-footer{
+	color: #131313;
+}
+.fiction{
+	padding: 8px;
+	color: floralwhite;
+}
+#explore{
+	margin-right: -50px;
+	background: #1971c2;
+	font-size: 20px;
+	border: 1px #1665ab solid;
+	border-radius: 10px;
+	border-bottom: 5px #1665ab solid;
+}
+.fiction:hover{
+	color: floralwhite;
+	text-decoration: none;
+}
+#explore:hover{
+	background: #4083C2;
+}
+#p1{
+	color: #B300B3;
+	font-weight: bold;
+	font-size: 22px;
+}
+#p2{
+	color: #FF4D4D;
+	font-weight: bold;
+	font-size: 22px;
+}
+#bdhead{
+	margin-top: 50px;
+	background: linear-gradient(to right, yellow, orange, green);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+}
+#p3{
+	color: #12B383;
+	font-weight: bold;
+	font-size: 22px;
+}
+#bio{
+	color: #2b2b2b;
+}
+#login{
+	color: #2b2b2b;
+}
+#login:hover{
+	cursor: pointer;
+}
+.modal-header{
+	background: url(../images/background.png);
+}
+.close{
+	color: black;
+	background-color: #ff0000;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+.close:hover{
+	color: white;
+	background-color: #ff0000;
+}
+#myself{
+	color: floralwhite;
+}
+.modal-dark{
+	background-color: #d9d9d9;
+}
+.form-control{
+	border: 2px solid #ddd;
+	border-bottom: 6px solid #dddfff;
+	font-weight: bold;
+	padding: 10px;
+}
+.savebtn{
+	border: 2px #0069D9 solid;
+	border-bottom: 6px #0069D9 solid;
+	padding: 10px 50px 10px 50px;
+	font-size: 20px;
+}
+#noform{
+	font-size: 20px;
+}
+#noform:hover{
+	text-decoration: none;
+}
+#king{
+	font-size: 20px;
+}
+#king:hover{
+	text-decoration: none;
+}
+#algore{
+	font-size: 20px;
+}
+#algore:hover{
+	text-decoration: none;
+}
+#high{
+	color: skyblue;
+}
+#kindan{
+	color: #ff8787;
+}
+#crux{
+	color: #ffa94d;
+}
+.card-header{
+	background: url(../images/background.png);
+}
+.card-body{
+	background: #131313;
+}
+.card{
+	border: none;
+}
+#accordion{
+	border: 1px grey solid;
+	border-bottom: 5px grey solid;
+}
+#faq1{
+	background-color: #d9d9d9;
+}
+#faq2{
+	background-color: #d9d9d9;
+}
+#faq3{
+	background-color: #d9d9d9;
+}
+#faq-head{
+	color: #38d9a9;
+}
+#me{
+	background: #ff8787;
+}
+.donor-head{
+	background: none;
+	background-color: #02B37E;
+}
+#donor-body{
+	background-color: #38d9a9;
+	color: #2b2b2b;
+}
+#donate-btn{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+}
+#contact{
+	color: limegreen;
+}
+.col-form-label{
+	font-size: 25px;
+}
+#sendfeed{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;	
+}
+.contributor{
+	cursor: pointer;
+}
