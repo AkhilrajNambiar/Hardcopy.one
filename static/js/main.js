@@ -93,14 +93,5 @@ $(document).ready(function(){
 	$('.contributor').click(function(){
 		$('#contributemodal').modal('show');
 	});
-	$('.theme').click(function(){
-		if($('.theme').children('img').attr('src') == 'images/lighttheme.png'){
-			$('#styledark').attr('href','css/styleslight.css');
-			$('.theme').children('img').attr('src','images/darktheme.png')
-		}
-		else if($('.theme').children('img').attr('src') == 'images/darktheme.png'){
-			$('#styledark').attr('href','css/stylesdark.css');
-			$('.theme').children('img').attr('src','images/lighttheme.png');
-		}
-	});
+	
 });

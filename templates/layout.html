@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/stylesdark.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
+
+    <link rel="stylesheet" id="styledark" href="{{ url_for('static',filename='css/stylesdark.css') }}">
 
     <title>
         {% if title %}
@@ -15,16 +23,14 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
         <div class="container">
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="fa fa-bars fa-lg"></span></button>
-            <a href="#" class="navbar-brand"><img src="images/logo2.png" width="70" height="50"></a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="navbar-toggler-icon"></span></button>
+            <a href="{{ url_for('home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2.png') }}" width="70" height="50"></a>
             <div class="collapse navbar-collapse" id="navig">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item main-nav"><a class="nav-link" href="#" id="first-nav"><span class="fa fa-home fa-lg"></span><strong> Home</strong></a></li>
+                    <li class="nav-item main-nav"><a class="nav-link" href="{{ url_for('home') }}" id="first-nav"><span class="fa fa-home fa-lg"></span><strong> Home</strong></a></li>
                     <li class="nav-item main-nav"><a href="{{ url_for('about') }}" class="nav-link" id="first-nav"><span class="fa fa-info-circle fa-lg"></span><strong> About</strong></a></li>
                     <li class="nav-item main-nav"><a href="{{ url_for('contact') }}" class="nav-link" id="first-nav"><span class="fa fa-address-card fa-lg"></span><strong> Contact</strong></a></li>
                     <li class="nav-item main-nav"><a class="nav-link contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span><strong> Contribute</strong></a></li>
-                    <li class="nav-item main-nav"><a href="cart.html" class="nav-link" id="first-nav"><span class="fa fa-shopping-cart fa-lg"></span><strong> Cart</strong></a></li>
-                    <li class="nav-item main-nav"><a class="nav-link theme"><img src="images/lighttheme.png"></a></li>
                 </ul>
                 <span class="navbar-text">
                     <a id="login"><span class="fa fa-sign-in fa-lg"></span><strong> Login/Signup</strong></a>
@@ -32,7 +38,50 @@
             </div>
         </div>
     </nav>
-
+    <div class="modal fade" id="contributemodal" role="dialog">
+        <div class="modal-dialog modal-lg" role="content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Contribute to help Hardcopy grow!</h2>
+                    <span class="close" data-dismiss="modal">
+                        &times;
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body modal-dark">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header donor-head">
+                                <h3>Donate</h3>
+                            </div>
+                            <div class="card-body" id="donor-body">
+                                <h5>I don't partake any of the delivery cost, so I would really feel motivated if you could contribute to help me keep this running!</h5>
+                                <h5>Not compulsary at all, only those who can afford to should do it! I hope that you rather take full advantage of such a website.</h5>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" id="donate-btn"><span class="fa fa-usd fa-lg"></span> Donate!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header donor-head">
+                                <h3>Upload</h3>
+                            </div>
+                            <div class="card-body" id="donor-body">
+                                <h5>Hardcopy needs books, and any book that you feel you have read enough can be donated over here, with quality measures.</h5>
+                                <h5>This website runs on contributions in the form of books, so this is something I encourage everyone of you to actively participate in!</h5>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" id="donate-btn"><span class="fa fa-upload fa-lg"></span> Upload!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <header class="jumbotron">
         <div class="container">
             <div class="row">
@@ -41,14 +90,16 @@
                     {% endblock pagewelcome %}
                 </div>
                 <div class="col-12 col-sm-6 align-self-center text-center">
-                    <img src="images/logo2.png" height="250" width="300" id="central-logo">
+                    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
                 </div>
             </div>
         </div>
     </header>
 
-    {% block content %}
-    {% endblock content %}
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
 
     <footer>
         <div class="container">
@@ -94,7 +145,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static',filename='main.js') }}"></script>
+    <script src="https://kit.fontawesome.com/43aacb403c.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
 </body>
 </html>
  

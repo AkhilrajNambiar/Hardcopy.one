@@ -25,7 +25,7 @@ body{
 	color: black;
 }
 .jumbotron{
-	background-image: url('../images/background.png');
+	background: url(../admin_images/background.png);
 }
 .carousel-item{
 	height: 350px;

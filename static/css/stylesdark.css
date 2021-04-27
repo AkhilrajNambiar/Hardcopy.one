@@ -22,11 +22,11 @@ body{
 	color:white;
 }
 .jumbotron{
-	background-image: url('../images/background.png');
+	background: url(../admin_images/background.png);
 }
 .carousel-item{
 	height: 350px;
-	background-image: url('../images/background.png');
+	background-image: url('../images/admin/background.png');
 }
 .carousel-caption{
 	position: absolute;
@@ -126,7 +126,7 @@ footer{
 	cursor: pointer;
 }
 .modal-header{
-	background: url(../images/background.png);
+	background: url(../admin_images/background.png);
 }
 .close{
 	color: white;
