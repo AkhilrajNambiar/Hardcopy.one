@@ -7,5 +7,80 @@
     <h5>Psst! This page also has the FAQs so keep a lookout just in case you have any query!!</h5>  
 {% endblock pagewelcome %}
 {% block content %}
-    
+    <div class="row">
+        <div class="col-sm-4">
+            <h2 id="high"> Purpose <span class="fa fa-puzzle-piece fa-lg"></span></h2>
+            <h5>Just to help all of you, yes you who is reading this, to help you to freely obtain the hardcopy of any book you like literally for free!</h5>
+            <h5>Used books which satisfy a set of quality values(Mentioned over here), will be offered to you with very little hustles and for free!!</h5>
+            <br><br>
+        </div>
+        <div class="col-sm-4">
+            <h2 id="kindan"> System <span class="fa fa-wrench fa-lg" id="kindan"></span></h2>
+            <h5>If you are curious how Hardcopy works, then just know that I am a facilitator for all of you to offer your used books and to obtain used books for free! (quality will be maintained be rest assured!)</h5>
+            <h5>The email address of the donor will be shared with the recepient so you can easily communicate.</h5>
+        </div>
+        <div class="col-sm-4">
+            <h2 id="crux"> Available <span class="fa fa-smile-o fa-lg" id="crux"></span></h2>
+            <h5>I am always available to answer any of your queries. I love obtaining feedback and criticism, and hence do feel free to always contact me.</h5>
+            <h5>Issues related to books, or issues related to the system or even if you feel an idea popping in your head, that can help, then please do mail me! I will reply asap.</h5>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header" id="me">
+                    <h2 class="text-center">About Me</h2>
+                </div>
+                <div class="card-body">
+                    <div class="media">
+                    <img src="{{ url_for('static',filename='admin_images/myself.jpg') }}" class=" img-thumbnail img-fluid" width="150" height="150">
+                    <div class="media-body ml-2" id="myself">
+                        <h5 class="text-center">Hi everyone, myself Akhilraj Nambiar and I am the founder and CEO of this website. I am a practising full-stack developer, and I hope that I can always solve any problem that you encounter here! <a href="{{ url_for('contact') }}">Contact me</a> in case you feel any functional or design errors or any sort of other issues related to this product.</h5>
+                </div>
+            </div>
+                </div>
+            </div>			
+        </div>
+    </div>
+    <br><br><br>
+    <div class="text-center">
+        <h2 id="faq-head">FAQs(Frequently Asked Questions) <span class="fa fa-question-circle fa-lg"></span></h2>
+    </div>
+    <div id="accordion" class="mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header accord" data-toggle="collapse" data-target="#faq1">
+                        <h3>
+                        Why should I pay 40&#8377; as a fee?
+                        </h3>
+                    </div>
+                    <div class="card-body collapse show" data-parent="#accordion" id="faq1">
+                        <h6>Well, just because I have to pay the delivery service which I am partnering with. I assure you I don't take any extra cost!</h6>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header accord" data-toggle="collapse" data-target="#faq2">
+                        <h3>
+                        What about books with MRP less than 40&#8377;?
+                        </h3>
+                    </div>
+                    <div class="card-body collapse" data-parent="#accordion" id="faq2">
+                        <h6>5&#8377; delivery charge for all books that have MRP below 40&#8377;</h6>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header accord" data-toggle="collapse" data-target="#faq3">
+                        <h3>
+                        Will the book be delivered to my doorstep every time I order it?
+                        </h3>
+                    </div>
+                    <div class="card-body collapse" data-parent="#accordion" id="faq3">
+                        <h6>Yes, of course! You can sign up to avoid filling up the address section every time you order a book.</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="Icon" href="{{ url_for('static',filename='admin_images/logo2.png') }}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -21,7 +22,7 @@
     </title>
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
         <div class="container">
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="navbar-toggler-icon"></span></button>
             <a href="{{ url_for('home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2.png') }}" width="70" height="50"></a>
@@ -33,7 +34,14 @@
                     <li class="nav-item main-nav"><a class="nav-link contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span><strong> Contribute</strong></a></li>
                 </ul>
                 <span class="navbar-text">
-                    <a id="login"><span class="fa fa-sign-in fa-lg"></span><strong> Login/Signup</strong></a>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item main-nav">
+                            <a id="login" href="{{ url_for('login') }}"  class="nav-link"><span class="fa fa-sign-in fa-lg"></span><strong> Login</strong></a>
+                        </li>
+                        <li class="nav-item main-nav">
+                            <a id="signup" href="{{ url_for('signup') }}" class="nav-link"><span class="fa fa-user-plus fa-lg"></span><strong> Signup</strong></a>
+                        </li>
+                    </ul>
                 </span>
             </div>
         </div>

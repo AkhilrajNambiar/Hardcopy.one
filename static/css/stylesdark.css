@@ -125,6 +125,9 @@ footer{
 #login:hover{
 	cursor: pointer;
 }
+#signup:hover{
+	cursor: pointer;
+}
 .modal-header{
 	background: url(../admin_images/background.png);
 }
@@ -180,8 +183,8 @@ footer{
 #crux{
 	color: #ffa94d;
 }
-.card-header{
-	background: url(../images/background.png);
+.accord{
+	background: url(../admin_images/background.png);
 }
 .card-body{
 	background: #131313;
@@ -225,4 +228,33 @@ footer{
 }
 .contributor{
 	cursor: pointer;
+}
+.genre-1, .genre-2, .genre-3, .genre-4, .genre-5, .genre-6{
+	font-size: x-large;
+	background: #131313;
+	min-height: auto;
+}
+.genre-1:hover, .genre-2:hover, .genre-3:hover, .genre-4:hover, .genre-5:hover, .genre-6:hover{
+	box-shadow: 2px 2px 20px 2px #131313;
+}
+.genre-list{
+	background: url(../admin_images/background.png);
+}
+.genre-image-1, .genre-image-2, .genre-image-3, .genre-image-4, .genre-image-5, .genre-image-6{
+	color: #1b95e2;
+}
+.form-label{
+	font-size: 22px;
+}
+.submit_button{
+	border: 1px solid blue;
+	border-bottom: 5px solid blue ;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;
+}
+.country_list{
+	padding:0rem;
+	padding-left: 10px;
+	/* border: none; */
 }

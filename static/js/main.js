@@ -93,5 +93,40 @@ $(document).ready(function(){
 	$('.contributor').click(function(){
 		$('#contributemodal').modal('show');
 	});
-	
+	$('.genre-1').hover(function(){
+		$('.genre-image-1').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-1').css('font-size','x-large');
+	});
+	$('.genre-2').hover(function(){
+		$('.genre-image-2').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-2').css('font-size','x-large');
+	});
+	$('.genre-3').hover(function(){
+		$('.genre-image-3').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-3').css('font-size','x-large');
+	});
+	$('.genre-4').hover(function(){
+		$('.genre-image-4').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-4').css('font-size','x-large');
+	});
+	$('.genre-5').hover(function(){
+		$('.genre-image-5').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-5').css('font-size','x-large');
+	});
+	$('.genre-6').hover(function(){
+		$('.genre-image-6').css('font-size','xx-large');
+	},
+	function(){
+		$('.genre-image-6').css('font-size','x-large');
+	});
 });
