@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for
-from forms import Registration_form
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import Registration_form, Login_form, Feedback_form
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '99d12359bfd5873cb57d85a1465f0f39'
@@ -13,17 +13,22 @@ def home():
 def about():
 	return render_template('about.html', title='About')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET','POST'])
 def contact():
-	return render_template('contact.html', title='Contact Me')
+	form = Feedback_form()
+	return render_template('contact.html', title='Contact Me', form=form)
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
-	return render_template('login.html', title='Login')
+	form = Login_form()
+	return render_template('login.html', title='Login', form=form)
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET','POST'])
 def signup():
 	form = Registration_form()
+	if form.validate_on_submit():
+		flash("Your account has been registered. You can now login!","success")
+		return redirect(url_for("login"))
 	return render_template('signup.html', title='Signup', form = form)
 
 

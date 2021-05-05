@@ -1,6 +1,29 @@
 {% extends 'layout.html' %}
 {% block pagewelcome %}
     <h1>Login Here</h1>
+    <h4>Welcome back dear reader! Hope you have a good time</h4>
 {% endblock pagewelcome %}
 {% block content %}
+    <form method="POST"> 
+        <div class="form-group row">
+            <div class="col-12">
+                {{ form.email.label(class='form-label') }}
+                {{ form.email( class='form-control form-control-lg' ) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                {{ form.password.label(class='form-label') }}
+                {{ form.password( class='form-control form-control-lg' ) }}
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-6">
+                {{ form.submit( class='btn btn-primary submit_button pr-5 pl-5' ) }}
+            </div>
+            <div class='col-6'>
+                <h4>Forgot Password?</h4>
+            </div>
+        </div>
+    </form>
 {% endblock content %}

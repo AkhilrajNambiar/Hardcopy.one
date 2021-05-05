@@ -3,5 +3,30 @@
     <h1>Contact me for feedback or for criticising!</h1>
 {% endblock pagewelcome %}
 {% block content %}
-    
+    <h3 id="contact" class="text-center">Feedback or complaint, please do send here <span class="fa fa-headphones fa-lg"></span></h3>
+    <form method="POST">
+        <div class="form-group row">
+            <div class="col-12">
+                {{ form.name.label(class='form-label') }}
+                {{ form.name( class='form-control form-control-lg' ) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                {{ form.email.label(class='form-label') }}
+                {{ form.email( class='form-control form-control-lg' ) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                {{ form.feedback.label(class='form-label') }}
+                {{ form.feedback( class='form-control form-control-lg' ) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 text-center">
+                {{ form.submit( class='btn btn-primary submit_button pr-5 pl-5')}}
+            </div>
+        </div>
+    </form>
 {% endblock content %}

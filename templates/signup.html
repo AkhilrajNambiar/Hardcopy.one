@@ -1,60 +1,128 @@
 {% extends 'layout.html' %}
 {% block pagewelcome %}
-    <h1>Signup Here</h1>
+    <h1>Signup Now!</h1>
+    <h4>Join a community of voracious and passionate readers of the old school type!!</h4>
 {% endblock pagewelcome %}
 {% block content %}
-    <form>
+    <form method='POST' action="">
+        {{ form.hidden_tag() }}
         <div class="form-group row">
             <div class="col-12">
                 {{ form.username.label(class='form-label') }}
-                {{ form.username( class='form-control form-control-lg' ) }}
+                {% if form.username.errors %}
+                    {{ form.username( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
                 {{ form.email.label(class='form-label') }}
-                {{ form.email( class='form-control form-control-lg' ) }}
+                {% if form.email.errors %}
+                    {{ form.email( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
                 {{ form.password.label(class='form-label') }}
-                {{ form.password( class='form-control form-control-lg' ) }}
+                {% if form.password.errors %}
+                    {{ form.password( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
                 {{ form.confirm_password.label(class='form-label') }}
-                {{ form.confirm_password( class='form-control form-control-lg' ) }}
+                {% if form.confirm_password.errors %}
+                    {{ form.confirm_password( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.confirm_password( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <fieldset>
             <legend class="text-center">Address</legend>
             <div class='form-group row'>
                 <div class="col-sm-6 mb-3">
-                    {{ form.street(class='form-control form-control-lg', placeholder='Room no. and Street') }}
+                    {{ form.street.label(class='form-label') }}
+                    {% if form.street.errors %}
+                        {{ form.street( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.street.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.street( class='form-control form-control-lg' ) }}
+                    {% endif %}
                 </div>
                 <br>
                 <div class="col-sm-6">
-                    {{ form.city(class='form-control form-control-lg', placeholder='City') }}
+                    {{ form.city.label(class='form-label') }}
+                    {% if form.city.errors %}
+                        {{ form.city( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.city.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.city( class='form-control form-control-lg' ) }}
+                    {% endif %}                    
                 </div>
             </div>
             <div class='form-group row'>
                 <div class="col-sm-6 mb-3">
-                    {{ form.state(class='form-control form-control-lg', placeholder='State') }}
+                    {{ form.state.label(class='form-label') }}
+                    {% if form.state.errors %}
+                        {{ form.state( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.state.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.state( class='form-control form-control-lg' ) }}
+                    {% endif %}                    
                 </div>
                 <div class="col-sm-6">
-                    <select class="form-control form-control-lg country_list">
-                        {% for country in form.countries %}
-                            <option class="form-control">
-                                {% if '|' in country %}
-                                    {{ country[country.index('|')+1 :] }}
-                                {% else %}
-                                    {{ country }}
-                                {% endif %}
-                            </option>
-                        {% endfor %}
-                    </select>
+                    {{ form.countries.label(class='form-label') }}
+                    {% if form.countries.errors %}
+                        {{ form.countries( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.countries.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.countries( class='form-control form-control-lg country_list' ) }}
+                    {% endif %}
                 </div>
             </div>
         </fieldset>
