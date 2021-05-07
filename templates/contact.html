@@ -5,22 +5,50 @@
 {% block content %}
     <h3 id="contact" class="text-center">Feedback or complaint, please do send here <span class="fa fa-headphones fa-lg"></span></h3>
     <form method="POST">
+        {{ form.hidden_tag() }}
         <div class="form-group row">
             <div class="col-12">
                 {{ form.name.label(class='form-label') }}
-                {{ form.name( class='form-control form-control-lg' ) }}
+                {% if form.name.errors %}
+                    {{ form.name( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
                 {{ form.email.label(class='form-label') }}
-                {{ form.email( class='form-control form-control-lg' ) }}
+                {% if form.email.errors %}
+                    {{ form.email( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
                 {{ form.feedback.label(class='form-label') }}
-                {{ form.feedback( class='form-control form-control-lg' ) }}
+                {% if form.feedback.errors %}
+                    {{ form.feedback( class='form-control form-control-lg is-invalid' ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.feedback.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.feedback( class='form-control form-control-lg' ) }}
+                {% endif %}
             </div>
         </div>
         <div class="form-group row">
