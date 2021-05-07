@@ -261,3 +261,20 @@ footer{
 .alert{
 	font-size: large;
 }
+.profile-editor{
+	border: 1px solid blue;
+	border-bottom: 5px solid blue ;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;
+}
+.updating_form{
+	display: none;
+}
+.cancel_btn{
+	border: 1px solid red;
+	border-bottom: 5px solid red ;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;
+}

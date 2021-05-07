@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
+{% block home %}
+    active
+{% endblock home %}
+{% block for_logo %}
+	<img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
 {% block pagewelcome %}
 	<h1>Do you want to obtain Hardcopy of your favourite books for free?</h1>
 	<h5>Hardcopy is the website that you might have dreamt of!! And guess what, the dream has come true.</h5>

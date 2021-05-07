@@ -129,4 +129,12 @@ $(document).ready(function(){
 	function(){
 		$('.genre-image-6').css('font-size','x-large');
 	});
+	$('#edit_profile').click(function(){
+		$('#edit_profile').css('display','none');
+		$('.updating_form').css('display','block');
+	});
+	$('.cancel_btn').click(function(){
+		$('#edit_profile').css('display','inline-block');
+		$('.updating_form').css('display','none');
+	})
 });

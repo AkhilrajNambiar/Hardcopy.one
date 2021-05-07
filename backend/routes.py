@@ -1,6 +1,9 @@
+import secrets
+import os
+from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from backend import app, db, bcrypt
-from backend.forms import Registration_form, Login_form, Feedback_form
+from backend.forms import Registration_form, Login_form, Feedback_form, Update_form
 from backend.models import User, Book
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -17,8 +20,8 @@ def about():
 def contact():
 	form = Feedback_form()
 	if current_user.is_authenticated:
-            form.name.data = current_user.username
-            form.email.data = current_user.email
+		form.name.data = current_user.username
+		form.email.data = current_user.email
 	if form.validate_on_submit():
 		flash('Message successfully sent','success')
 		return redirect(url_for('home'))
@@ -58,7 +61,42 @@ def logout():
 	logout_user()
 	return redirect(url_for('home'))
 
-@app.route('/account')
+# This method is simply responsible for saving the user's picture to our system
+def save_picture(form_picture):
+	# Giving a random name to the file to avoid naming conflicts with other files
+	random_hex = secrets.token_hex(16)
+	# Getting the extension of the file that the user has uploaded
+	_,f_ext = os.path.splitext(form_picture.filename)
+	# Giving the picture the random name but conserving the same extension that the user had uploaded
+	picture_fn = random_hex + f_ext
+	# Setting the path where the user pictures will be stored
+	picture_path = os.path.join(app.root_path, 'static/users_images', picture_fn)
+
+	# This is to resize the image
+	dimensions = (125,125)	
+	i = Image.open(form_picture)
+	i.thumbnail(dimensions)
+
+	# Saving the picture with the random name to the created path	
+	i.save(picture_path)
+
+	return picture_fn	
+
+@app.route('/account', methods=['GET','POST'])
 @login_required
 def account():
-	return render_template('account.html', title="User Account")
+	form = Update_form()
+	if form.validate_on_submit():
+		if form.picture.data:
+			picture_file = save_picture(form.picture.data)
+			current_user.profile_pic = picture_file
+		current_user.username = form.username.data
+		current_user.email = form.email.data
+		db.session.commit()
+		flash('Your account was successfully updated', 'success')
+		return redirect(url_for('account'))
+	elif request.method == 'GET':
+		form.username.data = current_user.username
+		form.email.data = current_user.email
+	image_file = url_for('static', filename=f'users_images/{current_user.profile_pic}')
+	return render_template('account.html', title="User Account", image_file=image_file, form=form)

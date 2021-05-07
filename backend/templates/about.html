@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
+{% block about %}
+    active
+{% endblock about %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
 {% block pagewelcome %}
     <h1>What is Hardcopy and why in the world, should you care?</h1>
     <br><br>

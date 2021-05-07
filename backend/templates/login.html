@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
+{% block login %}
+    active
+{% endblock login %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
 {% block pagewelcome %}
     <h1>Login Here</h1>
     <h4>Welcome back dear reader! Hope you have a good time</h4>
