@@ -34,14 +34,25 @@
                     <li class="nav-item main-nav"><a class="nav-link contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span><strong> Contribute</strong></a></li>
                 </ul>
                 <span class="navbar-text">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('login') }}"  class="nav-link"><span class="fa fa-sign-in fa-lg"></span><strong> Login</strong></a>
-                        </li>
-                        <li class="nav-item main-nav">
-                            <a id="signup" href="{{ url_for('signup') }}" class="nav-link"><span class="fa fa-user-plus fa-lg"></span><strong> Signup</strong></a>
-                        </li>
-                    </ul>
+                    {% if current_user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item main-nav">
+                                <a id="login" href="{{ url_for('account') }}"  class="nav-link"><span class="fa fa-user-circle fa-lg"></span><strong> Account</strong></a>
+                            </li>
+                            <li class="nav-item main-nav">
+                                <a id="login" href="{{ url_for('logout') }}"  class="nav-link"><span class="fa fa-sign-out fa-lg"></span><strong> Logout</strong></a>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item main-nav">
+                                <a id="login" href="{{ url_for('login') }}"  class="nav-link"><span class="fa fa-sign-in fa-lg"></span><strong> Login</strong></a>
+                            </li>
+                            <li class="nav-item main-nav">
+                                <a id="signup" href="{{ url_for('signup') }}" class="nav-link"><span class="fa fa-user-plus fa-lg"></span><strong> Signup</strong></a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </span>
             </div>
         </div>

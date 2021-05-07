@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from backend.models import User
 
@@ -28,6 +28,7 @@ class Registration_form(FlaskForm):
 class Login_form(FlaskForm):
     email = StringField('Email ID',validators=[DataRequired(), Email()])
     password = PasswordField('Password',validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
     submit = SubmitField('Login!')
 
 class Feedback_form(FlaskForm):
@@ -35,3 +36,4 @@ class Feedback_form(FlaskForm):
     email = StringField('Email ID',validators=[DataRequired(), Email()])
     feedback = TextAreaField('Feedback/Criticism', validators=[DataRequired()])
     submit = SubmitField('Send Feedback')
+        

@@ -126,9 +126,12 @@
                 </div>
             </div>
         </fieldset>
-        <div class="form-group row">
-            <div class="col-12 text-center">
+        <div class="form-group row align-items-center">
+            <div class="col-6">
                 {{ form.submit( class='btn btn-primary submit_button pr-5 pl-5' ) }}
+            </div>
+            <div class="col-6">
+                <h5>Already registered? <a href="{{ url_for('login') }}">Login</a></h5>
             </div>
         </div>
     </form>

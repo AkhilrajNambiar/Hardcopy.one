@@ -258,3 +258,6 @@ footer{
 	padding-left: 10px;
 	/* border: none; */
 }
+.alert{
+	font-size: large;
+}
