@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect
-from backend import app
+from backend import app, db, bcrypt
 from backend.forms import Registration_form, Login_form, Feedback_form
 from backend.models import User, Book
 
@@ -35,6 +35,10 @@ def login():
 def signup():
 	form = Registration_form()
 	if form.validate_on_submit():
-		flash("Your account has been registered. You can now login!","success")
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(username = form.username.data, email = form.email.data, password = hashed_password, address = f'{form.street.data} {form.city.data} {form.state.data} {form.countries.data}')		
+		db.session.add(user)		
+		db.session.commit()
+		flash("Your account has been created. You can now login!","success")
 		return redirect(url_for("login"))
 	return render_template('signup.html', title='Signup', form = form)
