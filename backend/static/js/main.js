@@ -132,6 +132,7 @@ $(document).ready(function(){
 	$('#edit_profile').click(function(){
 		$('#edit_profile').css('display','none');
 		$('.updating_form').css('display','block');
+		$('.error_msg').css('display','none');
 	});
 	$('.cancel_btn').click(function(){
 		$('#edit_profile').css('display','inline-block');
