@@ -137,5 +137,5 @@ $(document).ready(function(){
 	$('.cancel_btn').click(function(){
 		$('#edit_profile').css('display','inline-block');
 		$('.updating_form').css('display','none');
-	})
+	});
 });

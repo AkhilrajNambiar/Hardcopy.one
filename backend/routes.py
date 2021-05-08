@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from backend import app, db, bcrypt
-from backend.forms import Registration_form, Login_form, Feedback_form, Update_form
+from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm
 from backend.models import User, Book
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -100,3 +100,9 @@ def account():
 		form.email.data = current_user.email
 	image_file = url_for('static', filename=f'users_images/{current_user.profile_pic}')
 	return render_template('account.html', title="User Account", image_file=image_file, form=form)
+
+@app.route('/upload', methods=['GET','POST'])
+@login_required	
+def upload():
+	form = BookUploadForm()
+	return render_template('upload.html', title="Upload Books here", form=form)

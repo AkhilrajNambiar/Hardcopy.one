@@ -1,0 +1,135 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>Upload your books here</h1>
+	<h4>These is where you can donate the treasures that you have, among others and share the joy of reading and learning!</h4>
+{% endblock pagewelcome %}
+{% block content %}
+	<h2 id="upload-header" class="text-center">Uploading books with quality measures!</h2>
+	<br>
+	<h3 class="text-center">Well how to do it?</h3>
+	<br>
+	<div class="row">
+		<div class="col-sm-6">
+			<h5 class="text-muted">Books will be displayed in a 3d format. For that you have to upload the images of the book from the front, back, top, bottom, left and right!</h5>
+		</div>
+		<div class="col-sm-6">
+			<!-- HERE there will be the demo 3D BOOK code -->
+		</div>
+	</div>
+	<form method="POST" action="" enctype="multipart/form-data">
+		<fieldset>
+			<legend class="text-center">Upload now</legend>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					{{ form.book_name.label(class='form-label') }}
+	                {% if form.book_name.errors %}
+	                    {{ form.book_name( class='form-control form-control-lg is-invalid' ) }}
+	                    <div class="invalid-feedback">
+	                        {% for error in form.book_name.errors %}
+	                            <span>{{ error }}</span>
+	                        {% endfor %}
+	                    </div>
+	                {% else %}
+	                    {{ form.book_name( class='form-control form-control-lg' ) }}
+	                {% endif %}
+				</div>
+				<div class="col-sm-6">
+					{{ form.author_name.label(class='form-label') }}
+	                {% if form.author_name.errors %}
+	                    {{ form.author_name( class='form-control form-control-lg is-invalid' ) }}
+	                    <div class="invalid-feedback">
+	                        {% for error in form.author_name.errors %}
+	                            <span>{{ error }}</span>
+	                        {% endfor %}
+	                    </div>
+	                {% else %}
+	                    {{ form.author_name( class='form-control form-control-lg' ) }}
+	                {% endif %}
+				</div>
+			</div>
+			<div class="form-group row align-items-center">
+				<div class="col-12">
+					{{ form.genre.label(class='form-label') }}
+	                {% if form.genre.errors %}
+	                    {{ form.genre( class='form-control form-control-lg is-invalid' ) }}
+	                    <div class="invalid-feedback">
+	                        {% for error in form.genre.errors %}
+	                            <span>{{ error }}</span>
+	                        {% endfor %}
+	                    </div>
+	                {% else %}
+	                    {{ form.genre( class='form-control form-control-lg genre_select' ) }}
+	                {% endif %}
+				</div>
+			</div>
+			<div class="form-group row align-items-center">
+				<div class="col-sm-6">
+	        		{{ form.book_front.label(class='form-label') }}
+	        		{{ form.book_front(class='form-control-file') }}
+	        		{% if form.book_front.errors %}
+	        			{% for error in form.book_front.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+				<div class="col-sm-6">
+	        		{{ form.book_back.label(class='form-label') }}
+	        		{{ form.book_back(class='form-control-file') }}
+	        		{% if form.book_back.errors %}
+	        			{% for error in form.book_back.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+			</div>
+			<div class="form-group row align-items-center">
+				<div class="col-sm-6">
+	        		{{ form.book_top.label(class='form-label') }}
+	        		{{ form.book_top(class='form-control-file') }}
+	        		{% if form.book_top.errors %}
+	        			{% for error in form.book_top.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+				<div class="col-sm-6">
+	        		{{ form.book_bottom.label(class='form-label') }}
+	        		{{ form.book_bottom(class='form-control-file') }}
+	        		{% if form.book_bottom.errors %}
+	        			{% for error in form.book_bottom.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-6">
+	        		{{ form.book_left.label(class='form-label') }}
+	        		{{ form.book_left(class='form-control-file') }}
+	        		{% if form.book_left.errors %}
+	        			{% for error in form.book_left.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+				<div class="col-sm-6">
+	        		{{ form.book_right.label(class='form-label') }}
+	        		{{ form.book_right(class='form-control-file') }}
+	        		{% if form.book_right.errors %}
+	        			{% for error in form.book_right.errors %}
+	        				<span class="text-danger">{{ error }}</span><br>
+	        			{% endfor %}
+	        		{% endif %}
+        		</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-12 text-center">
+	                {{ form.submit( class='btn btn-primary submit_button pr-5 pl-5' ) }}
+	            </div>
+			</div>
+		</fieldset>
+	</form>
+{% endblock content %}

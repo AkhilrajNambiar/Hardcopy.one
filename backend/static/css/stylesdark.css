@@ -1,6 +1,6 @@
 body{
 	margin-top: 70px;
-	background-color: #2b2b2b;
+	background-color: #040d21;
 	color: floralwhite;
 }
 .row-content{
@@ -34,9 +34,31 @@ body{
 }
 #caption-header{
 	margin-right: -50px;
-	background: linear-gradient(orange,green,blue);
+	background: linear-gradient(#ff8372,#ffcd7c);
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
+}
+#bdhead{
+	margin-top: 50px;
+	background: linear-gradient(to right,#ff8372,#ffcd7c);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
+	font-size: 50px;
+}
+#upload-header{
+	margin-right: -50px;
+	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
+	font-size: 45px;
+}
+#genre-header{
+	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
 }
 .carousel-img{
 	position:absolute;
@@ -108,12 +130,6 @@ footer{
 	font-weight: bold;
 	font-size: 22px;
 }
-#bdhead{
-	margin-top: 50px;
-	background: linear-gradient(to right, yellow, orange, green);
-	-webkit-text-fill-color: transparent;
-	-webkit-background-clip: text;
-}
 #p3{
 	color: #38d9a9;
 	font-weight: bold;
@@ -130,6 +146,9 @@ footer{
 }
 .modal-header{
 	background: url(../admin_images/background.png);
+}
+.modal-dialog{
+	pointer-events: all;
 }
 .close{
 	color: white;
@@ -210,7 +229,12 @@ footer{
 	background-color: #38d9a9;
 	color: #2b2b2b;
 }
-#donate-btn{
+#donate-btn-1{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+}
+#donate-btn-2{
 	border: 2px #0057B3 solid;
 	border-bottom: 6px #0057B3 solid;
 	font-size: 20px;
@@ -277,4 +301,9 @@ footer{
 	font-size: 22px;
 	font-weight: bold;
 	padding: 10px;
+}
+.genre_select{
+	padding:0rem;
+	padding-left: 10px;
+	/* border: none; */
 }

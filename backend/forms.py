@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, BooleanField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from backend.models import User
 from flask_login import current_user
@@ -56,3 +56,15 @@ class Update_form(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email is taken. Please choose another one.')    
+
+class BookUploadForm(FlaskForm):
+    book_name = StringField('Book name', validators=[DataRequired()])
+    author_name = StringField('Author name', validators=[DataRequired()])
+    genre = SelectField('Genre', validators=[DataRequired()], choices=['Please select...', 'Fiction', 'Non-fiction', 'Romance', 'Biography', 'Comics', 'Self-help'])
+    book_front = FileField('Book Front', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
+    book_back = FileField('Book Back', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])    
+    book_top = FileField('Book Top', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
+    book_bottom = FileField('Book Bottom', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
+    book_right = FileField('Book Right', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
+    book_left = FileField('Book Left', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
+    submit = SubmitField('Upload Book')
