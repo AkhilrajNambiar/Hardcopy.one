@@ -82,6 +82,22 @@ def save_picture(form_picture):
 
 	return picture_fn	
 
+def save_picture_without_compression(form_picture):
+	# Giving a random name to the file to avoid naming conflicts with other files
+	random_hex = secrets.token_hex(16)
+	# Getting the extension of the file that the user has uploaded
+	_,f_ext = os.path.splitext(form_picture.filename)
+	# Giving the picture the random name but conserving the same extension that the user had uploaded
+	picture_fn = random_hex + f_ext
+	# Setting the path where the user pictures will be stored
+	picture_path = os.path.join(app.root_path, 'static/users_images', picture_fn)
+
+	# Saving the picture with the random name to the created path	
+	form_picture.save(picture_path)
+
+	return picture_fn	
+
+
 @app.route('/account', methods=['GET','POST'])
 @login_required
 def account():
@@ -105,4 +121,10 @@ def account():
 @login_required	
 def upload():
 	form = BookUploadForm()
+	if form.validate_on_submit():
+		book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data, book_front=save_picture_without_compression(form.book_front.data), book_back=save_picture_without_compression(form.book_back.data), book_top=save_picture_without_compression(form.book_top.data), book_bottom=save_picture_without_compression(form.book_bottom.data), book_right=save_picture_without_compression(form.book_right.data), book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
+		db.session.add(book)				
+		db.session.commit()
+		flash("Book has been successfully uploaded. Thank you for your contribution!","success")
+		return redirect(url_for('home'))		
 	return render_template('upload.html', title="Upload Books here", form=form)

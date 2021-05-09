@@ -29,7 +29,7 @@ class Book(db.Model):
 	book_bottom = db.Column(db.String(60), nullable=False, default='back.jpg')
 	book_right = db.Column(db.String(60), nullable=False, default='right.jpg')
 	book_left = db.Column(db.String(60), nullable=False, default='left.jpg')
-	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'),default=0)
 	donated_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	
 

@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 {% block for_logo %}
     <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
-{% endblock for_logo %}
+{% endblock for_logo %} 
 {% block pagewelcome %}
 	<h1>Upload your books here</h1>
-	<h4>These is where you can donate the treasures that you have, among others and share the joy of reading and learning!</h4>
+	<h4 class="text-muted">These is where you can donate the treasures that you have, among others and share the joy of reading and learning!</h4>
 {% endblock pagewelcome %}
 {% block content %}
 	<h2 id="upload-header" class="text-center">Uploading books with quality measures!</h2>
@@ -12,14 +12,15 @@
 	<h3 class="text-center">Well how to do it?</h3>
 	<br>
 	<div class="row">
-		<div class="col-sm-6">
-			<h5 class="text-muted">Books will be displayed in a 3d format. For that you have to upload the images of the book from the front, back, top, bottom, left and right!</h5>
+		<div class="col-12 text-center">
+			<h5 class="text-muted">Each and every book, has be fully user appreciable. For that you have to upload the images of the book from the front, back, top, bottom, left and right!</h5>
 		</div>
 		<div class="col-sm-6">
 			<!-- HERE there will be the demo 3D BOOK code -->
 		</div>
 	</div>
 	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
 		<fieldset>
 			<legend class="text-center">Upload now</legend>
 			<div class="form-group row">
