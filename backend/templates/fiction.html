@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+    <h1>Fiction</h1>  
+    <h4 class="text-muted">Imagination, can no better be spurred or understood, than through this genre. Dig through to find your favourite!</h4>
+{% endblock pagewelcome %}

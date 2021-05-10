@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+    <h1>Romance</h1>  
+    <h4 class="text-muted">All the Romeos and Juliets, find your favourites over here!</h4>
+{% endblock pagewelcome %}

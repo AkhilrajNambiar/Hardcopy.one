@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+    <h1>Self help</h1>  
+    <h4 class="text-muted">Do you find yourself questioning your thoughts and behaviour? Feel lonely and depressed? Help yourself over here!</h4>
+{% endblock pagewelcome %}

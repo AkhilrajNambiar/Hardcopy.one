@@ -257,6 +257,7 @@ footer{
 	font-size: x-large;
 	background: #131313;
 	min-height: auto;
+	color: white;
 }
 .genre-1:hover, .genre-2:hover, .genre-3:hover, .genre-4:hover, .genre-5:hover, .genre-6:hover{
 	box-shadow: 2px 2px 20px 2px #131313;

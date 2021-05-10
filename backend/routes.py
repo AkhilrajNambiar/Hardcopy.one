@@ -128,3 +128,27 @@ def upload():
 		flash("Book has been successfully uploaded. Thank you for your contribution!","success")
 		return redirect(url_for('home'))		
 	return render_template('upload.html', title="Upload Books here", form=form)
+
+@app.route('/fiction')
+def fiction():
+	return render_template('fiction.html', title='Fiction')
+
+@app.route('/non_fiction')
+def non_fiction():
+	return render_template('non-fiction.html', title='Non-fiction')
+
+@app.route('/biography')
+def biography():
+	return render_template('biography.html', title='Biography')
+
+@app.route('/comics')
+def comics():
+	return render_template('comics.html', title='Comics')
+
+@app.route('/romance')
+def romance():
+	return render_template('romance.html', title='Romance')
+
+@app.route('/personality')
+def personality():
+	return render_template('personality.html', title='Self-Help')
