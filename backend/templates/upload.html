@@ -62,7 +62,22 @@
 	                        {% endfor %}
 	                    </div>
 	                {% else %}
-	                    {{ form.genre( class='form-control form-control-lg genre_select' ) }}
+	                    {{ form.genre( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+	                {% endif %}
+				</div>
+			</div>
+			<div class="form-group row align-items-center" id="sub_genre_id">
+				<div class="col-12">
+					{{ form.sub_genre.label(class='form-label') }}
+	                {% if form.sub_genre.errors %}
+	                    {{ form.sub_genre( class='form-control form-control-lg is-invalid' ) }}
+	                    <div class="invalid-feedback">
+	                        {% for error in form.sub_genre.errors %}
+	                            <span>{{ error }}</span>
+	                        {% endfor %}
+	                    </div>
+	                {% else %}
+	                    {{ form.sub_genre( class='form-control form-control-lg genre_select' ) }}
 	                {% endif %}
 				</div>
 			</div>

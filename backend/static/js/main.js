@@ -138,4 +138,12 @@ $(document).ready(function(){
 		$('#edit_profile').css('display','inline-block');
 		$('.updating_form').css('display','none');
 	});
+	$('#genre_id').change(function(){
+		if($(this).val() == 'Non-fiction'){
+			$('#sub_genre_id').css('display','block');
+		}
+		else{
+			$('#sub_genre_id').css('display','none');
+		}
+	});
 });

@@ -308,3 +308,18 @@ footer{
 	padding-left: 10px;
 	/* border: none; */
 }
+.tab-pane{
+	/*background: url(../admin_images/background.png);
+	background-repeat: repeat-y;*/
+	background-color: none;
+	padding: 20px;
+	margin-top: 5px;
+	color: black;
+}
+#sub_genre_id{
+	display: none;
+}
+.books:hover{
+	box-shadow: 2px 2px 20px 2px gray;
+	border-radius: 5px;
+}

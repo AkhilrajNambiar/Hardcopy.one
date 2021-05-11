@@ -23,6 +23,7 @@ class Book(db.Model):
 	book_name = db.Column(db.String(20), nullable=False)
 	author_name = db.Column(db.String(20), nullable=False)
 	genre = db.Column(db.String(60), nullable=False)
+	sub_genre = db.Column(db.String(60))
 	book_front = db.Column(db.String(60), nullable=False, default='front.jpg')
 	book_back = db.Column(db.String(60), nullable=False, default='back.jpg')
 	book_top = db.Column(db.String(60), nullable=False, default='top.jpg')

@@ -122,7 +122,7 @@ def account():
 def upload():
 	form = BookUploadForm()
 	if form.validate_on_submit():
-		book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data, book_front=save_picture_without_compression(form.book_front.data), book_back=save_picture_without_compression(form.book_back.data), book_top=save_picture_without_compression(form.book_top.data), book_bottom=save_picture_without_compression(form.book_bottom.data), book_right=save_picture_without_compression(form.book_right.data), book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
+		book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data, sub_genre=form.sub_genre.data, book_front=save_picture_without_compression(form.book_front.data), book_back=save_picture_without_compression(form.book_back.data), book_top=save_picture_without_compression(form.book_top.data), book_bottom=save_picture_without_compression(form.book_bottom.data), book_right=save_picture_without_compression(form.book_right.data), book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
 		db.session.add(book)				
 		db.session.commit()
 		flash("Book has been successfully uploaded. Thank you for your contribution!","success")
@@ -131,24 +131,30 @@ def upload():
 
 @app.route('/fiction')
 def fiction():
-	return render_template('fiction.html', title='Fiction')
+	books = Book.query.all()
+	return render_template('fiction.html', title='Fiction', books=books)
 
 @app.route('/non_fiction')
 def non_fiction():
-	return render_template('non-fiction.html', title='Non-fiction')
+	books = Book.query.all()
+	return render_template('non-fiction.html', title='Non-fiction', books=books)
 
 @app.route('/biography')
 def biography():
-	return render_template('biography.html', title='Biography')
+	books = Book.query.all()
+	return render_template('biography.html', title='Biography', books=books)
 
 @app.route('/comics')
 def comics():
-	return render_template('comics.html', title='Comics')
+	books = Book.query.all()
+	return render_template('comics.html', title='Comics', books=books)
 
 @app.route('/romance')
 def romance():
-	return render_template('romance.html', title='Romance')
+	books = Book.query.all()
+	return render_template('romance.html', title='Romance', books=books)
 
 @app.route('/personality')
 def personality():
-	return render_template('personality.html', title='Self-Help')
+	books = Book.query.all()
+	return render_template('personality.html', title='Self-Help', books=books)
