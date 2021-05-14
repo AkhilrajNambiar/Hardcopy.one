@@ -12,7 +12,7 @@
 			{% if book.genre == 'Self-help' %}
 				<div class="col-sm-4 text-center books  mb-2">
 					<figure class="mt-4">
-						<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220">
+						<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
 						<figcaption>
 							<h5 style="color: white">{{ book.book_name }}</h5>
 							<h5><small class="text-muted">By {{ book.author_name }}</small></h5>

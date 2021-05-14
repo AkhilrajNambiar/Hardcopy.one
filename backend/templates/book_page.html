@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1 class="text-center">{{ book.book_name }}</h1>
+	<h4 class="text-muted text-center">By {{ book.author_name }}</h4>
+{% endblock pagewelcome %}
+{% block content %}
+	<div class="row">
+		<div class="col-sm-6">
+			<img src="{{ url_for('static', filename = 'users_images/'+book.book_front) }}" height="600" width="500" class="mb-5">
+		</div>
+		<div class="col-sm-6">
+			<center>
+				<h3 class="donor_specs"><img src="{{ url_for('static',filename='admin_images/celebrate.png') }}" width="50" height="50">Donated by <a>{{ book.provided_by.username }}</a><img src="{{ url_for('static',filename='admin_images/celebrate_reverse.png') }}" width="50" height="50"></h3>
+			</center>
+			<br><br>
+			<center>
+				<div class="btn btn-success btn-lg mr-3">
+					<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
+				</div>
+				<div class="btn btn-warning btn-lg ml-3">
+					<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+				</div>
+			</center>
+			<br><br>
+			<center>
+				<h4>Rate {{ book.book_name }}</h4>
+				<div>
+					{% for i in range(5) %}
+						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star_{{i}}">&nbsp;
+					{% endfor %}
+				</div>
+			</center>
+		</div>
+	</div>
+{% endblock content %}

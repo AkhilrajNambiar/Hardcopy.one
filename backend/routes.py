@@ -158,3 +158,8 @@ def romance():
 def personality():
 	books = Book.query.all()
 	return render_template('personality.html', title='Self-Help', books=books)
+
+@app.route('/book_page/<int:book_id>')
+def book_page(book_id):
+	book = Book.query.get_or_404(book_id)
+	return render_template('book_page.html', title=book.book_name, book=book)

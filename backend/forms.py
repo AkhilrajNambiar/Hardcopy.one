@@ -59,9 +59,9 @@ class Update_form(FlaskForm):
 
 class BookUploadForm(FlaskForm):
     book_name = StringField('Book name', validators=[DataRequired()])
-    author_name = StringField('Author name', validators=[DataRequired()])
+    author_name = StringField('Author/Publisher name', validators=[DataRequired()])
     genre = SelectField('Genre', validators=[DataRequired()], choices=['Please select...', 'Fiction', 'Non-fiction', 'Romance', 'Biography', 'Comics', 'Self-help'])
-    sub_genre = SelectField('Sub-genre', validators=[DataRequired()], choices=['Please select...', 'Computers and Technology', 'Maths', 'History', 'Natural Sciences', 'Exam preparation', 'Commerce & Accounting', 'Religion & Spirituality'])
+    sub_genre = SelectField('Sub-genre', validators=[DataRequired()], choices=['Please select...', 'Computers and Technology', 'Encyclopedias', 'History', 'Natural Sciences', 'Exam preparation', 'Commerce & Accounting', 'Religion & Spirituality'])
     book_front = FileField('Book Front', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
     book_back = FileField('Book Back', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])    
     book_top = FileField('Book Top', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])

@@ -146,4 +146,29 @@ $(document).ready(function(){
 			$('#sub_genre_id').css('display','none');
 		}
 	});
+	$('#star_0').click(function(){
+		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+	});
+	$('#star_1').click(function(){
+		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
+	});
+	$('#star_2').click(function(){
+		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
+	});
+	$('#star_3').click(function(){
+		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating_full.png");
+	});
+	$('#star_4').click(function(){
+		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating_full.png");
+	});
 });

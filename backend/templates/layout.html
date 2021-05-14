@@ -32,6 +32,9 @@
                     <li class="nav-item main-nav"><a href="{{ url_for('about') }}" class="nav-link {% block about %}{% endblock %}" id="first-nav"><span class="fa fa-info-circle fa-lg"></span><strong> About</strong></a></li>
                     <li class="nav-item main-nav"><a href="{{ url_for('contact') }}" class="nav-link {% block contact %}{% endblock %}" id="first-nav"><span class="fa fa-address-card fa-lg"></span><strong> Contact</strong></a></li>
                     <li class="nav-item main-nav"><a class="nav-link {% block contribute %}{% endblock %} contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span><strong> Contribute</strong></a></li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item main-nav"><a class="nav-link {% block cart %}{% endblock cart %}" id="first-nav"><span class="fa fa-shopping-cart fa-lg"></span><strong> Cart</strong></a></li>
+                    {% endif %}
                 </ul>
                 <span class="navbar-text">
                     {% if current_user.is_authenticated %}

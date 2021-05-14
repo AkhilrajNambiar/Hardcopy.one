@@ -319,7 +319,19 @@ footer{
 #sub_genre_id{
 	display: none;
 }
-.books:hover{
+.book_image:hover{
 	box-shadow: 2px 2px 20px 2px gray;
-	border-radius: 5px;
+}
+.book_link{
+	color: white;
+}
+.book_link:hover{
+	color: white;
+	text-decoration-color: white;
+}
+.donor_specs{
+	background: linear-gradient(to right,#ff8372,#ffcd7c);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
 }
