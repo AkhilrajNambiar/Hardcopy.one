@@ -9,7 +9,7 @@
 {% block content %}
 	<div class="row">
 		<div class="col-sm-6">
-			<img src="{{ url_for('static', filename = 'users_images/'+book.book_front) }}" height="600" width="500" class="mb-5">
+			<img src="{{ url_for('static', filename = 'users_images/'+book.book_front) }}" style="max-width: 100%; max-height: 100%" class="mb-5">
 		</div>
 		<div class="col-sm-6">
 			<center>
@@ -17,20 +17,37 @@
 			</center>
 			<br><br>
 			<center>
-				<div class="btn btn-success btn-lg mr-3">
-					<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
-				</div>
-				<div class="btn btn-warning btn-lg ml-3">
-					<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="btn btn-success btn-lg">
+							<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="btn btn-warning btn-lg">
+							<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+						</div>
+					</div>
 				</div>
 			</center>
 			<br><br>
 			<center>
-				<h4>Rate {{ book.book_name }}</h4>
+				<h4>Rate the content of this book</h4>
 				<div>
 					{% for i in range(5) %}
 						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star_{{i}}">&nbsp;
 					{% endfor %}
+					&nbsp;<img class="mt-2" id="ratings" src="{{ url_for('static', filename='admin_images/neutral.png') }}" width="60" height="50">
+				</div>
+			</center>
+			<br><br>
+			<center>
+				<h4>Rate the condition of this book</h4>
+				<div>
+					{% for i in range(5) %}
+						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star1_{{i}}">&nbsp;
+					{% endfor %}
+					&nbsp;<img class="mt-2" id="ratings1" src="{{ url_for('static', filename='admin_images/neutral.png') }}" width="60" height="50">
 				</div>
 			</center>
 		</div>

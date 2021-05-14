@@ -23,6 +23,7 @@ body{
 }
 .jumbotron{
 	background: url(../admin_images/background.png);
+	background-repeat: repeat-x;
 }
 .carousel-item{
 	height: 350px;

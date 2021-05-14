@@ -14,7 +14,7 @@
 					<figure class="mt-4">
 						<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220">
 						<figcaption>
-							<h5 style="color: white">{{ book.book_name }}</h5>
+							<h5 style="color: white"><a href="{{ url_for('book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
 							<h5><small class="text-muted">By {{ book.author_name }}</small></h5>
 						</figcaption>
 					</figure>

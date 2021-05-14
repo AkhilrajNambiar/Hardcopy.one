@@ -147,28 +147,83 @@ $(document).ready(function(){
 		}
 	});
 	$('#star_0').click(function(){
-		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings').attr("src","../../static/admin_images/x_unhappy.png");
 	});
 	$('#star_1').click(function(){
-		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings').attr("src","../../static/admin_images/unhappy.png");
 	});
 	$('#star_2').click(function(){
-		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings').attr("src","../../static/admin_images/ok.png");
 	});
 	$('#star_3').click(function(){
-		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_3').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings').attr("src","../../static/admin_images/happy.png");
 	});
 	$('#star_4').click(function(){
-		$('#star_0').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_1').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_2').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_3').attr("src", "../../static/admin_images/rating_full.png");
-		$('#star_4').attr("src", "../../static/admin_images/rating_full.png");
+		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_3').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star_4').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#ratings').attr("src","../../static/admin_images/xtrahappy.png");
 	});
+	$('#star1_0').click(function(){
+		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_1').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_2').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings1').attr("src","../../static/admin_images/x_unhappy.png");
+	});
+	$('#star1_1').click(function(){
+		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_2').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings1').attr("src","../../static/admin_images/unhappy.png");
+	});
+	$('#star1_2').click(function(){
+		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
+		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings1').attr("src","../../static/admin_images/ok.png");
+	});
+	$('#star1_3').click(function(){
+		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_3').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
+		$('#ratings1').attr("src","../../static/admin_images/happy.png");
+	});
+	$('#star1_4').click(function(){
+		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_1').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_2').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_3').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#star1_4').attr("src", "../../static/admin_images/rating_fill.png");
+		$('#ratings1').attr("src","../../static/admin_images/xtrahappy.png");
+	});	
 });
