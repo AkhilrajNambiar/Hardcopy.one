@@ -1,7 +1,11 @@
 body{
 	margin-top: 70px;
+	background: url(../admin_images/library.jpg);
 	background-color: #040d21;
 	color: floralwhite;
+}
+.transparent_back{
+	background-color: rgba(4,13,33,70%);
 }
 .row-content{
 	padding: 50px 0 50px 0;
