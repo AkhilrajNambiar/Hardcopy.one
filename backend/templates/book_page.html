@@ -54,14 +54,14 @@
 	</div>
 	<br><br>
 	<h2 class="text-center" id="AAbnd">View from other sides</h2>
-	<ul class="nav nav-tabs nav-fill">
+	<ul class="nav nav-tabs nav-fill view_tab">
 		<li class="nav-item"><a href="#backview" class="nav-link active" data-toggle="tab" role="tab">Back View</a></li>
 		<li class="nav-item"><a href="#topview" class="nav-link" data-toggle="tab" role="tab">Top View</a></li>
 		<li class="nav-item"><a href="#bottomview" class="nav-link" data-toggle="tab" role="tab">Bottom View</a></li>
 		<li class="nav-item"><a href="#leftview" class="nav-link" data-toggle="tab" role="tab">Left View</a></li>
 		<li class="nav-item"><a href="#rightview" class="nav-link" data-toggle="tab" role="tab">Right View</a></li>
 	</ul>
-	<div class="tab-content">
+	<div class="tab-content view_diff">
 		<div class="tab-pane fade show active text-center" role="tabpanel" id="backview">
 			<img src="{{ url_for('static', filename='users_images/'+book.book_back) }}" style="max-height: 50%; max-width: 50%">
 		</div>

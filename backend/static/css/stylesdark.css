@@ -210,7 +210,8 @@ footer{
 	color: #ffa94d;
 }
 .accord{
-	background: url(../admin_images/background.png);
+	background-color: #02B37E;
+	cursor: pointer;
 }
 .card-body{
 	background: #131313;
@@ -223,7 +224,14 @@ footer{
 	border-bottom: 5px grey solid;
 }
 #faq-head{
-	color: #38d9a9;
+	background: linear-gradient(to right,#ff8372,#ffcd7c);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bold;
+}
+#accord_body{
+	background-color: #38d9a9;
+	color: #2b2b2b;
 }
 #me{
 	background: #ff8787;
@@ -341,4 +349,7 @@ footer{
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 	font-weight: bolder;
+}
+.view_diff{
+	background-color: white;
 }

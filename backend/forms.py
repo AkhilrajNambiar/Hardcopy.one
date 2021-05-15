@@ -68,5 +68,5 @@ class BookUploadForm(FlaskForm):
     book_bottom = FileField('Book Bottom', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
     book_right = FileField('Book Right', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
     book_left = FileField('Book Left', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
-    extras = TextAreaField('Anything else that the buyer should know')
+    extras = TextAreaField('Anything else that the reader should know?', validators=[Length(max=300)])
     submit = SubmitField('Upload Book')
