@@ -19,12 +19,12 @@
 			<center>
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="btn btn-success btn-lg">
+						<div class="btn btn-success btn-lg" style="border: solid 1px darkgreen; border-bottom: solid 5px darkgreen">
 							<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<div class="btn btn-warning btn-lg">
+						<div class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange">
 							<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
 						</div>
 					</div>
@@ -52,4 +52,49 @@
 			</center>
 		</div>
 	</div>
+	<br><br>
+	<h2 class="text-center" id="AAbnd">View from other sides</h2>
+	<ul class="nav nav-tabs nav-fill">
+		<li class="nav-item"><a href="#backview" class="nav-link active" data-toggle="tab" role="tab">Back View</a></li>
+		<li class="nav-item"><a href="#topview" class="nav-link" data-toggle="tab" role="tab">Top View</a></li>
+		<li class="nav-item"><a href="#bottomview" class="nav-link" data-toggle="tab" role="tab">Bottom View</a></li>
+		<li class="nav-item"><a href="#leftview" class="nav-link" data-toggle="tab" role="tab">Left View</a></li>
+		<li class="nav-item"><a href="#rightview" class="nav-link" data-toggle="tab" role="tab">Right View</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade show active text-center" role="tabpanel" id="backview">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_back) }}" style="max-height: 50%; max-width: 50%">
+		</div>
+		<div class="tab-pane fade text-center" id="topview" role="tabpanel">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_top) }}" style="max-height: 50%; max-width: 50%">
+		</div>
+		<div class="tab-pane fade text-center" id="bottomview" role="tabpanel">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_bottom) }}" style="max-height: 50%; max-width: 50%">
+		</div>
+		<div class="tab-pane fade text-center" id="leftview" role="tabpanel">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_left) }}" style="max-height: 50%; max-width: 50%">
+		</div>
+		<div class="tab-pane fade text-center" id="rightview" role="tabpanel">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_right) }}" style="max-height: 50%; max-width: 50%">
+		</div>
+	</div>
+	<br><br>
+	{% if other_books_by_author.count() > 1 %}
+		<h2>More books by {{ book.author_name }}</h2>
+		<div class="row">
+			{% for other in other_books_by_author %}
+				{% if other.book_name != book.book_name %}
+					<div class="col-6 col-sm-4 col-xl-3 text-center books  mb-2">
+						<figure class="mt-4">
+							<img src="{{ url_for('static', filename='users_images/' + other.book_front) }}" width="145" height="220" class="book_image">
+							<figcaption>
+								<h5 style="color: white"><a href="{{ url_for('book_page', book_id=other.id) }}" class="book_link">{{ other.book_name }}</a></h5>
+								<h5><small class="text-muted">By {{ other.author_name }}</small></h5>
+							</figcaption>
+						</figure>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
 {% endblock content %}

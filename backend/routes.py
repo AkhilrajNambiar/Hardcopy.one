@@ -162,4 +162,5 @@ def personality():
 @app.route('/book_page/<int:book_id>')
 def book_page(book_id):
 	book = Book.query.get_or_404(book_id)
-	return render_template('book_page.html', title=book.book_name, book=book)
+	other_books_by_author = Book.query.filter_by(author_name=book.author_name)
+	return render_template('book_page.html', title=book.book_name, book=book, other_books_by_author=other_books_by_author)
