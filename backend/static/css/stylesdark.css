@@ -1,11 +1,8 @@
 body{
 	margin-top: 70px;
-	background: url(../admin_images/library.jpg);
-	background-color: #040d21;
+	background-image:linear-gradient(rgba(4,13,33,70%),rgba(4,13,33,70%)),url(../admin_images/library.jpg);
+	background-color: ;
 	color: floralwhite;
-}
-.transparent_back{
-	background-color: rgba(4,13,33,70%);
 }
 .row-content{
 	padding: 50px 0 50px 0;
@@ -52,11 +49,10 @@ body{
 	font-size: 50px;
 }
 #upload-header{
-	margin-right: -50px;
 	background: linear-gradient(to right,#9df4d3,#72bef4);
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
-	font-weight: bolder;
+	font-weight: bold;
 	font-size: 45px;
 }
 #AAbnd{
