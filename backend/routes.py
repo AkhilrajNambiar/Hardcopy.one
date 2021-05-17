@@ -6,13 +6,14 @@ from backend import app, db, bcrypt
 from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm
 from backend.models import User, Book
 from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy import or_
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home', methods=['GET','POST'])
 def home():
 	return render_template('index.html', title='Home')
 
-@app.route('/about')
+@app.route('/about', methods=['GET','POST'])
 def about():
 	return render_template('about.html', title='About')
 
@@ -129,38 +130,54 @@ def upload():
 		return redirect(url_for('home'))		
 	return render_template('upload.html', title="Upload Books here", form=form)
 
-@app.route('/fiction')
+@app.route('/fiction', methods=['GET','POST'])
 def fiction():
 	books = Book.query.all()
 	return render_template('fiction.html', title='Fiction', books=books)
 
-@app.route('/non_fiction')
+@app.route('/non_fiction', methods=['GET','POST'])
 def non_fiction():
 	books = Book.query.all()
 	return render_template('non-fiction.html', title='Non-fiction', books=books)
 
-@app.route('/biography')
+@app.route('/biography', methods=['GET','POST'])
 def biography():
 	books = Book.query.all()
 	return render_template('biography.html', title='Biography', books=books)
 
-@app.route('/comics')
+@app.route('/comics', methods=['GET','POST'])
 def comics():
 	books = Book.query.all()
 	return render_template('comics.html', title='Comics', books=books)
 
-@app.route('/romance')
+@app.route('/romance', methods=['GET','POST'])
 def romance():
 	books = Book.query.all()
 	return render_template('romance.html', title='Romance', books=books)
 
-@app.route('/personality')
+@app.route('/personality', methods=['GET','POST'])
 def personality():
 	books = Book.query.all()
 	return render_template('personality.html', title='Self-Help', books=books)
 
-@app.route('/book_page/<int:book_id>')
+@app.route('/book_page/<int:book_id>', methods=['GET','POST'])
 def book_page(book_id):
 	book = Book.query.get_or_404(book_id)
 	other_books_by_author = Book.query.filter_by(author_name=book.author_name)
 	return render_template('book_page.html', title=book.book_name, book=book, other_books_by_author=other_books_by_author)
+
+def book_search(query):
+	matched_books = []
+	book_list = Book.query.all()
+	for i in book_list:
+		if query in i.book_name or query in i.genre or query in i.author_name or query in i.sub_genre:
+			matched_books.append(i)
+	return matched_books
+
+@app.route('/search', methods=['GET','POST'])
+def search():
+	# matched_books = book_search(query)
+	if request.method == 'POST':
+		query = request.form.get('searchbar')
+	matched_books = book_search(query)
+	return render_template('search_results.html', matched_books=matched_books, query = query)

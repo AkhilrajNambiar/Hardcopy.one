@@ -226,4 +226,14 @@ $(document).ready(function(){
 		$('#star1_4').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#ratings1').attr("src","../../static/admin_images/xtrahappy.png");
 	});	
+	if($('.searchbox').css('display','none')){
+		$('#search').click(function(){
+			$('.searchbox').css("display","inline");
+			$('#search').css('display','none');
+		});
+	}
+	$('.search_close').click(function(){
+		$('.searchbox').css('display','none');
+		$('#search').css('display','inline');
+	});
 });
