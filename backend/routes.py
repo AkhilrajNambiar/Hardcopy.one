@@ -4,9 +4,9 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from backend import app, db, bcrypt
 from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm
-from backend.models import User, Book
+from backend.models import User, Book, Cart
 from flask_login import login_user, current_user, logout_user, login_required
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 @app.route('/')
 @app.route('/home', methods=['GET','POST'])
@@ -164,10 +164,15 @@ def personality():
 def book_page(book_id):
 	book = Book.query.get_or_404(book_id)
 	other_books_by_author = Book.query.filter_by(author_name=book.author_name)
-	return render_template('book_page.html', title=book.book_name, book=book, other_books_by_author=other_books_by_author)
+	hai_ya_nahi = Cart.query.filter(and_(Cart.user_id == current_user.id, Cart.book_id == book_id))
+	in_the_cart = False
+	if hai_ya_nahi.count() == 1:
+		in_the_cart = True
+	return render_template('book_page.html', title=book.book_name, book=book, other_books_by_author=other_books_by_author, in_the_cart=in_the_cart)
 
 def book_search(query):
 	matched_books = []
+	query = query.capitalize()
 	book_list = Book.query.all()
 	for i in book_list:
 		if query in i.book_name or query in i.genre or query in i.author_name or query in i.sub_genre:
@@ -176,8 +181,41 @@ def book_search(query):
 
 @app.route('/search', methods=['GET','POST'])
 def search():
-	# matched_books = book_search(query)
 	if request.method == 'POST':
 		query = request.form.get('searchbar')
 	matched_books = book_search(query)
-	return render_template('search_results.html', matched_books=matched_books, query = query)
+	return render_template('search_results.html',title=f'Search result for {query}', matched_books=matched_books, query = query)
+
+@app.route('/cart/<user_id>')
+@login_required
+def cart(user_id):
+	return render_template('cart.html',title=f'{current_user.username}s cart')
+
+@app.route('/add_to_cart/<user_id>', methods = ['GET','POST'])	
+@login_required
+def add_to_cart(user_id):
+	if request.method == 'POST':
+		if 'cartbtn' in request.form:
+			book_id = request.form['cartbtn']
+			cart = Cart(user_id=user_id,book_id=book_id)
+			db.session.add(cart)
+			db.session.commit()
+		flash('Book successfully added to cart', 'success')
+	user_cart = Cart.query.filter_by(user_id = current_user.id)
+	book_list = []
+	for cart in user_cart:
+		book_list.append(cart.book_is)
+	return render_template('cart.html', books=book_list)
+
+@app.route('/remove_from_cart/<user_id>', methods=['GET','POST'])
+@login_required
+def remove_from_cart(user_id):
+	if request.method == 'POST':
+		if 'cartremovebtn' in request.form:
+			book_id = request.form['cartremovebtn']
+			book_in_cart = Cart.query.filter(and_(Cart.user_id == current_user.id, Cart.book_id == book_id))
+			book_to_remove = book_in_cart[0]
+			db.session.delete(book_to_remove)
+			db.session.commit()
+		flash('Book successfully removed from cart','success')
+		return redirect(url_for('add_to_cart', user_id=current_user.id))

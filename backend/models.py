@@ -14,12 +14,12 @@ class User(db.Model, UserMixin):
 	address = db.Column(db.Text, nullable=False)
 	books_ordered = db.relationship('Book', backref='bought_by', lazy=True, foreign_keys='Book.ordered_by')
 	books_donated = db.relationship('Book', backref='provided_by', lazy=True, foreign_keys='Book.donated_by')
+	carted = db.relationship('Cart', backref='added_by', lazy=True, foreign_keys='Cart.user_id')
 
 	def __repr__(self):
 		return f"User({self.username}; {self.email}; {self.profile_pic}; {self.address})"
 
 class Book(db.Model):
-	__searchable__ = ['book_name','author_name','genre','sub_genre']
 
 	id = db.Column(db.Integer, primary_key=True)
 	book_name = db.Column(db.String(20), nullable=False)
@@ -35,7 +35,16 @@ class Book(db.Model):
 	extras = db.Column(db.Text)
 	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'),default=0)
 	donated_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	added_to_cart = db.relationship('Cart', backref='book_is', lazy=True, foreign_keys='Cart.book_id')
 	
 
 	def __repr__(self):
 		return f"Book({self.book_name}; {self.author_name}; {self.genre}; {self.donated_by}; {self.ordered_by})"
+
+class Cart(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=0)
+	book_id = db.Column(db.Integer, db.ForeignKey('book.id'), default=0)
+
+	def __repr__(self):
+		return f"Cart({self.id}; {self.user_id}; {self.book_id})"

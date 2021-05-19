@@ -24,9 +24,19 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<div class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange">
-							<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
-						</div>
+						{% if in_the_cart %}
+							<form method="POST" action="{{ url_for('remove_from_cart', user_id = current_user.id) }}">
+								<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartremovebtn" value="{{ book.id }}">
+									<span><img src="{{ url_for('static',filename = 'admin_images/cart-minus.svg') }}" width="30" height="30"></span> &nbsp;<b>Remove from cart</b>
+								</button>
+							</form>
+						{% else %}
+							<form method="POST" action="{{ url_for('add_to_cart', user_id = current_user.id) }}">
+								<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
+									<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+								</button>
+							</form>
+						{% endif %}
 					</div>
 				</div>
 			</center>

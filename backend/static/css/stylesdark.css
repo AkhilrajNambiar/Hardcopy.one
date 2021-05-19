@@ -397,3 +397,6 @@ footer{
 	z-index: 10;
 	border: none;
 }
+#submitsearch:hover{
+	outline: none;
+}

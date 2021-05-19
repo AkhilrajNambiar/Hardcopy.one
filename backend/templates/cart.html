@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block cart %}
+    active
+{% endblock cart %}
+{% block for_logo %}
+	<img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>{{ current_user.username }}'s cart</h1>
+{% endblock pagewelcome %}
+{% block content %}
+	<div class="row">
+		{% if current_user.is_authenticated %}
+			{% for book in books %}
+				<div class="col-6 col-sm-4 col-xl-3 text-center books  mb-2">
+					<figure class="mt-4">
+						<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
+						<figcaption>
+							<h5 style="color: white"><a href="{{ url_for('book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
+							<h5><small class="text-muted">By {{ book.author_name }}</small></h5>
+						</figcaption>
+					</figure>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock content %}
