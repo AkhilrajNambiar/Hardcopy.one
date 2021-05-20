@@ -9,12 +9,13 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
 	email = db.Column(db.String(20), unique=True, nullable=False)
-	password = db.Column(db.String(20), nullable=False)
+	password = db.Column(db.String(50), nullable=False)
 	profile_pic = db.Column(db.String(60), nullable=False, default='default.jpg')	
 	address = db.Column(db.Text, nullable=False)
 	books_ordered = db.relationship('Book', backref='bought_by', lazy=True, foreign_keys='Book.ordered_by')
 	books_donated = db.relationship('Book', backref='provided_by', lazy=True, foreign_keys='Book.donated_by')
 	carted = db.relationship('Cart', backref='added_by', lazy=True, foreign_keys='Cart.user_id')
+	requested = db.relationship('PendingRequests', backref='requested_by', lazy=True, foreign_keys='PendingRequests.user_id')
 
 	def __repr__(self):
 		return f"User({self.username}; {self.email}; {self.profile_pic}; {self.address})"
@@ -22,8 +23,8 @@ class User(db.Model, UserMixin):
 class Book(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
-	book_name = db.Column(db.String(20), nullable=False)
-	author_name = db.Column(db.String(20), nullable=False)
+	book_name = db.Column(db.String(60), nullable=False)
+	author_name = db.Column(db.String(60), nullable=False)
 	genre = db.Column(db.String(60), nullable=False)
 	sub_genre = db.Column(db.String(60))
 	book_front = db.Column(db.String(60), nullable=False, default='front.jpg')
@@ -48,3 +49,12 @@ class Cart(db.Model):
 
 	def __repr__(self):
 		return f"Cart({self.id}; {self.user_id}; {self.book_id})"
+
+class PendingRequests(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	book_name = db.Column(db.String(60), nullable=False)
+	author_name = db.Column(db.String(60), nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=0)
+
+	def __repr__(self):
+		return f"Request({self.book_name}, {self.author_name}, {self.user_id})"

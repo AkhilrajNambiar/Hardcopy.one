@@ -93,6 +93,9 @@ $(document).ready(function(){
 	$('.contributor').click(function(){
 		$('#contributemodal').modal('show');
 	});
+	$('.contorreq').click(function(){
+		$('#communitymodal').modal('show');
+	});
 	$('.genre-1').hover(function(){
 		$('.genre-image-1').css('font-size','xx-large');
 	},

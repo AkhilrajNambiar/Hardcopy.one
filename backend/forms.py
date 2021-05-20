@@ -70,3 +70,8 @@ class BookUploadForm(FlaskForm):
     book_left = FileField('Book Left', validators=[DataRequired(), FileAllowed(['jpg','png','jpeg'])])
     extras = TextAreaField('Anything else that the reader should know?', validators=[Length(max=300)])
     submit = SubmitField('Upload Book')
+
+class BookRequestForm(FlaskForm):
+    book_name = StringField('Book name', validators=[DataRequired()])
+    author_name = StringField('Author/Publisher name', validators=[DataRequired()])
+    submit = SubmitField('Request this Book')

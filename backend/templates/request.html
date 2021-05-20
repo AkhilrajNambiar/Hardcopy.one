@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>Request the community, for any book that you need</h1>
+{% endblock pagewelcome %}
+{% block content %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<fieldset>
+			<legend class="text-center request-form"><h1>Request Form</h1></legend>
+			<div class="form-group row">
+				<div class="col-12">
+					{{ form.book_name.label(class='form-label') }}
+			        {% if form.book_name.errors %}
+			            {{ form.book_name( class='form-control form-control-lg is-invalid' ) }}
+			            <div class="invalid-feedback">
+			                {% for error in form.book_name.errors %}
+			                    <span>{{ error }}</span>
+			                {% endfor %}
+			            </div>
+			        {% else %}
+			            {{ form.book_name( class='form-control form-control-lg' ) }}
+			        {% endif %}
+				</div>
+				<div class="col-12">
+					{{ form.author_name.label(class='form-label') }}
+	                {% if form.author_name.errors %}
+	                    {{ form.author_name( class='form-control form-control-lg is-invalid' ) }}
+	                    <div class="invalid-feedback">
+	                        {% for error in form.author_name.errors %}
+	                            <span>{{ error }}</span>
+	                        {% endfor %}
+	                    </div>
+	                {% else %}
+	                    {{ form.author_name( class='form-control form-control-lg' ) }}
+	                {% endif %}
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-12 text-center">
+					{{ form.submit( class='btn btn-primary submit_button pr-5 pl-5' ) }}
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<br>
+	{% if pending_requests|length > 0 %}
+		<h1><center><span><b class="pending-requests">Pending Requests</b> <span class="fa fa-exclamation-triangle pending"></span></span></center></h1>	
+	{% endif %}
+	<br>
+	{% for book in pending_requests %}
+		<div class="media">
+			<img src="{{ url_for('static',filename='users_images/'+book.requested_by.profile_pic) }}" class="rounded-circle" width="55" height="55">
+			<span class="media-body">
+				<div class="card">
+					<div class="card-header request-header">
+						<h5><center><b>{{ book.requested_by.username }}</b> requested for</center></h5>
+					</div>
+					<div class="card-body request-body">
+						<h5><center><b>{{ book.book_name }}</b> by <b>{{ book.author_name }}</b></center></h5>
+					</div>
+				</div>
+			</span>
+		</div>
+		<br>
+	{% endfor %}
+{% endblock content %}

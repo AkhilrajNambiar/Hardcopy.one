@@ -3,8 +3,8 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from backend import app, db, bcrypt
-from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm
-from backend.models import User, Book, Cart
+from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm, BookRequestForm
+from backend.models import User, Book, Cart, PendingRequests
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_, and_
 import webbrowser
@@ -124,6 +124,14 @@ def account():
 def upload():
 	form = BookUploadForm()
 	if form.validate_on_submit():
+		pending = PendingRequests.query.all()
+		pending_books = []
+		for book in pending:
+			pending_books.append(book.book_name)
+		if form.book_name.data in pending_books:
+			uploaded_book = PendingRequests.query.filter_by(book_name = form.book_name.data)
+			db.session.delete(uploaded_book[0])
+			db.session.commit()
 		book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data, sub_genre=form.sub_genre.data, book_front=save_picture_without_compression(form.book_front.data), book_back=save_picture_without_compression(form.book_back.data), book_top=save_picture_without_compression(form.book_top.data), book_bottom=save_picture_without_compression(form.book_bottom.data), book_right=save_picture_without_compression(form.book_right.data), book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
 		db.session.add(book)				
 		db.session.commit()
@@ -220,3 +228,24 @@ def remove_from_cart(user_id):
 			db.session.commit()
 		flash('Book successfully removed from cart','success')
 		return redirect(url_for('add_to_cart', user_id=current_user.id))
+
+# pending_requests = []
+@app.route('/request_book', methods=['GET','POST'])
+@login_required
+def request_book():
+	form = BookRequestForm()
+	if form.validate_on_submit():
+		books = Book.query.all()
+		book_names = []
+		# global pending_requests
+		for book in books:
+			book_names.append(book.book_name)
+		if form.book_name.data not in book_names:
+			pending_requests = PendingRequests(book_name=form.book_name.data, author_name=form.author_name.data, user_id=current_user.id)
+			db.session.add(pending_requests)
+			db.session.commit()
+			flash('Request successfully posted!','success')
+			return redirect(url_for('request_book'))
+		else:
+			flash('The book already exists in our website. Please check!','danger')
+	return render_template('request.html', title='Community', form=form, pending_requests=PendingRequests.query.all())

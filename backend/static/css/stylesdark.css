@@ -67,6 +67,18 @@ body{
 	-webkit-background-clip: text;
 	font-weight: bolder;
 }
+.request-form{
+	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
+}
+.pending-requests{
+	background: linear-gradient(to right,#ff8372,#ffcd7c);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bold;	
+}
 .carousel-img{
 	position:absolute;
 	left:0;
@@ -254,6 +266,18 @@ footer{
 	border-bottom: 6px #0057B3 solid;
 	font-size: 20px;
 }
+#request-btn-1{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+	color: white;
+}
+#request-btn-2{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+	color: white;
+}
 #contact{
 	color: lightgreen;
 }
@@ -399,4 +423,17 @@ footer{
 }
 #submitsearch:hover{
 	outline: none;
+}
+.contorreq{
+	cursor: pointer;
+}
+.request-header{
+	background-color: #02B37E;
+}
+.request-body{
+	background-color: #38d9a9;
+	color: #2b2b2b;	
+}
+.pending{
+	color: gold;
 }
