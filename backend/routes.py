@@ -7,6 +7,7 @@ from backend.forms import Registration_form, Login_form, Feedback_form, Update_f
 from backend.models import User, Book, Cart
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_, and_
+import webbrowser
 
 @app.route('/')
 @app.route('/home', methods=['GET','POST'])
@@ -22,8 +23,8 @@ def contact():
 	form = Feedback_form()
 	if current_user.is_authenticated:
 		form.name.data = current_user.username
-		form.email.data = current_user.email
 	if form.validate_on_submit():
+		webbrowser.open(f"mailto:nambiarakhilraj01@gmail.com?subject={form.subject.data}&body={form.feedback.data}", autoraise=True)
 		flash('Message successfully sent','success')
 		return redirect(url_for('home'))
 	return render_template('contact.html', title='Contact Me', form=form)
