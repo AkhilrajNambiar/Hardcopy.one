@@ -118,7 +118,8 @@ def account():
 		form.username.data = current_user.username
 		form.email.data = current_user.email
 	image_file = url_for('static', filename=f'users_images/{current_user.profile_pic}')
-	return render_template('account.html', title="User Account", image_file=image_file, form=form)
+	books = Book.query.filter_by(donated_by=current_user.id)
+	return render_template('account.html', title="User Account", image_file=image_file, form=form, books=books)
 
 @app.route('/upload', methods=['GET','POST'])
 @login_required	

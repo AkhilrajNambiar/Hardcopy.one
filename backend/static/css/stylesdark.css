@@ -73,6 +73,12 @@ body{
 	-webkit-background-clip: text;
 	font-weight: bolder;
 }
+.accountcontrib{
+	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
+}
 .pending-requests{
 	background: linear-gradient(to right,#ff8372,#ffcd7c);
 	-webkit-text-fill-color: transparent;
@@ -334,6 +340,7 @@ footer{
 }
 .updating_form{
 	display: none;
+	border-bottom: solid 2px orange;
 }
 .cancel_btn{
 	border: 1px solid red;
