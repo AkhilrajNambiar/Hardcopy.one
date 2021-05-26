@@ -35,6 +35,7 @@ class Login_form(FlaskForm):
 
 class Feedback_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email ID',validators=[DataRequired(), Email()])
     subject = StringField('Subject',validators=[DataRequired()])
     feedback = TextAreaField('Feedback/Criticism', validators=[DataRequired()])
     submit = SubmitField('Send Feedback')
@@ -90,3 +91,4 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('New Password',validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
+

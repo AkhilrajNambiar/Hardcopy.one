@@ -19,9 +19,11 @@
 			<center>
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="btn btn-success btn-lg" style="border: solid 1px darkgreen; border-bottom: solid 5px darkgreen">
-							<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
-						</div>
+						<form method="POST" action="{{ url_for('create_checkout_session',book_id=book.id)}}">
+							<button class="btn btn-success btn-lg" style="border: solid 1px darkgreen; border-bottom: solid 5px darkgreen" type="submit" name="	orderbtn" value="{{ book.id }}">
+								<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
+							</button>
+						</form>
 					</div>
 					<div class="col-sm-6">
 						{% if in_the_cart %}
@@ -31,11 +33,19 @@
 								</button>
 							</form>
 						{% else %}
-							<form method="POST" action="{{ url_for('add_to_cart', user_id = current_user.id) }}">
-								<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
-									<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
-								</button>
-							</form>
+							{% if current_user.is_authenticated %}
+								<form method="POST" action="{{ url_for('add_to_cart', user_id = current_user.id) }}">
+									<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
+										<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+									</button>
+								</form>
+							{% else %}
+								<form method="POST" action="{{ url_for('add_to_cart_for_no_user')}}">
+									<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
+										<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
+									</button>
+								</form>
+							{% endif %}
 						{% endif %}
 					</div>
 				</div>

@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+    <h1>Choose a payment method for {{ book.book_name }}</h1>
+{% endblock pagewelcome %}
+{% block content %}
+  <div class="row align-items-center">
+    <div class="col-6 col-sm-4 col-xl-3 text-center books  mb-2">
+      <figure class="mt-4">
+        <img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
+        <figcaption>
+          <h5 style="color: white"><a href="{{ url_for('book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
+          <h5><small class="text-muted">By {{ book.author_name }}</small></h5>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col-6 col-sm-8 col-xl-9 text-center">
+      <div class="row align-items-center">
+        <button type="button" id="checkout-button" class="btn btn-primary btn-lg btn-block"><span class="fa fa-credit-card fa-lg"></span> Pay with card</button>
+        <button type="button" class="btn btn-success btn-lg btn-block" id="pay_with_cash"><span class="fa fa-money-bill fa-lg"></span> Pay on Delivery</button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-12 text-center">
+      <div class="card bg-dark">
+        <div class="card-header">
+          <h1 class="payment-header">Confirm your address!</h1>
+        </div>
+        {% if current_user.is_authenticated %}
+          <div class="card-body bg-warning text-danger">
+            <h3> {{ current_user.address }} </h3>
+          </div>
+        {% else %}
+          <h3 class="text-warning py-2">Please <a href="{{ url_for('login') }}">login</a> to order a book!</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block only_for_payment %}
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const checkout_public_key = '{{ checkout_public_key }}';
+    const checkout_session_id = '{{ checkout_session_id }}';
+  </script>
+  <script src="{{ url_for('static',filename='js/payments.js') }}"></script>
+{% endblock only_for_payment %}

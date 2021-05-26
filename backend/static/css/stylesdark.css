@@ -26,14 +26,6 @@ body{
 	background: url(../admin_images/background.png);
 	background-repeat: repeat-x;
 }
-.carousel-item{
-	height: 350px;
-	background-image: url('../images/admin/background.png');
-}
-.carousel-caption{
-	position: absolute;
-	right:0;
-}
 #caption-header{
 	margin-right: -50px;
 	background: linear-gradient(#ff8372,#ffcd7c);
@@ -84,6 +76,12 @@ body{
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 	font-weight: bold;	
+}
+.payment-header{
+	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bold; 
 }
 .carousel-img{
 	position:absolute;
@@ -443,4 +441,16 @@ footer{
 }
 .pending{
 	color: gold;
+}
+#checkout-button{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+	color: white;
+}
+#pay_with_cash{
+	border: 2px darkgreen solid;
+	border-bottom: 6px darkgreen solid;
+	font-size: 20px;
+	color: white;
 }
