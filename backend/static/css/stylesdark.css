@@ -282,6 +282,12 @@ footer{
 	font-size: 20px;
 	color: white;
 }
+.address_update{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+	color: white;
+}
 #contact{
 	color: lightgreen;
 }
@@ -453,4 +459,14 @@ footer{
 	border-bottom: 6px darkgreen solid;
 	font-size: 20px;
 	color: white;
+}
+.cancel_address_change{
+	border: 1px solid red;
+	border-bottom: 5px solid red ;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;
+}
+#update_my_address{
+	display: none;
 }

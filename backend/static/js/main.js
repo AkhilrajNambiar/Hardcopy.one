@@ -239,4 +239,12 @@ $(document).ready(function(){
 		$('.searchbox').css('display','none');
 		$('#search').css('display','inline');
 	});
+	$('.address_update').click(function(){
+		$('#update_my_address').css('display','block');
+		$('.address_update').css('display','none');
+	});
+	$('.cancel_address_change').click(function(){
+		$('#update_my_address').css('display','none');
+		$('.address_update').css('display','inline');
+	});
 });

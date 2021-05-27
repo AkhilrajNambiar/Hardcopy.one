@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from backend import app, db, bcrypt, mail
 from backend.forms import Registration_form, Login_form, Feedback_form, Update_form, BookUploadForm, BookRequestForm, \
-    RequestResetForm, ResetPasswordForm
+    RequestResetForm, ResetPasswordForm, AddressUpdateForm
 from backend.models import User, Book, Cart, PendingRequests
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_, and_
@@ -31,12 +31,11 @@ def contact():
         form.name.data = current_user.username
         form.email.data = current_user.email
     if form.validate_on_submit():
-        # webbrowser.open(f"mailto:nambiarakhilraj01@gmail.com?subject={form.subject.data}&body={form.feedback.data}",
-        #                 autoraise=True)
-        msg = Message(form.subject.data, sender=form.email.data, recipients=['nambiarakhilraj01@gmail.com'])
-        msg.body = form.feedback.data
-        mail.send(msg)
-        flash('Message successfully sent', 'success')
+        webbrowser.open(f"mailto:nambiarakhilraj01@gmail.com?subject={form.subject.data}&body={form.feedback.data}", autoraise=True)
+        # msg = Message(form.subject.data, sender=form.email.data, recipients=['nambiarakhilraj01@gmail.com'])
+        # msg.body = form.feedback.data
+        # mail.send(msg)
+        flash('Message successfully added to mail client', 'success')
         return redirect(url_for('home'))
     return render_template('contact.html', title='Contact Me', form=form)
 
@@ -373,8 +372,12 @@ def create_checkout_session(book_id):
         success_url=url_for('payment_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
         cancel_url=url_for('payment_cancelled', _external=True)
     )
+    form = AddressUpdateForm()
+    if form.validate_on_submit():
+        current_user.address = f'{form.street.data} {form.city.data} {form.state.data} {form.countries.data}'
+        db.session.commit()
     return render_template('orders.html', checkout_session_id=session['id'],
-                           checkout_public_key=app.config['STRIPE_PUBLIC_KEY'], book=book)
+                           checkout_public_key=app.config['STRIPE_PUBLIC_KEY'], book=book, form=form)
 
 
 @app.route('/payment_success')
