@@ -1,5 +1,5 @@
-from flask import render_template, url_for, flash, redirect, Blueprint
-from backend import app, db
+from flask import render_template, url_for, flash, redirect, Blueprint, current_app
+from backend import db
 from backend.users.forms import Feedback_form, AddressUpdateForm
 from backend.models import Book
 from flask_login import current_user
@@ -35,11 +35,10 @@ def contact():
     return render_template('contact.html', title='Contact Me', form=form)
 
 
-stripe.api_key = app.config['STRIPE_SECRET_KEY']
-
 
 @main.route('/create-checkout-session/<int:book_id>', methods=['POST'])
 def create_checkout_session(book_id):
+    stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
     book = Book.query.get(book_id)
     product1 = stripe.Product.create(
         name=book.book_name,
@@ -68,7 +67,7 @@ def create_checkout_session(book_id):
         current_user.address = f'{form.street.data} {form.city.data} {form.state.data} {form.countries.data}'
         db.session.commit()
     return render_template('orders.html', checkout_session_id=session['id'],
-                           checkout_public_key=app.config['STRIPE_PUBLIC_KEY'], book=book, form=form)
+                           checkout_public_key=current_app.config['STRIPE_PUBLIC_KEY'], book=book, form=form)
 
 
 @main.route('/payment_success')

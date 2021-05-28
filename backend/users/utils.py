@@ -1,8 +1,8 @@
 import secrets
 import os
 from PIL import Image
-from flask import url_for
-from backend import app, mail
+from flask import url_for, current_app
+from backend import mail
 from flask_mail import Message
 from backend.models import Book
 
@@ -16,7 +16,7 @@ def save_picture(form_picture):
     # Giving the picture the random name but conserving the same extension that the user had uploaded
     picture_fn = random_hex + f_ext
     # Setting the path where the user pictures will be stored
-    picture_path = os.path.join(app.root_path, 'static/users_images', picture_fn)
+    picture_path = os.path.join(current_app.root_path, 'static/users_images', picture_fn)
 
     # This is to resize the image
     dimensions = (125, 125)
@@ -36,7 +36,7 @@ def save_picture_without_compression(form_picture):
     # Giving the picture the random name but conserving the same extension that the user had uploaded
     picture_fn = random_hex + f_ext
     # Setting the path where the user pictures will be stored
-    picture_path = os.path.join(app.root_path, 'static/users_images', picture_fn)
+    picture_path = os.path.join(current_app.root_path, 'static/users_images', picture_fn)
 
     # Saving the picture with the random name to the created path
     form_picture.save(picture_path)
