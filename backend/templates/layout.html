@@ -24,34 +24,34 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="navbar-toggler-icon"></span></button>
-        <a href="{{ url_for('home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2.png') }}" width="70" height="50"></a>
+        <a href="{{ url_for('main.home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2.png') }}" width="70" height="50"></a>
         <div class="collapse navbar-collapse" id="navig">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item main-nav"><a class="nav-link {% block home %}{% endblock %}" href="{{ url_for('home') }}" id="first-nav"><span class="fa fa-home fa-lg"></span> Home</a></li>
-                <li class="nav-item main-nav"><a href="{{ url_for('about') }}" class="nav-link {% block about %}{% endblock %}" id="first-nav"><span class="fa fa-info-circle fa-lg"></span> About</a></li>
+                <li class="nav-item main-nav"><a class="nav-link {% block home %}{% endblock %}" href="{{ url_for('main.home') }}" id="first-nav"><span class="fa fa-home fa-lg"></span> Home</a></li>
+                <li class="nav-item main-nav"><a href="{{ url_for('main.about') }}" class="nav-link {% block about %}{% endblock %}" id="first-nav"><span class="fa fa-info-circle fa-lg"></span> About</a></li>
                 <li class="nav-item main-nav"><a class="nav-link {% block contact %}{% endblock contact %} contorreq" id="first-nav"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
                 <li class="nav-item main-nav"><a class="nav-link {% block contribute %}{% endblock %} contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span> Contribute</a></li>
                 {% if current_user.is_authenticated %}
-                    <li class="nav-item main-nav"><a class="nav-link {% block cart %}{% endblock cart %}" id="first-nav" href="{{ url_for('add_to_cart', user_id=current_user.id) }}"><span class="fa fa-shopping-cart fa-lg"></span> Cart</a></li>
+                    <li class="nav-item main-nav"><a class="nav-link {% block cart %}{% endblock cart %}" id="first-nav" href="{{ url_for('users.add_to_cart', user_id=current_user.id) }}"><span class="fa fa-shopping-cart fa-lg"></span> Cart</a></li>
                 {% endif %}
             </ul>
             <span class="navbar-text">
                 {% if current_user.is_authenticated %}
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('account') }}"  class="nav-link {% block account %}{% endblock %}"><span class="fa fa-user-circle fa-lg"></span> Account</a>
+                            <a id="login" href="{{ url_for('users.account') }}"  class="nav-link {% block account %}{% endblock %}"><span class="fa fa-user-circle fa-lg"></span> Account</a>
                         </li>
                         <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('logout') }}"  class="nav-link {% block logout %}{% endblock %}"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
+                            <a id="login" href="{{ url_for('users.logout') }}"  class="nav-link {% block logout %}{% endblock %}"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
                         </li>
                     </ul>
                 {% else %}
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('login') }}"  class="nav-link {% block login %}{% endblock %}"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+                            <a id="login" href="{{ url_for('users.login') }}"  class="nav-link {% block login %}{% endblock %}"><span class="fa fa-sign-in fa-lg"></span> Login</a>
                         </li>
                         <li class="nav-item main-nav">
-                            <a id="signup" href="{{ url_for('signup') }}" class="nav-link {% block signup %}{% endblock %}"><span class="fa fa-user-plus fa-lg"></span> Signup</a>
+                            <a id="signup" href="{{ url_for('users.signup') }}" class="nav-link {% block signup %}{% endblock %}"><span class="fa fa-user-plus fa-lg"></span> Signup</a>
                         </li>
                     </ul>
                 {% endif %}
@@ -59,7 +59,7 @@
         </div>
     </nav>
     <a id="search" class="nav-link"><span class="fa fa-search fa-lg"></span></a>
-    <form action="{{ url_for('search') }}" method="POST">
+    <form action="{{ url_for('books.search') }}" method="POST">
         <div class="searchbox">
             <input type="text" name="searchbar" id="searchbar" placeholder="Search by name, author or genre" value="">
             <a class="search_close"><i class="fa fa-close fa-lg close_btn"></i></a>
@@ -101,7 +101,7 @@
                                 <h5>Hardcopy needs books, and any book that you feel you have read enough can be donated over here, with quality measures.</h5>
                                 <h5>This website runs on contributions in the form of books, so this is something I encourage everyone of you to actively participate in!</h5>
                                 <div class="text-center">
-                                    <a href="{{ url_for('upload') }}" class="btn btn-primary" id="donate-btn-2"><span class="fa fa-upload fa-lg"></span> Upload</a>
+                                    <a href="{{ url_for('books.upload') }}" class="btn btn-primary" id="donate-btn-2"><span class="fa fa-upload fa-lg"></span> Upload</a>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                 <div class="card-body" id="donor-body">
                                     <h5>Request the community for a book that you need!</h5>
                                     <div class="text-center">
-                                        <a class="btn btn-primary" id="request-btn-1" href="{{ url_for('request_book') }}"><span class="fa fa-reply-all fa-lg"></span> Request!</a>
+                                        <a class="btn btn-primary" id="request-btn-1" href="{{ url_for('books.request_book') }}"><span class="fa fa-reply-all fa-lg"></span> Request!</a>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                 <div class="card-body" id="donor-body">
                                     <h5>Contact me for any other query that you have.</h5>
                                     <div class="text-center">
-                                        <a href="{{ url_for('contact') }}" class="btn btn-primary" id="request-btn-2"><span class="fa fa-address-card fa-lg"></span> Contact</a>
+                                        <a href="{{ url_for('main.contact') }}" class="btn btn-primary" id="request-btn-2"><span class="fa fa-address-card fa-lg"></span> Contact</a>
                                     </div>
                                 </div>
                             </div>
@@ -183,22 +183,22 @@
                 <div class="col-3">
                     <ul class="list-unstyled" id="foot">
                         <li><b>Navigation</b></li>
-                        <li><a href="{{ url_for('home') }}" id="tap-link1"><span class="fa fa-home fa-lg" id="tap1"></span> Home</a></li>
-                        <li><a href="{{ url_for('about') }}" id="tap-link2"><span class="fa fa-info-circle fa-lg" id="tap2"></span> About</a></li>
-                        <li><a href="{{ url_for('contact') }}" id="tap-link3"><span class="fa fa-address-card fa-lg" id="tap3"></span> Contact</a></li>
-                        <li><a href="{{ url_for('upload') }}" id="tap-link4"><span class="fa fa-upload fa-lg" id="tap4"></span> Upload</a></li>
+                        <li><a href="{{ url_for('main.home') }}" id="tap-link1"><span class="fa fa-home fa-lg" id="tap1"></span> Home</a></li>
+                        <li><a href="{{ url_for('main.about') }}" id="tap-link2"><span class="fa fa-info-circle fa-lg" id="tap2"></span> About</a></li>
+                        <li><a href="{{ url_for('main.contact') }}" id="tap-link3"><span class="fa fa-address-card fa-lg" id="tap3"></span> Contact</a></li>
+                        <li><a href="{{ url_for('books.upload') }}" id="tap-link4"><span class="fa fa-upload fa-lg" id="tap4"></span> Upload</a></li>
                         <li><a href="#" id="tap-link5"><span class="fa fa-gift fa-lg" id="tap5"></span> Donate</a></li>
-                        <li><a href="{{ url_for('about') }}" id="tap-link6"><span class="fa fa-question-circle fa-lg" id="tap6"></span> FAQ</a></li>
+                        <li><a href="{{ url_for('main.about') }}" id="tap-link6"><span class="fa fa-question-circle fa-lg" id="tap6"></span> FAQ</a></li>
                     </ul>
                 </div>
                 <div class="col-3 offset-2">
                     <ul class="list-unstyled" id="foot">
                         <li><b>Genres</b></li>
-                        <li><a href="{{ url_for('fiction') }}" id="cap-link1"><span class="fa fa-fort-awesome fa-lg" id="cap1"></span> Fiction</a></li>
-                        <li><a href="{{ url_for('non_fiction') }}" id="cap-link2"><span class="fa fa-book fa-lg" id="cap2"></span> Non-Fiction</a></li>
-                        <li><a href="{{ url_for('romance') }}" id="cap-link3"><span class="fa fa-heart fa-lg" id="cap3"></span> Romance</a></li>
-                        <li><a href="{{ url_for('biography') }}" id="cap-link4"><span class="fa fa-user fa-lg" id="cap4"></span> Biographies</a></li>
-                        <li><a href="{{ url_for('comics') }}" id="cap-link5"><span class="fa fa-superpowers fa-lg" id="cap5"></span> Comics</a></li>
+                        <li><a href="{{ url_for('books.fiction') }}" id="cap-link1"><span class="fa fa-fort-awesome fa-lg" id="cap1"></span> Fiction</a></li>
+                        <li><a href="{{ url_for('books.non_fiction') }}" id="cap-link2"><span class="fa fa-book fa-lg" id="cap2"></span> Non-Fiction</a></li>
+                        <li><a href="{{ url_for('books.romance') }}" id="cap-link3"><span class="fa fa-heart fa-lg" id="cap3"></span> Romance</a></li>
+                        <li><a href="{{ url_for('books.biography') }}" id="cap-link4"><span class="fa fa-user fa-lg" id="cap4"></span> Biographies</a></li>
+                        <li><a href="{{ url_for('books.comics') }}" id="cap-link5"><span class="fa fa-superpowers fa-lg" id="cap5"></span> Comics</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-sm-4 text-center" id="foot">

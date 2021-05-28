@@ -11,7 +11,7 @@
       <figure class="mt-4">
         <img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
         <figcaption>
-          <h5 style="color: white"><a href="{{ url_for('book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
+          <h5 style="color: white"><a href="{{ url_for('books.book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
           <h5><small class="text-muted">By {{ book.author_name }}</small></h5>
         </figcaption>
       </figure>
@@ -86,7 +86,7 @@
                       <div class="col-sm-6">
                           {{ form.countries.label(class='form-label') }}
                           {% if form.countries.errors %}
-                              {{ form.countries( class='form-control form-control-lg is-invalid' ) }}
+                              {{ form.countries( class='form-control form-control-lg is-invalid country_list' ) }}
                               <div class="invalid-feedback">
                                   {% for error in form.countries.errors %}
                                       <span>{{ error }}</span>
@@ -110,7 +110,7 @@
             </div>
           </div>
         {% else %}
-          <h3 class="text-warning py-2">Please <a href="{{ url_for('login') }}">login</a> to order a book!</h3>
+          <h3 class="text-warning py-2">Please <a href="{{ url_for('users.login') }}">login</a> to order a book!</h3>
         {% endif %}
       </div>
     </div>

@@ -19,7 +19,7 @@
 			<center>
 				<div class="row">
 					<div class="col-sm-6">
-						<form method="POST" action="{{ url_for('create_checkout_session',book_id=book.id)}}">
+						<form method="POST" action="{{ url_for('main.create_checkout_session',book_id=book.id)}}">
 							<button class="btn btn-success btn-lg" style="border: solid 1px darkgreen; border-bottom: solid 5px darkgreen" type="submit" name="	orderbtn" value="{{ book.id }}">
 								<span class="fa fa-play fa-lg"></span> &nbsp;<b>Order Book</b>
 							</button>
@@ -27,20 +27,20 @@
 					</div>
 					<div class="col-sm-6">
 						{% if in_the_cart %}
-							<form method="POST" action="{{ url_for('remove_from_cart', user_id = current_user.id) }}">
+							<form method="POST" action="{{ url_for('users.remove_from_cart', user_id = current_user.id) }}">
 								<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartremovebtn" value="{{ book.id }}">
 									<span><img src="{{ url_for('static',filename = 'admin_images/cart-minus.svg') }}" width="30" height="30"></span> &nbsp;<b>Remove from cart</b>
 								</button>
 							</form>
 						{% else %}
 							{% if current_user.is_authenticated %}
-								<form method="POST" action="{{ url_for('add_to_cart', user_id = current_user.id) }}">
+								<form method="POST" action="{{ url_for('users.add_to_cart', user_id = current_user.id) }}">
 									<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
 										<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
 									</button>
 								</form>
 							{% else %}
-								<form method="POST" action="{{ url_for('add_to_cart_for_no_user')}}">
+								<form method="POST" action="{{ url_for('users.add_to_cart_for_no_user')}}">
 									<button class="btn btn-warning btn-lg" style="border: solid 1px orange; border-bottom: solid 5px orange" type="submit" name="cartbtn" value="{{ book.id }}">
 										<span class="fa fa-cart-plus fa-lg"></span> &nbsp;<b>Add to Cart</b>
 									</button>
@@ -108,7 +108,7 @@
 						<figure class="mt-4">
 							<img src="{{ url_for('static', filename='users_images/' + other.book_front) }}" width="145" height="220" class="book_image">
 							<figcaption>
-								<h5 style="color: white"><a href="{{ url_for('book_page', book_id=other.id) }}" class="book_link">{{ other.book_name }}</a></h5>
+								<h5 style="color: white"><a href="{{ url_for('books.book_page', book_id=other.id) }}" class="book_link">{{ other.book_name }}</a></h5>
 								<h5><small class="text-muted">By {{ other.author_name }}</small></h5>
 							</figcaption>
 						</figure>
