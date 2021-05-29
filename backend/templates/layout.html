@@ -58,14 +58,6 @@
             </span>
         </div>
     </nav>
-    <a id="search" class="nav-link"><span class="fa fa-search fa-lg"></span></a>
-    <form action="{{ url_for('books.search') }}" method="POST">
-        <div class="searchbox">
-            <input type="text" name="searchbar" id="searchbar" placeholder="Search by name, author or genre" value="">
-            <a class="search_close"><i class="fa fa-close fa-lg close_btn"></i></a>
-            <button id="submitsearch" class="nav-link" type="submit"><span class="fa fa-search fa-lg"></span></button>
-        </div>
-    </form>
     <div class="modal" id="contributemodal" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -149,6 +141,16 @@
         </div>
     </div>
     <header class="jumbotron">
+        <div>
+            <a id="search" class="nav-link"><span class="fa fa-search fa-lg"></span></a>
+            <form action="{{ url_for('books.search') }}" method="POST">
+                <div class="searchbox">
+                    <input type="text" name="searchbar" id="searchbar" placeholder="Search by name, author or genre" value="">
+                    <a class="search_close"><i class="fa fa-close fa-lg close_btn"></i></a>
+                    <button id="submitsearch" class="nav-link" type="submit"><span class="fa fa-search fa-lg"></span></button>
+                </div>
+            </form>
+        </div>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-sm-6 align-self-center">

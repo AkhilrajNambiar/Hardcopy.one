@@ -20,6 +20,11 @@
 							<h5><small class="text-muted">By {{ book.author_name }}</small></h5>
 						</figcaption>
 					</figure>
+					<form method="POST" action="{{ url_for('users.remove_from_cart', user_id = current_user.id) }}">
+						<button class="btn btn-danger btn-lg" style="border: solid 1px darkred; border-bottom: solid 5px darkred" type="submit" name="cartremovebtn" value="{{ book.id }}">
+							<span><img src="{{ url_for('static',filename = 'admin_images/cart-minus.svg') }}" width="30" height="30"></span> &nbsp;<b>Remove</b>
+						</button>
+					</form>
 				</div>
 			{% endfor %}
 		{% endif %}
