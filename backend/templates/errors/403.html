@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>You don't belong here! <strong>(403)</strong></h1>
+{% endblock pagewelcome %}
+{% block content %}
+	<h3 class="text-center">You are not authorised to do that. Please check your account and try again.</h3>
+{% endblock content %}

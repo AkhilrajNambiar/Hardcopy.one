@@ -32,8 +32,10 @@ def create_app(config_class=Config):
 	from backend.users.routes import users
 	from backend.books.routes import books
 	from backend.main.routes import main
+	from backend.errors.handlers import errors
 	app.register_blueprint(users)
 	app.register_blueprint(books)
 	app.register_blueprint(main)
+	app.register_blueprint(errors)
 
 	return app
