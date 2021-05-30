@@ -52,6 +52,13 @@ class Book(db.Model):
 	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'),default=0)
 	donated_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	added_to_cart = db.relationship('Cart', backref='book_is', lazy=True, foreign_keys='Cart.book_id')
+	votes_for_content = db.Column(db.Float(), default=0)
+	total_content_rating = db.Column(db.Float(), default=0)
+	votes_for_condition = db.Column(db.Float(), default=0)
+	total_condition_rating = db.Column(db.Float(), default=0)
+	content_rating = db.Column(db.Float(), default=0)
+	condition_rating = db.Column(db.Float(), default=0)
+	book_stars = db.relationship('StarValues', backref='stars', lazy=True, foreign_keys='StarValues.book_id')
 	
 
 	def __repr__(self):
@@ -73,3 +80,20 @@ class PendingRequests(db.Model):
 
 	def __repr__(self):
 		return f"Request({self.book_name}, {self.author_name}, {self.user_id})"
+
+class StarValues(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	five_star_content = db.Column(db.Integer, default=0)
+	four_star_content = db.Column(db.Integer, default=0)
+	three_star_content = db.Column(db.Integer, default=0)
+	two_star_content = db.Column(db.Integer, default=0)
+	one_star_content = db.Column(db.Integer, default=0)
+	five_star_condition = db.Column(db.Integer, default=0)
+	four_star_condition = db.Column(db.Integer, default=0)
+	three_star_condition = db.Column(db.Integer, default=0)
+	two_star_condition = db.Column(db.Integer, default=0)
+	one_star_condition = db.Column(db.Integer, default=0)
+	book_id = db.Column(db.Integer, db.ForeignKey('book.id'), default = 0)
+
+	def __repr__(self):
+		return f"StarValues(Contents:{self.five_star_content}, {self.four_star_content}, {self.three_star_content}, {self.two_star_content}, {self.one_star_content}; Condition: {self.five_star_condition}, {self.four_star_condition}, {self.three_star_content}, {self.two_star_content}, {self.one_star_content})"

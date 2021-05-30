@@ -70,6 +70,137 @@
 					&nbsp;<img class="mt-2" id="ratings1" src="{{ url_for('static', filename='admin_images/neutral.png') }}" width="60" height="50">
 				</div>
 			</center>
+			<br>
+			<center>
+				<form method="POST" action="">
+					<input type="hidden" name="rating_content" id="rating_content" value=''>
+					<input type="hidden" name="rating_condition" id="rating_condition" value=''>
+					<button type="submit" class="btn btn-primary" id="rating_button">Submit rating</button>
+				</form>
+			</center>
+		</div>
+	</div>
+	<br><br>
+	<h1 class="rating_header text-center">What people say!</h1>
+	<br>
+	<div class="row">
+		<div class="col-6 text-center" >
+			<h2 style="color: orange">Content</h2>
+			<div  id="book_content">
+				<h1> {{ book.content_rating }} </h1>
+				<div class="d-none d-lg-block">
+					<div class="row align-items-center">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">5</p>
+						</div>
+						<div class="col-8">
+							<div class="content_5_star_outer">
+								<div class="content_5_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">4</p>
+						</div>
+						<div class="col-8">
+							<div class="content_4_star_outer">
+								<div class="content_4_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">3</p>
+						</div>
+						<div class="col-8">
+							<div class="content_3_star_outer">
+								<div class="content_3_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">2</p>
+						</div>
+						<div class="col-8">
+							<div class="content_2_star_outer">
+								<div class="content_2_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">1</p>
+						</div>
+						<div class="col-8">
+							<div class="content_1_star_outer">
+								<div class="content_1_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="text-muted">Ratings: {{ book.votes_for_content|int }}</h3>
+			</div>
+		</div>
+		<div class="col-6 text-center">
+			<h2 style="color: orange">Condition</h2>
+			<div id="book_condition">
+				<h1> {{ book.condition_rating }} </h1>
+				<div class="d-none d-lg-block">
+					<div class="row align-items-center">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">5</p>
+						</div>
+						<div class="col-8">
+							<div class="condition_5_star_outer">
+								<div class="condition_5_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">4</p>
+						</div>
+						<div class="col-8">
+							<div class="condition_4_star_outer">
+								<div class="condition_4_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">3</p>
+						</div>
+						<div class="col-8">
+							<div class="condition_3_star_outer">
+								<div class="condition_3_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">2</p>
+						</div>
+						<div class="col-8">
+							<div class="condition_2_star_outer">
+								<div class="condition_2_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center inner-ratings">
+						<div class="offset-1 col-1 mt-3">
+							<p style="font-size: 14px;">1</p>
+						</div>
+						<div class="col-8">
+							<div class="condition_1_star_outer">
+								<div class="condition_1_star_inner">nn</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="text-muted">Ratings: {{ book.votes_for_condition|int }}</h3>
+			</div>
 		</div>
 	</div>
 	<br><br>
@@ -118,3 +249,22 @@
 		</div>
 	{% endif %}
 {% endblock content %}
+{% block only_for_payment %}
+	<script src="{{ url_for('static',filename='js/ratings.js') }}"></script>
+	<script>
+		 starBars(
+		 	five_star_content = '{{ five_star_content }}',
+			four_star_content = '{{ four_star_content }}',
+			three_star_content = '{{ three_star_content }}',
+			two_star_content = '{{ two_star_content }}',
+			one_star_content = '{{ one_star_content }}',
+			five_star_condition = '{{ five_star_condition }}',
+			four_star_condition = '{{ four_star_condition }}',
+			three_star_condition = '{{ three_star_condition }}',
+			two_star_condition = '{{ two_star_condition }}',
+			one_star_condition = '{{ one_star_condition }}',
+			votes_for_content = '{{ votes_for_content }}',
+			votes_for_condition = '{{ votes_for_condition }}'
+		 )
+	</script>
+{% endblock only_for_payment %}

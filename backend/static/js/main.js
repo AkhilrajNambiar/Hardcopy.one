@@ -156,6 +156,7 @@ $(document).ready(function(){
 		$('#star_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings').attr("src","../../static/admin_images/x_unhappy.png");
+		$('#rating_content').attr('value','1');
 	});
 	$('#star_1').click(function(){
 		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -164,6 +165,7 @@ $(document).ready(function(){
 		$('#star_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings').attr("src","../../static/admin_images/unhappy.png");
+		$('#rating_content').attr('value','2');
 	});
 	$('#star_2').click(function(){
 		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -172,6 +174,7 @@ $(document).ready(function(){
 		$('#star_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings').attr("src","../../static/admin_images/ok.png");
+		$('#rating_content').attr('value','3');
 	});
 	$('#star_3').click(function(){
 		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -180,6 +183,7 @@ $(document).ready(function(){
 		$('#star_3').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#star_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings').attr("src","../../static/admin_images/happy.png");
+		$('#rating_content').attr('value','4');
 	});
 	$('#star_4').click(function(){
 		$('#star_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -188,6 +192,7 @@ $(document).ready(function(){
 		$('#star_3').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#star_4').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#ratings').attr("src","../../static/admin_images/xtrahappy.png");
+		$('#rating_content').attr('value','5');
 	});
 	$('#star1_0').click(function(){
 		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -196,6 +201,7 @@ $(document).ready(function(){
 		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings1').attr("src","../../static/admin_images/x_unhappy.png");
+		$('#rating_condition').attr('value','1');
 	});
 	$('#star1_1').click(function(){
 		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -204,6 +210,7 @@ $(document).ready(function(){
 		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings1').attr("src","../../static/admin_images/unhappy.png");
+		$('#rating_condition').attr('value','2');
 	});
 	$('#star1_2').click(function(){
 		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -212,6 +219,7 @@ $(document).ready(function(){
 		$('#star1_3').attr("src", "../../static/admin_images/rating.png");
 		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings1').attr("src","../../static/admin_images/ok.png");
+		$('#rating_condition').attr('value','3');
 	});
 	$('#star1_3').click(function(){
 		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -220,6 +228,7 @@ $(document).ready(function(){
 		$('#star1_3').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#star1_4').attr("src", "../../static/admin_images/rating.png");
 		$('#ratings1').attr("src","../../static/admin_images/happy.png");
+		$('#rating_condition').attr('value','4');
 	});
 	$('#star1_4').click(function(){
 		$('#star1_0').attr("src", "../../static/admin_images/rating_fill.png");
@@ -228,6 +237,7 @@ $(document).ready(function(){
 		$('#star1_3').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#star1_4').attr("src", "../../static/admin_images/rating_fill.png");
 		$('#ratings1').attr("src","../../static/admin_images/xtrahappy.png");
+		$('#rating_condition').attr('value','5');
 	});	
 	if($('.searchbox').css('display','none')){
 		$('#search').click(function(){

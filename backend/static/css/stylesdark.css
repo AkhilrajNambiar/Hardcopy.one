@@ -1,5 +1,6 @@
 body{
-	background-image:linear-gradient(rgba(4,13,33,70%),rgba(4,13,33,70%)),url(../admin_images/library.jpg);
+	background-image:linear-gradient(rgba(4,13,33,77%),rgba(4,13,33,77%)),url(https://source.unsplash.com/featured/1600x1440?books,library);
+	background-size: contain;
 	background-color: ;
 	color: floralwhite;
 }
@@ -67,6 +68,12 @@ body{
 }
 .accountcontrib{
 	background: linear-gradient(to right,#9df4d3,#72bef4);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-weight: bolder;
+}
+.rating_header{
+	background: linear-gradient(to right,green,lightgreen);
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 	font-weight: bolder;
@@ -276,6 +283,12 @@ footer{
 	font-size: 20px;
 	color: white;
 }
+#rating_button{
+	border: 2px #0057B3 solid;
+	border-bottom: 6px #0057B3 solid;
+	font-size: 20px;
+	color: white;
+}
 #request-btn-2{
 	border: 2px #0057B3 solid;
 	border-bottom: 6px #0057B3 solid;
@@ -469,4 +482,158 @@ footer{
 }
 #update_my_address{
 	display: none;
+}
+#book_content{
+	border: solid 4px green;
+	border-radius: 100%;
+	color: black;
+	background-color: white;
+	padding: 2em;
+}
+#book_condition{
+	border: solid 4px green;
+	border-radius: 100%;
+	color: black;
+	background-color: white;
+	padding: 2em;
+}
+.content_5_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_5_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_4_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_4_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_3_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_3_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_2_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_2_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_1_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.content_1_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_5_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_5_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_4_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_4_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_3_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_3_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_2_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_2_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_1_star_inner{
+	border: solid 1px green;
+	background-color: green;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
+}
+.condition_1_star_outer{
+	/*border: solid 1px grey;*/
+	background-color: lightgrey;
+	color: transparent;
+	font-size: 5px;
+	border-radius: 5px;
 }

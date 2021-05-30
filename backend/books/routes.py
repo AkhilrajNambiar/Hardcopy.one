@@ -1,11 +1,13 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from backend import db
 from backend.books.forms import BookUploadForm, BookRequestForm
-from backend.models import Book, Cart, PendingRequests
+from backend.models import Book, Cart, PendingRequests, StarValues
 from flask_login import current_user, login_required
 from sqlalchemy import and_
 from backend.users.utils import save_picture_without_compression
 from backend.books.utils import book_search
+import requests
+from bs4 import BeautifulSoup
 
 books = Blueprint('books', __name__)
 
@@ -32,22 +34,71 @@ def upload():
                     book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
         db.session.add(book)
         db.session.commit()
+        stars = StarValues(five_star_content=0,five_star_condition=0,book_id=book.id)
+        db.session.add(stars)
+        db.session.commit()
         flash("Book has been successfully uploaded. Thank you for your contribution!", "success")
         return redirect(url_for('main.home'))
     return render_template('upload.html', title="Upload Books here", form=form)
 
 
+stars = {}
+
 @books.route('/book_page/<int:book_id>', methods=['GET', 'POST'])
+@login_required
 def book_page(book_id):
     book = Book.query.get_or_404(book_id)
+    starring = StarValues.query.filter_by(book_id=book.id).first()
     other_books_by_author = Book.query.filter_by(author_name=book.author_name)
     in_the_cart = False
     if current_user.is_authenticated:
         hai_ya_nahi = Cart.query.filter(and_(Cart.user_id == current_user.id, Cart.book_id == book_id))
         if hai_ya_nahi.count() == 1:
             in_the_cart = True
+    if request.method == 'POST':
+        if 'rating_content' in request.form:
+            content = int(request.form['rating_content'])
+            if content:
+                if content == 5:
+                    starring.five_star_content += 1
+                elif content == 4:
+                    starring.four_star_content += 1
+                elif content == 3:
+                    starring.three_star_content += 1
+                elif content == 2:
+                    starring.two_star_content += 1                    
+                elif content == 1:
+                    starring.one_star_content += 1
+                # global votes_for_content, total_content_rating
+                book.votes_for_content += 1
+                book.total_content_rating += content
+                book.content_rating = float('{0:.1f}'.format(book.total_content_rating/book.votes_for_content))
+                db.session.commit()
+            # book.content_rating = 0
+            # db.session.commit()
+        if 'rating_condition' in request.form:
+            condition = int(request.form['rating_condition'])
+            if condition:
+                # global votes_for_condition, total_condition_rating
+                if condition == 5:
+                    starring.five_star_condition += 1
+                elif condition == 4:
+                    starring.four_star_condition += 1
+                elif condition == 3:
+                    starring.three_star_condition += 1
+                elif condition == 2:
+                    starring.two_star_condition += 1                    
+                elif condition == 1:
+                    starring.one_star_condition += 1
+                book.votes_for_condition += 1
+                book.total_condition_rating += condition
+                book.condition_rating = float('{0:.1f}'.format(book.total_condition_rating/book.votes_for_condition))
+                db.session.commit()
+
+            # book.condition_rating = 0
+            # db.session.commit()
     return render_template('book_page.html', title=book.book_name, book=book,
-                           other_books_by_author=other_books_by_author, in_the_cart=in_the_cart)
+                           other_books_by_author=other_books_by_author, in_the_cart=in_the_cart, five_star_content=starring.five_star_content, four_star_content=starring.four_star_content, three_star_content=starring.three_star_content, two_star_content=starring.two_star_content, one_star_content=starring.one_star_content, five_star_condition=starring.five_star_condition, four_star_condition=starring.four_star_condition, three_star_condition=starring.three_star_condition, two_star_condtion=starring.two_star_condition, one_star_condition=starring.one_star_condition, votes_for_condition=book.votes_for_condition, votes_for_content=book.votes_for_content)
 
 
 @books.route('/search', methods=['GET', 'POST'])
