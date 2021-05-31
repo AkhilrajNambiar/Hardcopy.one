@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
 	books_donated = db.relationship('Book', backref='provided_by', lazy=True, foreign_keys='Book.donated_by')
 	carted = db.relationship('Cart', backref='added_by', lazy=True, foreign_keys='Cart.user_id')
 	requested = db.relationship('PendingRequests', backref='requested_by', lazy=True, foreign_keys='PendingRequests.user_id')
+	stars = db.relationship('StarValues', backref='rating_for', lazy=True, foreign_keys='StarValues.donor_id')
+	rater = db.relationship('StarValues', backref='rated_by', lazy=True, foreign_keys='StarValues.rater_id')
 
 	def get_reset_token(self, expires=1800):
 		s = Serializer(current_app.config['SECRET_KEY'], expires)
@@ -94,6 +96,8 @@ class StarValues(db.Model):
 	two_star_condition = db.Column(db.Integer, default=0)
 	one_star_condition = db.Column(db.Integer, default=0)
 	book_id = db.Column(db.Integer, db.ForeignKey('book.id'), default = 0)
+	donor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	rater_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	def __repr__(self):
-		return f"StarValues(Contents:{self.five_star_content}, {self.four_star_content}, {self.three_star_content}, {self.two_star_content}, {self.one_star_content}; Condition: {self.five_star_condition}, {self.four_star_condition}, {self.three_star_content}, {self.two_star_content}, {self.one_star_content})"
+		return f"StarValues(Contents:{self.five_star_content}, {self.four_star_content}, {self.three_star_content}, {self.two_star_content}, {self.one_star_content}; Condition: {self.five_star_condition}, {self.four_star_condition}, {self.three_star_condition}, {self.two_star_condition}, {self.one_star_condition})"
