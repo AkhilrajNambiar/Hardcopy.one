@@ -1,14 +1,16 @@
-<html>
-<head>
-  <title>Thanks for your order!</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <section>
-    <p>
-      We appreciate your business! If you have any questions, please email
-      <a href="mailto:orders@example.com">orders@example.com</a>.
-    </p>
-  </section>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo" alt="main_logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+  <h1>Payment Success!</h1>
+{% endblock pagewelcome %}
+{% block content %}
+  <h2 class="text-center">
+    <img src="{{ url_for('static',filename='admin_images/xtrahappy.png') }}" width="150" height="150" alt="successfully_paid_image" style="background-color: white; border: solid 4px green">
+  </h2>
+  <br>
+  <h3 class="text-center text-success">The payment was successfully processed. Feel free to explore again!</h3>
+  <h4 class="text-center">Your book is on the way. An email receipt has been sent to your email account.</h4>
+  <br>
+{% endblock content %}

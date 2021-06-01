@@ -1,13 +1,14 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
-from backend import db
+from backend import db, mail
 from backend.books.forms import BookUploadForm, BookRequestForm
-from backend.models import Book, Cart, PendingRequests, StarValues
+from backend.models import User, Book, Cart, PendingRequests, StarValues
 from flask_login import current_user, login_required
 from sqlalchemy import and_
 from backend.users.utils import save_picture_without_compression
 from backend.books.utils import book_search
 import requests
 from bs4 import BeautifulSoup
+from flask_mail import Message
 
 books = Blueprint('books', __name__)
 
@@ -22,8 +23,14 @@ def upload():
         for book in pending:
             pending_books.append(book.book_name)
         if form.book_name.data in pending_books:
-            uploaded_book = PendingRequests.query.filter_by(book_name=form.book_name.data)
-            db.session.delete(uploaded_book[0])
+            uploaded_book = PendingRequests.query.filter_by(book_name=form.book_name.data).first()
+            requestor = User.query.get(uploaded_book.user_id)
+            msg = Message(f'Your Request has been fulfilled {requestor.username}', sender='noreply@demo.com', recipients=[requestor.email])
+            msg.html = f'''
+            <h4> Your request for {uploaded_book.book_name} has been fulfilled by {current_user.username}. One or more copies of {uploaded_book.book_name} has been uploaded. Please check out! </h4>
+            '''
+            mail.send(msg)
+            db.session.delete(uploaded_book)
             db.session.commit()
         book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data,
                     sub_genre=form.sub_genre.data, book_front=save_picture_without_compression(form.book_front.data),
@@ -172,10 +179,19 @@ def request_book():
         for book in books:
             book_names.append(book.book_name)
         if form.book_name.data not in book_names:
+            all_users = User.query.all()
             pending_requests = PendingRequests(book_name=form.book_name.data, author_name=form.author_name.data,
                                                user_id=current_user.id)
             db.session.add(pending_requests)
             db.session.commit()
+            for i in all_users:
+                if i.id != current_user.id:
+                    msg = Message('A new book request!', sender='noreply@demo.com', recipients=[i.email])
+                    msg.html=f'''
+                    <p> {pending_requests.requested_by.username} has requested for {pending_requests.book_name}. Kindly see, if you can fulfill this request.</p> 
+                    <p>Your support helps Hardcopy keep going. <strong>Happy reading!</strong></p>
+                    '''
+                    mail.send(msg)
             flash('Request successfully posted!', 'success')
             return redirect(url_for('books.request_book'))
         else:

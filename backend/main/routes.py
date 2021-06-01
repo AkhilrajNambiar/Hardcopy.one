@@ -1,10 +1,11 @@
 from flask import render_template, url_for, flash, redirect, Blueprint, current_app
-from backend import db
+from backend import db, mail
 from backend.users.forms import Feedback_form, AddressUpdateForm
-from backend.models import Book
+from backend.models import Book, User
 from flask_login import current_user
 import webbrowser
 import stripe
+from flask_mail import Message
 
 main = Blueprint('main', __name__)
 
@@ -36,8 +37,8 @@ def contact():
 
 
 
-@main.route('/create-checkout-session/<int:book_id>', methods=['POST'])
-def create_checkout_session(book_id):
+@main.route('/create-checkout-session/<int:book_id>/<int:user_id>', methods=['POST'])
+def create_checkout_session(book_id,user_id):
     stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
     book = Book.query.get(book_id)
     product1 = stripe.Product.create(
@@ -59,8 +60,8 @@ def create_checkout_session(book_id):
             }
         ],
         mode='payment',
-        success_url=url_for('main.payment_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=url_for('main.payment_cancelled', _external=True)
+        success_url=url_for('main.payment_success',user_id=user_id, book_id=book.id, _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=url_for('main.payment_cancelled',user_id=user_id, book_id=book.id, _external=True)
     )
     form = AddressUpdateForm()
     if form.validate_on_submit():
@@ -70,11 +71,34 @@ def create_checkout_session(book_id):
                            checkout_public_key=current_app.config['STRIPE_PUBLIC_KEY'], book=book, form=form)
 
 
-@main.route('/payment_success')
-def payment_success():
+@main.route('/payment_success/<int:book_id>/<int:user_id>')
+def payment_success(book_id, user_id):
+    user = User.query.filter_by(id=user_id).first()
+    book = Book.query.filter_by(id=book_id).first()
+    donor = User.query.filter_by(id=book.donated_by).first()
+
+    msg = Message('Receipt for your book', sender='noreply@demo.com', recipients=[user.email])
+    msg.html = f'''
+<p>Hello {user.username}, this is the receipt for {book.book_name}:</p>
+                    
+<center>
+<h1>{ book.book_name }</h1>
+<br>
+<strong>Author</strong> : { book.author_name }
+<br>
+<strong>Amount Paid</strong> : 40 Rs.
+<br>
+<strong>Donor email</strong> : {donor.email}
+<br>
+<strong>Delivery Address Address</strong> : {user.address}
+<br><br>
+<p>Thank you for using Hardcopy.com, and happy reading!</p>
+</center>
+'''
+    mail.send(msg)
     return render_template('payment_success.html')
 
 
-@main.route('/payment_cancelled')
-def payment_cancelled():
+@main.route('/payment_cancelled/<int:user_id>')
+def payment_cancelled(user_id):
     return render_template('payment_cancelled.html')

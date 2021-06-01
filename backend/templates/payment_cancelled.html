@@ -1,11 +1,15 @@
-<html>
-<head>
-  <title>Checkout canceled</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <section>
-    <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
-  </section>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo" alt="main_logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+  <h1>Payment Cancelled!</h1>
+{% endblock pagewelcome %}
+{% block content %}
+  <h2 class="text-center">
+    <img src="{{ url_for('static',filename='admin_images/x_unhappy.png') }}" width="150" height="150" alt="successfully_paid_image" style="background-color: white; border: solid 4px red">
+  </h2>
+  <br>
+  <h3 class="text-center text-danger">The payment was cancelled. Please contact me if, you feel there was an issue on our side.</h3>
+  <br>
+{% endblock content %}
