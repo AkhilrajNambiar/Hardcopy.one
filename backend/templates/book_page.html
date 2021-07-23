@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
+{% block SEO %}
+	Book: {{ book.book_name }}, Author: {{ book.author_name }}
+{% endblock SEO %}
 {% block for_logo %}
-    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+    <img src="{{ url_for('static',filename='admin_images/logo2small.webp') }}" height="250" width="300" id="central-logo" alt="hardcopy_logo">
 {% endblock for_logo %}
 {% block pagewelcome %}
 	<h1 class="text-center">{{ book.book_name }}</h1>
@@ -9,11 +12,28 @@
 {% block content %}
 	<div class="row">
 		<div class="col-sm-6">
-			<img src="{{ url_for('static', filename = 'users_images/'+book.book_front) }}" style="max-width: 100%; max-height: 100%" class="mb-5">
+			<img src="{{ url_for('static', filename = 'users_images/'+book.book_front) }}" style="max-width: 100%; max-height: 100%" class="mb-5" alt="{{ book.book_name }}_frontview">
+			<div class="card d-block d-xl-none">
+				<div class='card-header bg-primary'>
+					<h3>Dimensions(approx)</h3>
+				</div>
+				<div class="card-body" style="color:black;background-color: floralwhite;">
+					<dl class='row'>
+						<dt class="col-6"><strong><h5>Length(cm)</h5></strong></dt>
+						<dd class="col-6"><h5>{{ book.length }}</h5></dd>
+						<dt class="col-6"><strong><h5>Breadth(cm)</h5></strong></dt>
+						<dd class="col-6"><h5>{{ book.breadth }}</h5></dd>
+						<dt class="col-6"><strong><h5>Height(cm)</h5></strong></dt>
+						<dd class="col-6"><h5>{{ book.height }}</h5></dd>
+						<dt class="col-6"><strong><h5>Weight(grms)</h5></strong></dt>
+						<dd class="col-6"><h5>{{ book.weight }}</h5></dd>
+					</dl>
+				</div>
+			</div>
 		</div>
 		<div class="col-sm-6">
 			<center>
-				<h3 class="donor_specs"><img src="{{ url_for('static',filename='admin_images/celebrate.png') }}" width="50" height="50">Donated by <a>{{ book.provided_by.username }}</a><img src="{{ url_for('static',filename='admin_images/celebrate_reverse.png') }}" width="50" height="50"></h3>
+				<h3 class="donor_specs">Donated by <a href="#">{{ book.provided_by.username }}</a></h3>
 			</center>
 			<br><br>
 			<center>
@@ -55,9 +75,9 @@
 				<h4>Rate the content of this book</h4>
 				<div>
 					{% for i in range(5) %}
-						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star_{{i}}">&nbsp;
+						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star_{{i}}" alt="star_{{i}}">&nbsp;
 					{% endfor %}
-					&nbsp;<img class="mt-2" id="ratings" src="{{ url_for('static', filename='admin_images/neutral.png') }}" width="60" height="50">
+					&nbsp;<img class="mt-2" id="ratings" src="{{ url_for('static', filename='admin_images/neutral.png') }}" alt="content feeling" width="60" height="50">
 				</div>
 			</center>
 			<br><br>
@@ -65,9 +85,9 @@
 				<h4>Rate the condition of this book</h4>
 				<div>
 					{% for i in range(5) %}
-						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star1_{{i}}">&nbsp;
+						<img src="{{ url_for('static',filename='admin_images/rating.png') }}" width="50" height="50" id="star1_{{i}}" alt="star1_{{i}}">&nbsp;
 					{% endfor %}
-					&nbsp;<img class="mt-2" id="ratings1" src="{{ url_for('static', filename='admin_images/neutral.png') }}" width="60" height="50">
+					&nbsp;<img class="mt-2" id="ratings1" src="{{ url_for('static', filename='admin_images/neutral.png') }}" alt="condition feeling" width="60" height="50">
 				</div>
 			</center>
 			<br>
@@ -75,11 +95,39 @@
 				<form method="POST" action="">
 					<input type="hidden" name="rating_content" id="rating_content" value=''>
 					<input type="hidden" name="rating_condition" id="rating_condition" value=''>
-					<button type="submit" class="btn btn-primary" id="rating_button">Submit rating</button>
+					<button type="submit" class="btn btn-primary" style="color:black;" id="rating_button">Submit rating</button>
 				</form>
 			</center>
 		</div>
 	</div>
+	<div class="card d-none d-xl-block text-center">
+		<div class='card-header bg-primary'>
+			<h3>Dimensions(approx)</h3>
+		</div>
+		<div class="card-body" style="color:black;background-color: floralwhite;">
+			<dl class='row'>
+				<dt class="col-6"><strong><h5>Length(cm)</h5></strong></dt>
+				<dd class="col-6"><h5>{{ book.length }}</h5></dd>
+				<dt class="col-6"><strong><h5>Breadth(cm)</h5></strong></dt>
+				<dd class="col-6"><h5>{{ book.breadth }}</h5></dd>
+				<dt class="col-6"><strong><h5>Height(cm)</h5></strong></dt>
+				<dd class="col-6"><h5>{{ book.height }}</h5></dd>
+				<dt class="col-6"><strong><h5>Weight(grms)</h5></strong></dt>
+				<dd class="col-6"><h5>{{ book.weight }}</h5></dd>
+			</dl>
+		</div>
+	</div>
+	<br><br>
+	{% if book.extras %}
+		<div class="card">
+			<div class="card-header" style="background-color: cyan; color: black">
+				<h2>{{ book.provided_by.username }}'s remarks</h2>
+			</div>
+			<div class="card-body" style="background-color: floralwhite; color: black">
+				<h3>{{ book.extras }}</h3>
+			</div>
+		</div>
+	{% endif %}
 	<br><br>
 	<h1 class="rating_header text-center">What people say!</h1>
 	<br>
@@ -205,28 +253,28 @@
 	</div>
 	<br><br>
 	<h2 class="text-center" id="AAbnd">View from other sides</h2>
-	<ul class="nav nav-tabs nav-fill view_tab">
-		<li class="nav-item"><a href="#backview" class="nav-link active" data-toggle="tab" role="tab">Back View</a></li>
-		<li class="nav-item"><a href="#topview" class="nav-link" data-toggle="tab" role="tab">Top View</a></li>
-		<li class="nav-item"><a href="#bottomview" class="nav-link" data-toggle="tab" role="tab">Bottom View</a></li>
-		<li class="nav-item"><a href="#leftview" class="nav-link" data-toggle="tab" role="tab">Left View</a></li>
-		<li class="nav-item"><a href="#rightview" class="nav-link" data-toggle="tab" role="tab">Right View</a></li>
+	<ul class="nav nav-tabs nav-fill view_tab" role="tablist">
+		<li class="nav-item" role="tab"><a href="#backview" class="nav-link active" data-toggle="tab">Back View</a></li>
+		<li class="nav-item" role="tab"><a href="#topview" class="nav-link" data-toggle="tab">Top View</a></li>
+		<li class="nav-item" role="tab"><a href="#bottomview" class="nav-link" data-toggle="tab">Bottom View</a></li>
+		<li class="nav-item" role="tab"><a href="#leftview" class="nav-link" data-toggle="tab">Left View</a></li>
+		<li class="nav-item" role="tab"><a href="#rightview" class="nav-link" data-toggle="tab">Right View</a></li>
 	</ul>
 	<div class="tab-content view_diff">
 		<div class="tab-pane fade show active text-center" role="tabpanel" id="backview">
-			<img src="{{ url_for('static', filename='users_images/'+book.book_back) }}" style="max-height: 50%; max-width: 50%">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_back) }}" style="max-height: 50%; max-width: 50%" alt="{{ book.book_name }}_backview">
 		</div>
 		<div class="tab-pane fade text-center" id="topview" role="tabpanel">
-			<img src="{{ url_for('static', filename='users_images/'+book.book_top) }}" style="max-height: 50%; max-width: 50%">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_top) }}" style="max-height: 50%; max-width: 50%" alt="{{ book.book_name }}_topview">
 		</div>
 		<div class="tab-pane fade text-center" id="bottomview" role="tabpanel">
-			<img src="{{ url_for('static', filename='users_images/'+book.book_bottom) }}" style="max-height: 50%; max-width: 50%">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_bottom) }}" style="max-height: 50%; max-width: 50%" alt="{{ book.book_name }}_bottomview">
 		</div>
 		<div class="tab-pane fade text-center" id="leftview" role="tabpanel">
-			<img src="{{ url_for('static', filename='users_images/'+book.book_left) }}" style="max-height: 50%; max-width: 50%">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_left) }}" style="max-height: 50%; max-width: 50%" alt="{{ book.book_name }}_leftsideview">
 		</div>
 		<div class="tab-pane fade text-center" id="rightview" role="tabpanel">
-			<img src="{{ url_for('static', filename='users_images/'+book.book_right) }}" style="max-height: 50%; max-width: 50%">
+			<img src="{{ url_for('static', filename='users_images/'+book.book_right) }}" style="max-height: 50%; max-width: 50%" alt="{{ book.book_name }}_rightsideview">
 		</div>
 	</div>
 	<br><br>

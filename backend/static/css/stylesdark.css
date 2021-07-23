@@ -1,7 +1,6 @@
 body{
-	background-image:linear-gradient(rgba(4,13,33,77%),rgba(4,13,33,77%)),url(https://source.unsplash.com/featured/1600x1440?books,library);
+	background-image:linear-gradient(rgba(4,13,33,77%),rgba(4,13,33,77%)),url(../admin_images/library.webp);
 	background-size: contain;
-	background-color: ;
 	color: floralwhite;
 }
 .row-content{
@@ -24,7 +23,7 @@ body{
 }
 .jumbotron{
 	padding-top: 150px;
-	background: url(../admin_images/background.png);
+	background: url(../admin_images/background.webp);
 	background-repeat: repeat-x;
 }
 #caption-header{
@@ -175,7 +174,7 @@ footer{
 	cursor: pointer;
 }
 .modal-header{
-	background: url(../admin_images/background.png);
+	background: url(../admin_images/background.webp);
 }
 .modal-dialog{
 	pointer-events: all;
@@ -189,6 +188,7 @@ footer{
 .close:hover{
 	color: white;
 	background-color: #ff0000;
+	cursor: pointer;
 }
 .modal-dark{
 	background-color: #2b2b2b;
@@ -325,7 +325,7 @@ footer{
 	box-shadow: 2px 2px 20px 2px #131313;
 }
 .genre-list{
-	background: url(../admin_images/background.png);
+	background: url(../admin_images/background.webp);
 }
 .genre-image-1, .genre-image-2, .genre-image-3, .genre-image-4, .genre-image-5, .genre-image-6{
 	color: #1b95e2;
@@ -360,8 +360,8 @@ footer{
 	border-bottom: solid 2px orange;
 }
 .cancel_btn{
-	border: 1px solid red;
-	border-bottom: 5px solid red ;
+	border: 1px solid darkred;
+	border-bottom: 5px solid darkred;
 	font-size: 22px;
 	font-weight: bold;
 	padding: 10px;
@@ -503,6 +503,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .content_5_star_outer{
 	/*border: solid 1px grey;*/
@@ -517,6 +518,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .content_4_star_outer{
 	/*border: solid 1px grey;*/
@@ -531,6 +533,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .content_3_star_outer{
 	/*border: solid 1px grey;*/
@@ -545,6 +548,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .content_2_star_outer{
 	/*border: solid 1px grey;*/
@@ -559,6 +563,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .content_1_star_outer{
 	/*border: solid 1px grey;*/
@@ -573,6 +578,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .condition_5_star_outer{
 	/*border: solid 1px grey;*/
@@ -587,6 +593,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .condition_4_star_outer{
 	/*border: solid 1px grey;*/
@@ -601,6 +608,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .condition_3_star_outer{
 	/*border: solid 1px grey;*/
@@ -615,6 +623,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .condition_2_star_outer{
 	/*border: solid 1px grey;*/
@@ -629,6 +638,7 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+	width: 0%;
 }
 .condition_1_star_outer{
 	/*border: solid 1px grey;*/
@@ -636,4 +646,92 @@ footer{
 	color: transparent;
 	font-size: 5px;
 	border-radius: 5px;
+}
+#login:hover{
+	cursor: pointer;
+}
+.dropdown-menu{
+	background-color: #2b2b2b;
+}
+.dropdown-item:hover{
+	background-image: none;
+	background-color: #555555;
+}
+.genre_tags{
+	/*border: 2px solid green;*/
+	display: inline-block;
+	position: relative;
+}
+.genre_tags::after{
+	content: "";
+	width: 0%;
+	height: 2px;
+	background: #00ddff;
+	position: absolute;
+	z-index: 10;
+	display: block;
+	border-radius: 1px;
+	transition-duration: 250ms;
+}
+.genre_tags:hover::after{
+	width: 100%;
+}
+#tracking_button{
+	border: 2px #0057B3 solid;
+	border-bottom: 5px #0057B3 solid;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;
+}
+.ordered_books{
+	background-color: #38d9a9;
+	color: #2b2b2b;
+	padding: 5px;
+}
+.ordered_book_image{
+	padding: 5px;
+	background: none;
+	background-color: #02B37E;
+	display: inline-block;
+}
+#invoice_button{
+	border: 2px orange solid;
+	border-bottom: 5px orange solid;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px;	
+}
+.cancel_small_btn{
+	border: 1px solid darkred;
+	border-bottom: 5px solid darkred ;
+	font-size: 18px;
+	/*font-weight: bold;*/
+	padding: 5px;
+}
+#tracking_small_button{
+	border: 1px #0057B3 solid;
+	border-bottom: 5px #0057B3 solid;
+	font-size: 18px;
+	/*font-weight: bold;*/
+	padding: 5px;	
+}
+#invoice_small_button{
+	border: 1px orange solid;
+	border-bottom: 5px orange solid;
+	font-size: 18px;
+	/*font-weight: bold;*/
+	padding: 5px;	
+}
+#tracking_wait{
+	background-color: floralwhite;
+	padding: 10px;
+	color: black;
+}
+.nav-pills>li>a{
+	border-radius: 50px !important;
+	color: #00ddff;
+}
+.nav-pills>li>a:hover{
+	background-color: #00ddff;
+	color: black;
 }

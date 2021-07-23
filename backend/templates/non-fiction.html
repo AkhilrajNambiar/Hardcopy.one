@@ -7,34 +7,36 @@
     <h4 class="text-muted">Information and content explanation, gave us non-fiction. Find your subject and read on!</h4>
 {% endblock pagewelcome %}
 {% block content %}
-	<ul class="nav nav-pills nav-fill">
-		<li class="nav-item">
-			<a href="#computer" class="nav-link active" role='pill' data-toggle="pill">Computers and Technoloy</a>
-		</li>
-		<li class="nav-item">
-			<a href="#encylopedia" class="nav-link" role='pill' data-toggle="pill">Encyclopedias</a>
-		</li>
-		<li class="nav-item">
-			<a href="#history" class="nav-link" role='pill' data-toggle="pill">History</a>
-		</li>
-		<li class="nav-item">
-			<a href="#natural" class="nav-link" role='pill' data-toggle="pill">Natural Sciences</a>
-		</li>
-		<li class="nav-item">
-			<a href="#exam" class="nav-link" role='pill' data-toggle="pill">Exam Preparation</a>
-		</li>
-		<li class="nav-item">
-			<a href="#commerce" class="nav-link" role='pill' data-toggle="pill">Commerce and Accounting</a>
-		</li>
-		<li class="nav-item">
-			<a href="#religion" class="nav-link" role='tab' data-toggle="tab">Religion and Spirituality</a>
-		</li>
-	</ul>
+	<div class="nav-holder">
+		<ul class="row justify-content-center nav nav-pills nav-fill">
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#computer" class="nav-link active" role='pill' data-toggle="pill">Computers and Technology</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#encylopedia" class="nav-link" role='pill' data-toggle="pill">Encyclopedias</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#history" class="nav-link" role='pill' data-toggle="pill">History</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#natural" class="nav-link" role='pill' data-toggle="pill">Natural Sciences</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#exam" class="nav-link" role='pill' data-toggle="pill">Exam Preparation</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#commerce" class="nav-link" role='pill' data-toggle="pill">Commerce and Accounting</a>
+			</li>
+			<li class="col-lg-3 col-sm-4 col-6 nav-item">
+				<a href="#religion" class="nav-link" role='tab' data-toggle="pill">Religion and Spirituality</a>
+			</li>
+		</ul>
+	</div>
 	<div class="tab-content">
 		<div class="tab-pane fade show active" role="tabpanel" id="computer">
 			<div class="row mt-3">
 				{% for book in books %}
-					{% if book.genre == 'Non-fiction' %}
+					{% if book.genre == 'Non-fiction' and book.ordered_by == None %}
 						{% if book.sub_genre == 'Computers and Technology' %}
 							<div class="col-sm-4 text-center books  mb-2">
 								<figure class="mt-4">

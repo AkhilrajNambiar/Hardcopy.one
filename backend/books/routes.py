@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from backend import db, mail
 from backend.books.forms import BookUploadForm, BookRequestForm
 from backend.models import User, Book, Cart, PendingRequests, StarValues
@@ -22,34 +22,43 @@ def upload():
         pending_books = []
         for book in pending:
             pending_books.append(book.book_name)
-        if form.book_name.data in pending_books:
-            uploaded_book = PendingRequests.query.filter_by(book_name=form.book_name.data).first()
-            requestor = User.query.get(uploaded_book.user_id)
-            msg = Message(f'Your Request has been fulfilled {requestor.username}', sender='noreply@demo.com', recipients=[requestor.email])
-            msg.html = f'''
-            <h4> Your request for {uploaded_book.book_name} has been fulfilled by {current_user.username}. One or more copies of {uploaded_book.book_name} has been uploaded. Please check out! </h4>
-            '''
-            mail.send(msg)
-            db.session.delete(uploaded_book)
+        if form.book_name.data.lower() in pending_books:
+            waiting_books = PendingRequests.query.filter_by(book_name=form.book_name.data)           
+            for book in waiting_books:
+                    requestor = User.query.get(book.user_id)
+                    msg = Message(f'Your Request has been fulfilled {requestor.username}', sender='noreply@demo.com', recipients=[requestor.email])
+                    msg.html = f'''
+                    <h4> Your request for {book.book_name} has been fulfilled. One or more copies of {book.book_name} has been uploaded. Please check out! </h4>
+                    '''
+                    mail.send(msg)
+                    db.session.delete(book)
             db.session.commit()
         book = Book(book_name=form.book_name.data, author_name=form.author_name.data, genre=form.genre.data,
-                    sub_genre=form.sub_genre.data, book_front=save_picture_without_compression(form.book_front.data),
-                    book_back=save_picture_without_compression(form.book_back.data),
-                    book_top=save_picture_without_compression(form.book_top.data),
-                    book_bottom=save_picture_without_compression(form.book_bottom.data),
-                    book_right=save_picture_without_compression(form.book_right.data),
-                    book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user)
+                    sub_genre=form.sub_genre.data, book_front=save_picture_without_compression(
+                        form.book_front.data),
+                    book_back=save_picture_without_compression(
+                        form.book_back.data),
+                    book_top=save_picture_without_compression(
+                        form.book_top.data),
+                    book_bottom=save_picture_without_compression(
+                        form.book_bottom.data),
+                    book_right=save_picture_without_compression(
+                        form.book_right.data),
+                    book_left=save_picture_without_compression(form.book_left.data), provided_by=current_user, extras=form.extras.data, length=int(float(form.length.data)), breadth=int(float(form.breadth.data)), height=int(float(form.height.data)), weight=form.weight.data)
         db.session.add(book)
         db.session.commit()
         stars = StarValues(book_id=book.id, donor_id=current_user.id)
         db.session.add(stars)
         db.session.commit()
-        flash("Book has been successfully uploaded. Thank you for your contribution!", "success")
-        return redirect(url_for('main.home'))
+        return jsonify(status=1)
     return render_template('upload.html', title="Upload Books here", form=form)
 
 
-stars = {}
+class Raters_list:
+    def __init__(self, book_id):
+        self.book_id = book_id
+        self.raters = []
+
 
 @books.route('/book_page/<int:book_id>', methods=['GET', 'POST'])
 @login_required
@@ -60,65 +69,76 @@ def book_page(book_id):
     in_the_cart = False
 
     if current_user.is_authenticated:
-        hai_ya_nahi = Cart.query.filter(and_(Cart.user_id == current_user.id, Cart.book_id == book_id))
+        hai_ya_nahi = Cart.query.filter(
+            and_(Cart.user_id == current_user.id, Cart.book_id == book_id))
         if hai_ya_nahi.count() == 1:
             in_the_cart = True
 
     ratings = StarValues.query.all()
-    raters_list = []
+    book_ratings = []
     for i in ratings:
-        raters_list.append(i.rater_id)
+        book_ratings.append(Raters_list(i.book_id))
+    no_duplicate = list(set(book_ratings))
+    for j in no_duplicate:
+        if book.id == j.book_id:
+            rate = StarValues.query.filter_by(book_id=j.book_id).first()
+            j.raters.append(rate.rater_id)
 
     if request.method == 'POST':
-        if starring.donor_id != current_user.id and current_user.id not in raters_list:
-            starring.rater_id = current_user.id
-            if 'rating_content' in request.form:
-                content = int(request.form['rating_content'])
-                if content:
-                    if content == 5:
-                        starring.five_star_content += 1
-                    elif content == 4:
-                        starring.four_star_content += 1
-                    elif content == 3:
-                        starring.three_star_content += 1
-                    elif content == 2:
-                        starring.two_star_content += 1                    
-                    elif content == 1:
-                        starring.one_star_content += 1
-                    # global votes_for_content, total_content_rating
-                    book.votes_for_content += 1
-                    book.total_content_rating += content
-                    book.content_rating = float('{0:.1f}'.format(book.total_content_rating/book.votes_for_content))
-                    db.session.commit()
-                # book.content_rating = 0
-                # db.session.commit()
-            if 'rating_condition' in request.form:
-                condition = int(request.form['rating_condition'])
-                if condition:
-                    # global votes_for_condition, total_condition_rating
-                    if condition == 5:
-                        starring.five_star_condition += 1
-                    elif condition == 4:
-                        starring.four_star_condition += 1
-                    elif condition == 3:
-                        starring.three_star_condition += 1
-                    elif condition == 2:
-                        starring.two_star_condition += 1                    
-                    elif condition == 1:
-                        starring.one_star_condition += 1
-                    book.votes_for_condition += 1
-                    book.total_condition_rating += condition
-                    book.condition_rating = float('{0:.1f}'.format(book.total_condition_rating/book.votes_for_condition))
-                    db.session.commit()
-        elif starring.donor_id == current_user.id:
-            flash('You cannot rate the book you donated!','warning')                    
-            return redirect(url_for('books.book_page', book_id=book.id))
+        for j in book_ratings:
+            if j.book_id == book.id:
+                if starring.donor_id != current_user.id and current_user.id not in j.raters:
+                    starring.rater_id = current_user.id
+                    if 'rating_content' in request.form:
+                        content = int(request.form['rating_content'])
+                        if content:
+                            if content == 5:
+                                starring.five_star_content += 1
+                            elif content == 4:
+                                starring.four_star_content += 1
+                            elif content == 3:
+                                starring.three_star_content += 1
+                            elif content == 2:
+                                starring.two_star_content += 1
+                            elif content == 1:
+                                starring.one_star_content += 1
+                            # global votes_for_content, total_content_rating
+                            book.votes_for_content += 1
+                            book.total_content_rating += content
+                            book.content_rating = float('{0:.1f}'.format(
+                                book.total_content_rating/book.votes_for_content))
+                            db.session.commit()
+                        # book.content_rating = 0
+                        # db.session.commit()
+                    if 'rating_condition' in request.form:
+                        condition = int(request.form['rating_condition'])
+                        if condition:
+                            # global votes_for_condition, total_condition_rating
+                            if condition == 5:
+                                starring.five_star_condition += 1
+                            elif condition == 4:
+                                starring.four_star_condition += 1
+                            elif condition == 3:
+                                starring.three_star_condition += 1
+                            elif condition == 2:
+                                starring.two_star_condition += 1
+                            elif condition == 1:
+                                starring.one_star_condition += 1
+                            book.votes_for_condition += 1
+                            book.total_condition_rating += condition
+                            book.condition_rating = float('{0:.1f}'.format(
+                                book.total_condition_rating/book.votes_for_condition))
+                            db.session.commit()
+                elif starring.donor_id == current_user.id:
+                    flash('You cannot rate the book you donated!', 'warning')
+                    return redirect(url_for('books.book_page', book_id=book.id))
 
-        elif current_user.id in raters_list:
-            flash('You have already voted for this book! Please choose another one','warning')
-            return redirect(url_for('books.book_page', book_id=book.id))
-            # book.condition_rating = 0
-            # db.session.commit()
+                elif current_user.id in j.raters:
+                    flash(
+                        'You have already voted for this book! Please choose another one', 'warning')
+                    return redirect(url_for('books.book_page', book_id=book.id))
+                    # book.condition_rating = 0
+                    # db.session.commit()
     return render_template('book_page.html', title=book.book_name, book=book,
                            other_books_by_author=other_books_by_author, in_the_cart=in_the_cart, five_star_content=starring.five_star_content, four_star_content=starring.four_star_content, three_star_content=starring.three_star_content, two_star_content=starring.two_star_content, one_star_content=starring.one_star_content, five_star_condition=starring.five_star_condition, four_star_condition=starring.four_star_condition, three_star_condition=starring.three_star_condition, two_star_condition=starring.two_star_condition, one_star_condition=starring.one_star_condition, votes_for_condition=book.votes_for_condition, votes_for_content=book.votes_for_content)
 
@@ -186,8 +206,9 @@ def request_book():
             db.session.commit()
             for i in all_users:
                 if i.id != current_user.id:
-                    msg = Message('A new book request!', sender='noreply@demo.com', recipients=[i.email])
-                    msg.html=f'''
+                    msg = Message('A new book request!',
+                                  sender='noreply@demo.com', recipients=[i.email])
+                    msg.html = f'''
                     <p> {pending_requests.requested_by.username} has requested for {pending_requests.book_name}. Kindly see, if you can fulfill this request.</p> 
                     <p>Your support helps Hardcopy keep going. <strong>Happy reading!</strong></p>
                     '''

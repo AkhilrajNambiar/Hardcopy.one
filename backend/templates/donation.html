@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block contribute %}
+    active
+{% endblock contribute%}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2small.webp') }}" height="209" width="300" id="central-logo" alt="hardcopy_logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>Support me in running Hardcopy</h1>
+    <h4 class="text-dark">If you feel this initiative has to be kept running, and have the means to do so, then do contribute.</h4>
+{% endblock pagewelcome %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <figure>
+                    <a href="https://www.patreon.com/akhilrajnambiar" style="cursor: pointer;"><img src="{{ url_for('static', filename='admin_images/patreon.webp') }}" alt="donate_with_patreon" title="patreon"></a>
+                </figure>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

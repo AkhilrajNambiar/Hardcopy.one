@@ -16,7 +16,9 @@ class Registration_form(FlaskForm):
     street = StringField('Room No. and Street',validators=[DataRequired()])
     city = StringField('City',validators=[DataRequired()])
     state = StringField('State',validators=[DataRequired()])
-    countries = SelectField('Country', choices=country_list, validators=[DataRequired()])
+    countries = SelectField('Country', choices=['India'], validators=[DataRequired()])
+    pincode = StringField('Pincode', validators=[DataRequired()])
+    contactnumber = StringField('Contact No.', validators=[DataRequired()])
     
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -27,6 +29,15 @@ class Registration_form(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email already exists. Please choose another one.')
+
+    def validate_contactnumber(self, contactnumber):
+        if not contactnumber.data.isnumeric():
+            raise ValidationError('Phone number can contain only numbers!')
+
+    def validate_street(self, street):
+        if not any(i.isdigit() for i in street.data):
+            raise ValidationError("Room number or House Number is needed!")            
+
 class Login_form(FlaskForm):
     email = StringField('Email ID',validators=[DataRequired(), Email()])
     password = PasswordField('Password',validators=[DataRequired()])
@@ -63,6 +74,7 @@ class AddressUpdateForm(FlaskForm):
     city = StringField('City',validators=[DataRequired()])
     state = StringField('State',validators=[DataRequired()])
     countries = SelectField('Country', choices=country_list, validators=[DataRequired()])
+    pincode = StringField('Pincode', validators=[DataRequired()])    
     submit = SubmitField('Update')
 
 class RequestResetForm(FlaskForm):

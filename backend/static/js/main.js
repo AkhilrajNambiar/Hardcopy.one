@@ -96,42 +96,42 @@ $(document).ready(function(){
 	$('.contorreq').click(function(){
 		$('#communitymodal').modal('show');
 	});
-	$('.genre-1').hover(function(){
-		$('.genre-image-1').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-1').css('font-size','x-large');
-	});
-	$('.genre-2').hover(function(){
-		$('.genre-image-2').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-2').css('font-size','x-large');
-	});
-	$('.genre-3').hover(function(){
-		$('.genre-image-3').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-3').css('font-size','x-large');
-	});
-	$('.genre-4').hover(function(){
-		$('.genre-image-4').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-4').css('font-size','x-large');
-	});
-	$('.genre-5').hover(function(){
-		$('.genre-image-5').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-5').css('font-size','x-large');
-	});
-	$('.genre-6').hover(function(){
-		$('.genre-image-6').css('font-size','xx-large');
-	},
-	function(){
-		$('.genre-image-6').css('font-size','x-large');
-	});
+	// $('.genre-1').hover(function(){
+	// 	$('.genre-image-1').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-1').css('font-size','x-large');
+	// });
+	// $('.genre-2').hover(function(){
+	// 	$('.genre-image-2').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-2').css('font-size','x-large');
+	// });
+	// $('.genre-3').hover(function(){
+	// 	$('.genre-image-3').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-3').css('font-size','x-large');
+	// });
+	// $('.genre-4').hover(function(){
+	// 	$('.genre-image-4').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-4').css('font-size','x-large');
+	// });
+	// $('.genre-5').hover(function(){
+	// 	$('.genre-image-5').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-5').css('font-size','x-large');
+	// });
+	// $('.genre-6').hover(function(){
+	// 	$('.genre-image-6').css('font-size','xx-large');
+	// },
+	// function(){
+	// 	$('.genre-image-6').css('font-size','x-large');
+	// });
 	$('#edit_profile').click(function(){
 		$('#edit_profile').css('display','none');
 		$('.updating_form').css('display','block');
@@ -256,5 +256,39 @@ $(document).ready(function(){
 	$('.cancel_address_change').click(function(){
 		$('#update_my_address').css('display','none');
 		$('.address_update').css('display','inline');
+	});
+	$('#upload_form').on('submit', function(event){
+		event.preventDefault();
+
+		var formData = new FormData($('#upload_form')[0]);
+
+		$.ajax({
+			xhr: function(){
+				var xhr = new window.XMLHttpRequest();
+				xhr.upload.addEventListener('progress', function(e){
+					if(e.lengthComputable){
+						console.log('Bytes Loaded: ' + e.loaded);
+						console.log('Total size ' + e.total);
+						console.log('Percentage loaded' + (e.loaded/e.total));
+
+						var percent = Math.round((e.loaded/e.total)*100);
+
+						$('#progressBar').attr('aria-valuenow', percent).css('width', percent+'%').text(percent+'%');
+					}
+				});
+				return xhr;
+			},
+			type: 'POST',
+			url: '/upload',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				if(data["status"] == "1"){
+					alert("Your book was successfully uploaded!");
+					window.location.href = '/home';
+				}
+			}
+		});
 	});
 });

@@ -1,136 +1,97 @@
 <!DOCTYPE html>
-<head>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="Icon" href="{{ url_for('static',filename='admin_images/logo2.png') }}">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
-
-    <link rel="stylesheet" id="styledark" href="{{ url_for('static',filename='css/stylesdark.css') }}">
-
-    <title>
-        {% if title %}
-            Hardcopy.com | {{ title }}
-        {% else %}
-            Hardcopy.com
-        {% endif %}
-    </title>
-</head>
-<body>
-    <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navig"><span class="navbar-toggler-icon"></span></button>
-        <a href="{{ url_for('main.home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2.png') }}" width="70" height="50"></a>
-        <div class="collapse navbar-collapse" id="navig">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item main-nav"><a class="nav-link {% block home %}{% endblock %}" href="{{ url_for('main.home') }}" id="first-nav"><span class="fa fa-home fa-lg"></span> Home</a></li>
-                <li class="nav-item main-nav"><a href="{{ url_for('main.about') }}" class="nav-link {% block about %}{% endblock %}" id="first-nav"><span class="fa fa-info-circle fa-lg"></span> About</a></li>
-                <li class="nav-item main-nav"><a class="nav-link {% block contact %}{% endblock contact %} contorreq" id="first-nav"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
-                <li class="nav-item main-nav"><a class="nav-link {% block contribute %}{% endblock %} contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span> Contribute</a></li>
-                {% if current_user.is_authenticated %}
-                    <li class="nav-item main-nav"><a class="nav-link {% block cart %}{% endblock cart %}" id="first-nav" href="{{ url_for('users.add_to_cart', user_id=current_user.id) }}"><span class="fa fa-shopping-cart fa-lg"></span> Cart</a></li>
-                {% endif %}
-            </ul>
-            <span class="navbar-text">
-                {% if current_user.is_authenticated %}
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('users.account') }}"  class="nav-link {% block account %}{% endblock %}"><span class="fa fa-user-circle fa-lg"></span> Account</a>
-                        </li>
-                        <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('users.logout') }}"  class="nav-link {% block logout %}{% endblock %}"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
-                        </li>
-                    </ul>
-                {% else %}
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item main-nav">
-                            <a id="login" href="{{ url_for('users.login') }}"  class="nav-link {% block login %}{% endblock %}"><span class="fa fa-sign-in fa-lg"></span> Login</a>
-                        </li>
-                        <li class="nav-item main-nav">
-                            <a id="signup" href="{{ url_for('users.signup') }}" class="nav-link {% block signup %}{% endblock %}"><span class="fa fa-user-plus fa-lg"></span> Signup</a>
-                        </li>
-                    </ul>
-                {% endif %}
-            </span>
-        </div>
-    </nav>
-    <div class="modal" id="contributemodal" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Contribute to help Hardcopy grow!</h2>
-                    <span class="close" data-dismiss="modal">
-                        &times;
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body modal-dark">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header donor-head">
-                                <h3>Donate</h3>
-                            </div>
-                            <div class="card-body" id="donor-body">
-                                <h5>I don't partake any of the delivery cost, so I would really feel motivated if you could contribute to help me keep this running!</h5>
-                                <h5>Not compulsary at all, only those who can afford to should do it! I hope that you rather take full advantage of such a website.</h5>
-                                <div class="text-center">
-                                    <button class="btn btn-primary" id="donate-btn-1"><span class="fa fa-usd fa-lg"></span> Donate!</button>
+        <meta name="description" content="Free hardcopy books, used books, free books {% block SEO %}{% endblock SEO %}">
+    
+        <link rel="Icon" href="{{ url_for('static',filename='admin_images/logo2.png') }}">
+    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" lazyload>
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" lazyload>
+    
+        <link rel="stylesheet" id="styledark" href="{{ url_for('static',filename='css/stylesdark.css') }}" lazyload>
+    
+        <title>
+            {% if title %}
+                Hardcopy.one | {{ title }}
+            {% else %}
+                Hardcopy.one
+            {% endif %}
+        </title>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
+            <button class="navbar-toggler" aria-label="Navbar_toggler" data-toggle="collapse" data-target="#navig"><span class="navbar-toggler-icon"></span></button>
+            <a href="{{ url_for('main.home') }}" class="navbar-brand"><img src="{{ url_for('static',filename='admin_images/logo2small.webp') }}" width="70" height="50" alt="hardcopy_logo"></a>
+            <div class="collapse navbar-collapse" id="navig">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item main-nav"><a class="nav-link {% block home %}{% endblock %}" href="{{ url_for('main.home') }}" id="first-nav"><span class="fa fa-home fa-lg"></span> Home</a></li>
+                    <li class="nav-item main-nav"><a href="{{ url_for('main.about') }}" class="nav-link {% block about %}{% endblock %}" id="first-nav"><span class="fa fa-info-circle fa-lg"></span> About</a></li>
+                    <li class="nav-item main-nav"><a class="nav-link {% block contact %}{% endblock contact %} contorreq" id="first-nav"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
+                    <li class="nav-item main-nav"><a class="nav-link {% block contribute %}{% endblock %} contributor" id="first-nav"><span class="fa fa-angle-double-down fa-lg"></span> Contribute</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item main-nav"><a class="nav-link {% block cart %}{% endblock cart %}" id="first-nav" href="{{ url_for('users.add_to_cart', user_id=current_user.id) }}"><span class="fa fa-shopping-cart fa-lg"></span> Cart</a></li>
+                    {% endif %}
+                </ul>
+                <span class="navbar-text">
+                    {% if current_user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item main-nav">
+                                <!-- <a id="login" href="{{ url_for('users.account') }}"  class="nav-link {% block account %}{% endblock %}"><span class="fa fa-user-circle fa-lg"></span> Account</a> -->
+                                <div class="dropdown show">
+                                  <a class="btn btn-secondary dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fa fa-user-circle fa-lg"></span> Account
+                                  </a>
+    
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" id="user_profile" href="{{ url_for('users.account') }}">{{ current_user.username }}</a>
+                                    <a class="dropdown-item" href="{{ url_for('users.orders', user_id=current_user.id) }}">My orders</a>
+                                  </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header donor-head">
-                                <h3>Upload</h3>
-                            </div>
-                            <div class="card-body" id="donor-body">
-                                <h5>Hardcopy needs books, and any book that you feel you have read enough can be donated over here, with quality measures.</h5>
-                                <h5>This website runs on contributions in the form of books, so this is something I encourage everyone of you to actively participate in!</h5>
-                                <div class="text-center">
-                                    <a href="{{ url_for('books.upload') }}" class="btn btn-primary" id="donate-btn-2"><span class="fa fa-upload fa-lg"></span> Upload</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </li>
+                            <li class="nav-item main-nav">
+                                <a id="login" href="{{ url_for('users.logout') }}"  class="nav-link {% block logout %}{% endblock %}"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item main-nav">
+                                <a id="login" href="{{ url_for('users.login') }}"  class="nav-link {% block login %}{% endblock %}"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+                            </li>
+                            <li class="nav-item main-nav">
+                                <a id="signup" href="{{ url_for('users.signup') }}" class="nav-link {% block signup %}{% endblock %}"><span class="fa fa-user-plus fa-lg"></span> Signup</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </span>
             </div>
-        </div>
-    </div>
-    <div class="modal" id="communitymodal" role='dialog'>
-        <div class="modal-dialog modal-lg" role='document'>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">
-                        Contact!
-                    </h2>
-                    <span class="close" data-dismiss="modal">
-                        &times;
-                    </span>
+        </nav>
+        <div class="modal" id="contributemodal" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Contribute to help Hardcopy grow!</h2>
+                        <span class="close" data-dismiss="modal">
+                            &times;
+                        </span>
+                    </div>
                 </div>
                 <div class="modal-body modal-dark">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="card">
-                                <div class="card-body" id="donor-body">
-                                    <h5>Request the community for a book that you need!</h5>
-                                    <div class="text-center">
-                                        <a class="btn btn-primary" id="request-btn-1" href="{{ url_for('books.request_book') }}"><span class="fa fa-reply-all fa-lg"></span> Request!</a>
-                                    </div>
+                                <div class="card-header donor-head">
+                                    <h3>Upload</h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
                                 <div class="card-body" id="donor-body">
-                                    <h5>Contact me for any other query that you have.</h5>
+                                    <h5 class="d-none d-md-block">Hardcopy needs books, and any book that you feel you have read enough can be donated over here, with quality measures.</h5>
+                                    <h5 class="d-none d-xl-block">This website runs on contributions in the form of books, so this is something I encourage everyone of you to actively participate in!</h5>
                                     <div class="text-center">
-                                        <a href="{{ url_for('main.contact') }}" class="btn btn-primary" id="request-btn-2"><span class="fa fa-address-card fa-lg"></span> Contact</a>
+                                        <a href="{{ url_for('books.upload') }}" class="btn btn-primary" id="donate-btn-2"><span class="fa fa-upload fa-lg"></span> Upload</a>
                                     </div>
                                 </div>
                             </div>
@@ -139,94 +100,133 @@
                 </div>
             </div>
         </div>
-    </div>
-    <header class="jumbotron">
-        <div>
-            <a id="search" class="nav-link"><span class="fa fa-search fa-lg"></span></a>
-            <form action="{{ url_for('books.search') }}" method="POST">
-                <div class="searchbox">
-                    <input type="text" name="searchbar" id="searchbar" placeholder="Search by name, author or genre" value="">
-                    <a class="search_close"><i class="fa fa-close fa-lg close_btn"></i></a>
-                    <button id="submitsearch" class="nav-link" type="submit"><span class="fa fa-search fa-lg"></span></button>
-                </div>
-            </form>
-        </div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-sm-6 align-self-center">
-                    {% block pagewelcome %}
-                    {% endblock pagewelcome %}
-                </div>
-                <div class="col-12 col-sm-6 text-center order-sm-first">
-                    {% block for_logo %}
-                    {% endblock for_logo %}
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories = true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} text-center">
-                        <b>{{ message }}</b>
+        <div class="modal" id="communitymodal" role='dialog'>
+            <div class="modal-dialog modal-lg" role='document'>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">
+                            Contact!
+                        </h2>
+                        <span class="close" data-dismiss="modal">
+                            &times;
+                        </span>
                     </div>
-            {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}
-        {% endblock content %}
-    </div>
-
-    <footer>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-3">
-                    <ul class="list-unstyled" id="foot">
-                        <li><b>Navigation</b></li>
-                        <li><a href="{{ url_for('main.home') }}" id="tap-link1"><span class="fa fa-home fa-lg" id="tap1"></span> Home</a></li>
-                        <li><a href="{{ url_for('main.about') }}" id="tap-link2"><span class="fa fa-info-circle fa-lg" id="tap2"></span> About</a></li>
-                        <li><a href="{{ url_for('main.contact') }}" id="tap-link3"><span class="fa fa-address-card fa-lg" id="tap3"></span> Contact</a></li>
-                        <li><a href="{{ url_for('books.upload') }}" id="tap-link4"><span class="fa fa-upload fa-lg" id="tap4"></span> Upload</a></li>
-                        <li><a href="#" id="tap-link5"><span class="fa fa-gift fa-lg" id="tap5"></span> Donate</a></li>
-                        <li><a href="{{ url_for('main.about') }}" id="tap-link6"><span class="fa fa-question-circle fa-lg" id="tap6"></span> FAQ</a></li>
-                    </ul>
+                    <div class="modal-body modal-dark">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body" id="donor-body">
+                                        <h5 class="d-block d-md-none">Request a book!</h5>
+                                        <h5 class="d-none d-md-block">Request the community for books here</h5>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" id="request-btn-1" href="{{ url_for('books.request_book') }}"><span class="fa fa-reply-all fa-lg"></span> Request!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body" id="donor-body">
+                                        <h5 class="d-block d-md-none">Contact me.</h5>
+                                        <h5 class="d-none d-md-block">Contact me for any query that you have</h5>
+                                        <div class="text-center">
+                                            <a href="{{ url_for('main.contact') }}" class="btn btn-primary" id="request-btn-2"><span class="fa fa-address-card fa-lg"></span> Contact</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3 offset-2">
-                    <ul class="list-unstyled" id="foot">
-                        <li><b>Genres</b></li>
-                        <li><a href="{{ url_for('books.fiction') }}" id="cap-link1"><span class="fa fa-fort-awesome fa-lg" id="cap1"></span> Fiction</a></li>
-                        <li><a href="{{ url_for('books.non_fiction') }}" id="cap-link2"><span class="fa fa-book fa-lg" id="cap2"></span> Non-Fiction</a></li>
-                        <li><a href="{{ url_for('books.romance') }}" id="cap-link3"><span class="fa fa-heart fa-lg" id="cap3"></span> Romance</a></li>
-                        <li><a href="{{ url_for('books.biography') }}" id="cap-link4"><span class="fa fa-user fa-lg" id="cap4"></span> Biographies</a></li>
-                        <li><a href="{{ url_for('books.comics') }}" id="cap-link5"><span class="fa fa-superpowers fa-lg" id="cap5"></span> Comics</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-sm-4 text-center" id="foot">
-                    <ul class="list-unstyled">
-                        <li><b>Connect</b></li>
-                        <a href="mailto:nambiarakhilraj01@gmail.com" class="btn btn-social-icon btn-google"><span class="fa fa-envelope fa-lg"></span></a>
-                        &nbsp;
-                        <span><a class="btn btn-social-icon btn-linkedin" target='/blank' href="https://www.linkedin.com/in/akhilraj-nambiar-013b811a2"><i class="fa fa-linkedin fa-lg"></i></a></span>
-                        &nbsp;
-                        <span><a href="https://www.instagram.com/nambiarakhilraj01/" target="/blank" class="btn btn-social-icon btn-instagram" id="instagram"><i class="fa fa-instagram fa-lg"></i></a></span>
-                    </ul>
-                 </div>
             </div>
         </div>
-    </footer>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/43aacb403c.js" crossorigin="anonymous"></script>
-    {% block only_for_payment %}
-    {% endblock only_for_payment %}
-    <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
-</body>
+        <header class="jumbotron jumbotron-fluid">
+            <div>
+                <a id="search" class="nav-link"><span class="fa fa-search fa-lg"></span></a>
+                <form action="{{ url_for('books.search') }}" method="POST">
+                    <div class="searchbox">
+                        <input type="text" name="searchbar" id="searchbar" placeholder="Search by name, author or genre" value="">
+                        <a class="search_close"><i class="fa fa-close fa-lg close_btn"></i></a>
+                        <button id="submitsearch" class="nav-link" type="submit"><span class="fa fa-search fa-lg"></span></button>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6">
+                        {% block pagewelcome %}
+                        {% endblock pagewelcome %}
+                    </div>
+                    <div class="col-12 col-md-6 text-center order-md-first">
+                        {% block for_logo %}
+                        {% endblock for_logo %}
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} text-center">
+                            <b>{{ message }}</b>
+                        </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}
+            {% endblock content %}
+        </div>
+    
+        <footer>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <ul class="list-unstyled" id="foot">
+                            <li><b>Navigation</b></li>
+                            <li><a href="{{ url_for('main.home') }}" id="tap-link1"><span class="fa fa-home fa-lg" id="tap1"></span> Home</a></li>
+                            <li><a href="{{ url_for('main.about') }}" id="tap-link2"><span class="fa fa-info-circle fa-lg" id="tap2"></span> About</a></li>
+                            <li><a href="{{ url_for('main.contact') }}" id="tap-link3"><span class="fa fa-address-card fa-lg" id="tap3"></span> Contact</a></li>
+                            <li><a href="{{ url_for('books.upload') }}" id="tap-link4"><span class="fa fa-upload fa-lg" id="tap4"></span> Upload</a></li>
+                            <li><a href="#" id="tap-link5"><span class="fa fa-gift fa-lg" id="tap5"></span> Donate</a></li>
+                            <li><a href="{{ url_for('main.about') }}" id="tap-link6"><span class="fa fa-question-circle fa-lg" id="tap6"></span> FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-3 offset-2">
+                        <ul class="list-unstyled" id="foot">
+                            <li><b>Genres</b></li>
+                            <li><a href="{{ url_for('books.fiction') }}" id="cap-link1"><span class="fa fa-fort-awesome fa-lg" id="cap1"></span> Fiction</a></li>
+                            <li><a href="{{ url_for('books.non_fiction') }}" id="cap-link2"><span class="fa fa-book fa-lg" id="cap2"></span> Non-Fiction</a></li>
+                            <li><a href="{{ url_for('books.romance') }}" id="cap-link3"><span class="fa fa-heart fa-lg" id="cap3"></span> Romance</a></li>
+                            <li><a href="{{ url_for('books.biography') }}" id="cap-link4"><span class="fa fa-user fa-lg" id="cap4"></span> Biographies</a></li>
+                            <li><a href="{{ url_for('books.comics') }}" id="cap-link5"><span class="fa fa-superpowers fa-lg" id="cap5"></span> Comics</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-sm-4 text-center" id="foot">
+                        <ul class="list-unstyled">
+                            <li><b>Connect</b></li>
+                            <a href="mailto:nambiarakhilraj01@gmail.com" class="btn btn-social-icon btn-google" title="Gmail"><span class="fa fa-envelope fa-lg"></span></a>
+                            &nbsp;
+                            <span><a class="btn btn-social-icon btn-linkedin" target='/blank' href="https://www.linkedin.com/in/akhilraj-nambiar-013b811a2" title="Linkedin"><i class="fa fa-linkedin fa-lg"></i></a></span>
+                            &nbsp;
+                            <span><a href="https://www.instagram.com/nambiarakhilraj01/" target="/blank" class="btn btn-social-icon btn-instagram" id="instagram" title="Instagram"><i class="fa fa-instagram fa-lg"></i></a></span>
+                        </ul>
+                     </div>
+                </div>
+            </div>
+        </footer>
+    
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/43aacb403c.js" crossorigin="anonymous"></script>
+        {% block only_for_payment %}
+        {% endblock only_for_payment %}
+        <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
+    </body>
 </html>
  
  

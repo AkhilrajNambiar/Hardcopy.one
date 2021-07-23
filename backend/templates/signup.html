@@ -131,6 +131,34 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3">
+                    {{ form.pincode.label(class='form-label') }}
+                    {% if form.pincode.errors %}
+                        {{ form.pincode( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pincode.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pincode( class='form-control form-control-lg' ) }}
+                    {% endif %}                    
+                </div>
+                <div class="col-sm-6 mb-3">
+                    {{ form.contactnumber.label(class='form-label') }}
+                    {% if form.contactnumber.errors %}
+                        {{ form.contactnumber( class='form-control form-control-lg is-invalid' ) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.contactnumber.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.contactnumber( class='form-control form-control-lg' ) }}
+                    {% endif %}                    
+                </div>
+            </div>
         </fieldset>
         <div class="form-group row align-items-center">
             <div class="col-sm-6">

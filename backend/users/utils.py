@@ -34,12 +34,15 @@ def save_picture_without_compression(form_picture):
     # Getting the extension of the file that the user has uploaded
     _, f_ext = os.path.splitext(form_picture.filename)
     # Giving the picture the random name but conserving the same extension that the user had uploaded
-    picture_fn = random_hex + f_ext
+    picture_fn = random_hex + ".webp"
     # Setting the path where the user pictures will be stored
     picture_path = os.path.join(current_app.root_path, 'static/users_images', picture_fn)
 
     # Saving the picture with the random name to the created path
-    form_picture.save(picture_path)
+    i = Image.open(form_picture)
+    width, height = i.size[0], i.size[1]
+    i = i.resize((width//8, height//8),Image.ANTIALIAS)
+    i.save(picture_path, "webp", optimize=True, quality=70)
 
     return picture_fn
 

@@ -9,17 +9,20 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(20), unique=True, nullable=False)
-	email = db.Column(db.String(20), unique=True, nullable=False)
-	password = db.Column(db.String(50), nullable=False)
+	username = db.Column(db.String(60), unique=True, nullable=False)
+	email = db.Column(db.String(60), unique=True, nullable=False)
+	password = db.Column(db.String(60), nullable=False)
 	profile_pic = db.Column(db.String(60), nullable=False, default='default.jpg')	
 	address = db.Column(db.Text, nullable=False)
+	contactnumber = db.Column(db.Text,nullable=False)
 	books_ordered = db.relationship('Book', backref='bought_by', lazy=True, foreign_keys='Book.ordered_by')
 	books_donated = db.relationship('Book', backref='provided_by', lazy=True, foreign_keys='Book.donated_by')
 	carted = db.relationship('Cart', backref='added_by', lazy=True, foreign_keys='Cart.user_id')
 	requested = db.relationship('PendingRequests', backref='requested_by', lazy=True, foreign_keys='PendingRequests.user_id')
 	stars = db.relationship('StarValues', backref='rating_for', lazy=True, foreign_keys='StarValues.donor_id')
 	rater = db.relationship('StarValues', backref='rated_by', lazy=True, foreign_keys='StarValues.rater_id')
+	total_donations = db.Column(db.Integer, nullable=True, default=0)
+	pickup = db.Column(db.String(100), unique=True)	
 
 	def get_reset_token(self, expires=1800):
 		s = Serializer(current_app.config['SECRET_KEY'], expires)
@@ -35,7 +38,7 @@ class User(db.Model, UserMixin):
 		return User.query.get(user_id)
 
 	def __repr__(self):
-		return f"User({self.username}; {self.email}; {self.profile_pic}; {self.address})"
+		return f"User({self.username}; {self.email}; {self.profile_pic}; {self.address}; {self.pickup})"
 
 class Book(db.Model):
 
@@ -50,8 +53,12 @@ class Book(db.Model):
 	book_bottom = db.Column(db.String(60), nullable=False, default='back.jpg')
 	book_right = db.Column(db.String(60), nullable=False, default='right.jpg')
 	book_left = db.Column(db.String(60), nullable=False, default='left.jpg')
+	length = db.Column(db.Integer, nullable=False)
+	breadth = db.Column(db.Integer, nullable=False)
+	height = db.Column(db.Integer, nullable=False)
+	weight = db.Column(db.Integer, nullable=False)
 	extras = db.Column(db.Text)
-	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'),default=0)
+	ordered_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 	donated_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	added_to_cart = db.relationship('Cart', backref='book_is', lazy=True, foreign_keys='Cart.book_id')
 	votes_for_content = db.Column(db.Float(), default=0)
@@ -61,6 +68,10 @@ class Book(db.Model):
 	content_rating = db.Column(db.Float(), default=0)
 	condition_rating = db.Column(db.Float(), default=0)
 	book_stars = db.relationship('StarValues', backref='stars', lazy=True, foreign_keys='StarValues.book_id')
+	shipment_id = db.Column(db.String(10), nullable=True, default='')
+	shipment_status = db.Column(db.String(60), nullable=True, default='')
+	order_id = db.Column(db.String(10), nullable=True, default='')
+	order_date = db.Column(db.String(60), nullable=True, default='')
 	
 
 	def __repr__(self):
@@ -68,8 +79,8 @@ class Book(db.Model):
 
 class Cart(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=0)
-	book_id = db.Column(db.Integer, db.ForeignKey('book.id'), default=0)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
 
 	def __repr__(self):
 		return f"Cart({self.id}; {self.user_id}; {self.book_id})"
@@ -78,7 +89,7 @@ class PendingRequests(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	book_name = db.Column(db.String(60), nullable=False)
 	author_name = db.Column(db.String(60), nullable=False)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=0)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	def __repr__(self):
 		return f"Request({self.book_name}, {self.author_name}, {self.user_id})"
@@ -95,7 +106,7 @@ class StarValues(db.Model):
 	three_star_condition = db.Column(db.Integer, default=0)
 	two_star_condition = db.Column(db.Integer, default=0)
 	one_star_condition = db.Column(db.Integer, default=0)
-	book_id = db.Column(db.Integer, db.ForeignKey('book.id'), default = 0)
+	book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
 	donor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	rater_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 

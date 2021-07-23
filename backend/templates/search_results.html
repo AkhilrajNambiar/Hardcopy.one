@@ -12,15 +12,17 @@
 {% block content %}
 	<div class="row">
 		{% for book in matched_books %}
-			<div class="col-6 col-sm-4 col-xl-3 text-center books  mb-2">
-				<figure class="mt-4">
-					<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
-					<figcaption>
-						<h5 style="color: white"><a href="{{ url_for('books.book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
-						<h5><small class="text-muted">By {{ book.author_name }}</small></h5>
-					</figcaption>
-				</figure>
-			</div>
+			{% if book.ordered_by == None %}
+				<div class="col-6 col-sm-4 col-xl-3 text-center books  mb-2">
+					<figure class="mt-4">
+						<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image">
+						<figcaption>
+							<h5 style="color: white"><a href="{{ url_for('books.book_page', book_id=book.id) }}" class="book_link">{{ book.book_name }}</a></h5>
+							<h5><small class="text-muted">By {{ book.author_name }}</small></h5>
+						</figcaption>
+					</figure>
+				</div>
+			{% endif %}
 		{% endfor %}
 	</div>
 {% endblock content %}

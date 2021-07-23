@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+	<h1>My Orders!</h1>
+{% endblock pagewelcome %}
+{% block content %}
+	{% if books %}
+		{% for book in books %}
+			<div class="row ordered_books align-items-center mt-2">
+				<div class="col-3 ordered_book_image text-center d-none d-lg-block">
+					<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image img-thumbnail img-fluid"  loading="lazy">
+				</div>
+				<div class="col-auto d-none d-lg-block">
+					<h2>Order for {{ book.book_name }}</h2>
+					<h4>Status: {{ book.shipment_status }}</h4>
+					{% if 'cancel' in book.shipment_status.lower() %}
+						<button class="btn btn-danger cancel_btn pr-5 pl-5" disabled="disabled">Cancel Order</button>
+					{% elif 'deliver' in book.shipment_status.lower() %}
+						<button class="btn btn-danger cancel_btn pr-5 pl-5" disabled="disabled">Cancel Order</button>
+					{% else %}
+						<a class="btn btn-danger cancel_btn pr-5 pl-5" href="{{ url_for('main.cancel_order', order_id=book.order_id) }}">Cancel Order</a>
+					{% endif %}
+					<a class="btn btn-primary pr-5 pl-5" id="tracking_button" href="{{ url_for('main.tracking', shipment_id=book.shipment_id) }}">Track Order</a>
+					<a href="{{ url_for('main.generate_invoice', order_id=book.order_id) }}" class="btn btn-warning pr-5 pl-5" id="invoice_button">Invoice</a>
+				</div>
+				<div class='col-5 ordered_book_image text-center d-block d-lg-none'>
+					<img src="{{ url_for('static', filename='users_images/' + book.book_front) }}" width="145" height="220" class="book_image img-thumbnail img-fluid"  loading="lazy">
+				</div>
+				<div class="col-7 d-block d-lg-none">
+					<h4>Order for {{ book.book_name }}</h4>
+					<h6>Status: {{ book.shipment_status }}</h6>
+					{% if 'cancel' not in book.shipment_status.lower() %}
+						<a class="btn btn-danger cancel_small_btn pr-5 pl-5">Cancel Order</a>
+					{% else %}
+						<button class="btn btn-danger cancel_small_btn pr-5 pl-5" disabled="disabled">Cancel Order</button>
+					{% endif %}
+					<a class="btn btn-primary pr-5 pl-5" id="tracking_small_button" href="{{ url_for('main.tracking', shipment_id=book.shipment_id) }}">Track Order</a>
+					<a href="{{ url_for('main.generate_invoice', order_id=book.order_id) }}" class="btn btn-warning pr-5 pl-5" id="invoice_small_button">Invoice</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="text-danger">No orders till now!!</h1>
+			</div>
+		</div>
+	{% endif %}
+	<br>
+{% endblock content %}

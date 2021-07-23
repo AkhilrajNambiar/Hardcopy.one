@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+{% endblock for_logo %}
+{% block content %}
+	<div class="text-center">
+		<h1>Please <a href="mailto:nambiarakhilraj01@gmail.com?subject={{subject}}&body={{feedback}}">Click here</a> to send this message using your mail client.</h1>
+		<h3 class="text-muted"><a href="{{ url_for('main.home') }}">I have successfully send the message!</a></h3>
+	</div>
+{% endblock content %}

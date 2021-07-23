@@ -3,12 +3,12 @@
     active
 {% endblock home %}
 {% block for_logo %}
-	<img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+	<img src="{{ url_for('static',filename='admin_images/logo2small.webp') }}" height="209" width="300" id="central-logo" alt="hardcopy_logo">
 {% endblock for_logo %}
 {% block pagewelcome %}
 	<h1>Do you want to obtain Hardcopy of your favourite books for free?</h1>
 	<br>
-	<h5 class="text-muted">Hardcopy is the website that you might have dreamt of!! And guess what, the dream has come true.</h5>
+	<h4 class="text-muted">Hardcopy is the website that you might have dreamt of!! And guess what, the dream has come true.</h4>
 {% endblock pagewelcome %}
 {% block content %}
 	<div class="row">
@@ -26,7 +26,7 @@
 								<i class="fa fa-book-open fa-lg"></i>
 							</div>
 							<div class="col-12 text-center">
-								<p>Fiction</p>
+								<p class="genre_tags">Fiction</p>
 							</div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 								<i class="fa fa-book-open fa-lg"></i>
 							</div>
 							<div class="col-12 text-center">
-								<p>Non-fiction</p>
+								<p class="genre_tags">Non-fiction</p>
 							</div>
 						</div>
 					</div>
@@ -58,7 +58,7 @@
 								<i class="fa fa-book-open fa-lg"></i>	
 							</div>
 							<div class="col-12 text-center">
-								<p>Comics</p>
+								<p class="genre_tags">Comics</p>
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 								<i class="fa fa-book-open fa-lg"></i>
 							</div>
 							<div class="col-12 text-center">
-								<p>Biography</p>
+								<p class="genre_tags">Biography</p>
 							</div>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 								<i class="fa fa-book-open fa-lg"></i>
 							</div>
 							<div class="col-12 text-center">
-								<p>Romance</p>
+								<p class="genre_tags">Romance</p>
 							</div>
 						</div>
 					</div>
@@ -106,7 +106,7 @@
 								<i class="fa fa-book-open fa-lg"></i>
 							</div>
 							<div class="col-12 text-center">
-								<p>Self-Help</p>
+								<p class="genre_tags">Self-Help</p>
 							</div>
 						</div>
 					</div>
@@ -126,7 +126,7 @@
 		</div>
 		<div class="col-sm-4">
 			<p><span class="fa fa-tags fa-lg" id="p2"></span></p>
-			<p style="font-size: 22px">The only thing you got to pay for is the delivery charge which is 40&#8377; for Indian residents, and only 2$ in case of every other reader outside India. Now I hope it won't be repelling you from using this, as the delivery service needs payment from me!</p>
+			<p style="font-size: 22px">The only thing you got to pay for is the delivery charge, which is managed by our partners. Now I hope it won't be repelling you from using this, as the delivery service needs payment from me! Delivery charges are calculated based on book dimensions, just in case anybody wanted to know.</p>
 		</div>
 		<div class="col-sm-4">
 			<p><span class="fa fa-thumbs-up" id="p3"></span></p>

@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
+{% block contribute %}
+	active
+{% endblock contribute %}
 {% block for_logo %}
-    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo">
+    <img src="{{ url_for('static',filename='admin_images/logo2small.webp') }}" height="250" width="300" id="central-logo">
 {% endblock for_logo %} 
 {% block pagewelcome %}
 	<h1>Upload your books here</h1>
@@ -19,7 +22,7 @@
 			<!-- HERE there will be the demo 3D BOOK code -->
 		</div>
 	</div>
-	<form method="POST" action="" enctype="multipart/form-data">
+	<form method="POST" action="" enctype="multipart/form-data" id="upload_form">
 		{{ form.hidden_tag() }}
 		<fieldset>
 			<legend class="text-center">Upload now</legend>
@@ -62,7 +65,7 @@
 	                        {% endfor %}
 	                    </div>
 	                {% else %}
-	                    {{ form.genre( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+	                    {{ form.genre( class='form-control form-control-lg genre_select', id="genre_id")}}
 	                {% endif %}
 				</div>
 			</div>
@@ -77,7 +80,7 @@
 	                        {% endfor %}
 	                    </div>
 	                {% else %}
-	                    {{ form.sub_genre( class='form-control form-control-lg genre_select' ) }}
+	                    {{ form.sub_genre( class='form-control form-control-lg genre_select') }}
 	                {% endif %}
 				</div>
 			</div>
@@ -156,6 +159,65 @@
 	                {% endif %}
 				</div>
 			</div>
+			<fieldset>
+				<legend class="text-center"><h1>Dimensions</h1></legend>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						{{ form.length.label(class='form-label') }}
+		                {% if form.length.errors %}
+		                    {{ form.length( class='form-control form-control-lg is-invalid' ) }}
+		                    <div class="invalid-feedback">
+		                        {% for error in form.length.errors %}
+		                            <span>{{ error }}</span>
+		                        {% endfor %}
+		                    </div>
+		                {% else %}
+		                    {{ form.length( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+		                {% endif %}
+					</div>
+					<div class="col-sm-6">
+						{{ form.breadth.label(class='form-label') }}
+		                {% if form.breadth.errors %}
+		                    {{ form.breadth( class='form-control form-control-lg is-invalid' ) }}
+		                    <div class="invalid-feedback">
+		                        {% for error in form.breadth.errors %}
+		                            <span>{{ error }}</span>
+		                        {% endfor %}
+		                    </div>
+		                {% else %}
+		                    {{ form.breadth( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+		                {% endif %}
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						{{ form.height.label(class='form-label') }}
+		                {% if form.height.errors %}
+		                    {{ form.height( class='form-control form-control-lg is-invalid' ) }}
+		                    <div class="invalid-feedback">
+		                        {% for error in form.height.errors %}
+		                            <span>{{ error }}</span>
+		                        {% endfor %}
+		                    </div>
+		                {% else %}
+		                    {{ form.height( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+		                {% endif %}
+					</div>
+					<div class="col-sm-6">
+						{{ form.weight.label(class='form-label') }}
+		                {% if form.weight.errors %}
+		                    {{ form.weight( class='form-control form-control-lg is-invalid' ) }}
+		                    <div class="invalid-feedback">
+		                        {% for error in form.weight.errors %}
+		                            <span>{{ error }}</span>
+		                        {% endfor %}
+		                    </div>
+		                {% else %}
+		                    {{ form.weight( class='form-control form-control-lg genre_select', id="genre_id" ) }}
+		                {% endif %}
+					</div>
+				</div>
+			</fieldset>
 			<div class="form-group row">
 				<div class="col-12 text-center">
 	                {{ form.submit( class='btn btn-primary submit_button pr-5 pl-5' ) }}
@@ -163,4 +225,10 @@
 			</div>
 		</fieldset>
 	</form>
+	<br>
+	<br>
+	<div class="progress" style="height:30px;">
+	  <div id="progressBar" class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+		</div>
+	<br><br>
 {% endblock content %}

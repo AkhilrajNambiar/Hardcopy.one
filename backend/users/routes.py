@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, current_app
 from backend import db, bcrypt
 from backend.users.forms import Registration_form, Login_form, Update_form, \
     RequestResetForm, ResetPasswordForm
@@ -6,7 +6,10 @@ from backend.models import User, Book, Cart
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import and_
 from backend.users.utils import send_reset_email, save_picture
-
+import requests
+import random
+import json
+from backend.main.routes import shipment_kaisa_hai
 
 users = Blueprint('users', __name__)
 
@@ -28,6 +31,37 @@ def login():
             flash('Wrong Email ID or Password!', category='danger')
     return render_template('login.html', title='Login', form=form)
 
+def add_pickup_address(user):
+    auth = current_app.config['SHIPROCKET_TOKEN']
+    url = "https://apiv2.shiprocket.in/v1/external/settings/company/addpickup"
+    address = user.address
+    address_list = address.split('#@')
+    country, pincode = address_list[3].split('-') 
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']   
+    pickup = ''
+    for i in range(7):
+        pickup += alphabet[random.randint(0,25)]   
+
+    payload = json.dumps({
+      "pickup_location": pickup,
+      "name": f"{user.username}",
+      "email": f"{user.email}",
+      "phone": f"{user.contactnumber}",
+      "address": f"{address_list[0]}",
+      "address_2": "",
+      "city": f"{address_list[1]}",
+      "state": f"{address_list[2]}",
+      "country": f"{country}",
+      "pin_code": f"{pincode}"
+    })
+    headers = {
+      'Content-Type': 'application/json',
+      'Authorization': f'Bearer {auth}'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.text)   
+    return pickup
 
 @users.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -35,8 +69,12 @@ def signup():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password,
-                    address=f'{form.street.data} {form.city.data} {form.state.data} {form.countries.data}')
+                    address=f'{form.street.data}#@{form.city.data}#@{form.state.data}#@{form.countries.data}-{form.pincode.data}', contactnumber=form.contactnumber.data)
         db.session.add(user)
+        db.session.commit()
+        user = User.query.filter_by(username=form.username.data).first()
+        pickup = add_pickup_address(user)
+        user.pickup = pickup
         db.session.commit()
         flash("Your account has been created. You can now login!", "success")
         return redirect(url_for("users.login"))
@@ -55,6 +93,18 @@ def cart(user_id):
     if current_user.is_authenticated:
         return render_template('cart.html', title=f'{current_user.username}s cart')
 
+@users.route('/orders/<user_id>')
+@login_required
+def orders(user_id):
+    if current_user.is_authenticated:
+        bookall = Book.query.all()
+        books = []
+        for book in bookall:
+            if int(user_id) == book.ordered_by:
+                book.shipment_status = shipment_kaisa_hai(book.shipment_id)
+                db.session.commit()
+                books.append(book)
+        return render_template('user_orders.html', books=books, user_id=user_id)
 
 @users.route('/add_to_cart', methods=['GET', 'POST'])
 @login_required
@@ -94,7 +144,6 @@ def remove_from_cart(user_id):
             db.session.commit()
         flash('Book successfully removed from cart', 'success')
         return redirect(url_for('users.add_to_cart', user_id=current_user.id))
-
 
 
 @users.route('/reset_password', methods=['GET', 'POST'])
@@ -147,3 +196,4 @@ def account():
     image_file = url_for('static', filename=f'users_images/{current_user.profile_pic}')
     books = Book.query.filter_by(donated_by=current_user.id)
     return render_template('account.html', title="User Account", image_file=image_file, form=form, books=books)
+

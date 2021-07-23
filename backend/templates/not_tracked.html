@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block for_logo %}
+    <img src="{{ url_for('static',filename='admin_images/logo2.png') }}" height="250" width="300" id="central-logo" alt="main_logo">
+{% endblock for_logo %}
+{% block pagewelcome %}
+  <h1>Shipment not yet tracked!</h1>
+{% endblock pagewelcome %}
+{% block content %}
+	<div class="text-center" id="tracking_wait">
+		<h2 style="color:#fa5252;">The shipment has not been picked till now! <span class="fa fa-shipping-fast"></span></h2>
+		<h3>Once the shipment is picked up, you will receive detailed tracking updates!</h3>
+	</div>
+{% endblock content %}
